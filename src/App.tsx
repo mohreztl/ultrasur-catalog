@@ -1035,6 +1035,9 @@ export default function UltraSurCatalogApp() {
   const handleDownloadPdfFile = async () => {
     if (isExportingPdf) return;
     setIsExportingPdf(true);
+    // ابعاد دقیق A4 با رزولوشن 96dpi؛ صفحه‌ها دقیقاً نسبت ۲۱۰×۲۹۷ می‌گیرند
+    const A4_W = 794;
+    const A4_H = 1123;
     try {
       setActiveTab("pdf-preview");
       await new Promise((r) => setTimeout(r, 250));
@@ -1043,40 +1046,86 @@ export default function UltraSurCatalogApp() {
         document.querySelectorAll<HTMLElement>(".catalog-page"),
       );
       if (nodes.length === 0) throw new Error("no catalog pages rendered");
-      const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
-        import("jspdf"),
-        import("html2canvas-pro"),
-      ]);
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      });
-      const pageW = 210;
-      const pageH = 297;
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        const canvas = await html2canvas(node, {
-          scale: 2,
-          backgroundColor: getComputedStyle(node).backgroundColor,
-          useCORS: true,
-        });
-        const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-        const imgW = pageW;
-        const imgH = (canvas.height / canvas.width) * pageW;
-        if (i > 0) pdf.addPage();
-        if (imgH <= pageH) {
-          pdf.addImage(dataUrl, "JPEG", 0, (pageH - imgH) / 2, imgW, imgH);
-        } else {
-          const scale = pageH / imgH;
-          const w = imgW * scale;
-          pdf.addImage(dataUrl, "JPEG", (pageW - w) / 2, 0, w, pageH);
+      // اعمال ابعاد ثابت A4 روی هر صفحه تا خروجی بدون حاشیه سفید باشد
+      for (const node of nodes) {
+        node.style.width = `${A4_W}px`;
+        node.style.height = `${A4_H}px`;
+        node.style.overflow = "hidden";
+      }
+      // اندازه‌گیری مختصات ردیف‌های فهرست برای لینک‌های داخلی PDF
+      const tocLinks: Array<{
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+        page: number;
+      }> = [];
+      const tocNode = nodes[1];
+      if (tocNode) {
+        const tocRect = tocNode.getBoundingClientRect();
+        for (const a of tocNode.querySelectorAll<HTMLAnchorElement>(
+          "a[href^='#cat-']",
+        )) {
+          const href = a.getAttribute("href");
+          if (!href) continue;
+          const group = categoryPages.find(
+            (g) => `cat-${g.id}` === href.slice(1),
+          );
+          if (!group) continue;
+          const r = a.getBoundingClientRect();
+          tocLinks.push({
+            x: r.left - tocRect.left,
+            y: r.top - tocRect.top,
+            w: r.width,
+            h: r.height,
+            page: group.startPage,
+          });
         }
       }
-      pdf.save("ariyatechno-catalog.pdf");
-      showToast(
-        `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) دانلود شد`,
-      );
+      try {
+        const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
+          import("jspdf"),
+          import("html2canvas-pro"),
+        ]);
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+        });
+        const pageW = 210;
+        const pageH = 297;
+        const k = pageW / A4_W;
+        for (let i = 0; i < nodes.length; i++) {
+          const node = nodes[i];
+          const canvas = await html2canvas(node, {
+            scale: 2.5,
+            backgroundColor: getComputedStyle(node).backgroundColor,
+            useCORS: true,
+          });
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+          if (i > 0) pdf.addPage();
+          // نسبت صفحه دقیقاً A4 است؛ تصویر تمام‌صفحه بدون حاشیه سفید
+          pdf.addImage(dataUrl, "JPEG", 0, 0, pageW, pageH);
+          if (i === 1) {
+            // لینک‌های داخلی ردیف‌های فهرست به صفحه شروع هر دسته‌بندی
+            for (const l of tocLinks) {
+              pdf.link(l.x * k, l.y * k, l.w * k, l.h * k, {
+                pageNumber: l.page,
+              });
+            }
+          }
+        }
+        pdf.save("ariyatechno-catalog.pdf");
+        showToast(
+          `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) دانلود شد`,
+        );
+      } finally {
+        for (const node of nodes) {
+          node.style.width = "";
+          node.style.height = "";
+          node.style.overflow = "";
+        }
+      }
     } catch (err) {
       console.error("PDF export failed:", err);
       showToast("خطا در ساخت فایل PDF", "error");
@@ -1540,7 +1589,7 @@ export default function UltraSurCatalogApp() {
                       ariyatechno
                       <span className="text-orange-500">.</span>
                     </h1>
-                    <p className="text-xs text-orange-400 tracking-wider font-semibold mt-0.5">
+                    <p className="text-xs text-orange-400 font-semibold mt-0.5">
                       کاتالوگ لوازم جانبی و کالاهای دیجیتال
                     </p>
                   </div>
@@ -1708,7 +1757,7 @@ export default function UltraSurCatalogApp() {
                           key={item.id}
                           className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-5"
                         >
-                          <div className="w-full md:w-52 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
+                          <div className="w-full md:w-64 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
                             <img
                               src={item.image}
                               alt={item.title}
