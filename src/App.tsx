@@ -38,6 +38,7 @@ interface Product {
   id: string;
   category: string;
   title: string;
+  brand?: string;
   capacity?: string;
   price: number;
   badge?: string;
@@ -52,6 +53,7 @@ const DB_SCHEMA = `
     id TEXT PRIMARY KEY,
     category TEXT NOT NULL,
     title TEXT NOT NULL,
+    brand TEXT,
     capacity TEXT,
     price INTEGER NOT NULL DEFAULT 0,
     badge TEXT,
@@ -102,18 +104,19 @@ const persistDb = async (bytes: Uint8Array): Promise<void> => {
 
 const readAllProducts = (db: SqlJsDatabase): Product[] => {
   const result = db.exec(
-    "SELECT id, category, title, capacity, price, badge, image, specs FROM products",
+    "SELECT id, category, title, brand, capacity, price, badge, image, specs FROM products",
   );
   if (result.length === 0) return [];
   return result[0].values.map((row) => ({
     id: String(row[0]),
     category: String(row[1]),
     title: String(row[2]),
-    capacity: (row[3] as string) || "",
-    price: Number(row[4]) || 0,
-    badge: (row[5] as string) || "",
-    image: (row[6] as string) || "",
-    specs: JSON.parse(String(row[7] || "[]")) as string[],
+    brand: (row[3] as string) || "",
+    capacity: (row[4] as string) || "",
+    price: Number(row[5]) || 0,
+    badge: (row[6] as string) || "",
+    image: (row[7] as string) || "",
+    specs: JSON.parse(String(row[8] || "[]")) as string[],
   }));
 };
 
@@ -121,11 +124,12 @@ const seedProducts = (db: SqlJsDatabase, products: Product[]): void => {
   db.run("BEGIN");
   for (const p of products) {
     db.run(
-      "INSERT INTO products (id, category, title, capacity, price, badge, image, specs) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO products (id, category, title, brand, capacity, price, badge, image, specs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         p.id,
         p.category,
         p.title,
+        p.brand ?? null,
         p.capacity ?? "",
         p.price,
         p.badge ?? "",
@@ -135,6 +139,73 @@ const seedProducts = (db: SqlJsDatabase, products: Product[]): void => {
     );
   }
   db.run("COMMIT");
+};
+
+const PLACEHOLDER_IMAGE = "images/placeholder.svg";
+
+// نگاشت تصاویر قدیمی (Unsplash) به فایل‌های محلی؛ دسترسی به unsplash در برخی شبکه‌ها مسدود است
+const LEGACY_IMAGE_MAP: Record<string, string> = {
+  "https://images.unsplash.com/photo-1609592426365-1886861611d2?w=600&auto=format&fit=crop&q=80":
+    "images/products/p1.svg",
+  "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=600&auto=format&fit=crop&q=80":
+    "images/products/p2.svg",
+  "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80":
+    "images/products/p3.svg",
+  "https://images.unsplash.com/photo-1618478594486-c65b899c4936?w=600&auto=format&fit=crop&q=80":
+    "images/products/p4.svg",
+  "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&auto=format&fit=crop&q=80":
+    "images/products/p5.svg",
+  "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80":
+    "images/products/e1.svg",
+  "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600&auto=format&fit=crop&q=80":
+    "images/products/e2.svg",
+  "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&auto=format&fit=crop&q=80":
+    "images/products/e3.svg",
+  "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80":
+    "images/products/e4.svg",
+  "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=600&auto=format&fit=crop&q=80":
+    "images/products/e5.svg",
+  "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&auto=format&fit=crop&q=80":
+    "images/products/w1.svg",
+  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80":
+    "images/products/w2.svg",
+  "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&auto=format&fit=crop&q=80":
+    "images/products/w3.svg",
+  "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80":
+    "images/products/c1.svg",
+  "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80":
+    "images/products/c2.svg",
+  "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80":
+    "images/products/c3.svg",
+  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80":
+    "images/products/cb1.svg",
+  "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&auto=format&fit=crop&q=80":
+    "images/products/sp1.svg",
+};
+
+// ارتقای دیتابیس‌های قدیمی: افزودن ستون brand، نسبت دادن برند به رکوردها و جایگزینی تصاویر unsplash
+const migrateDatabase = (db: SqlJsDatabase): void => {
+  const cols = db.exec("PRAGMA table_info(products)");
+  const hasBrand =
+    cols.length > 0 && cols[0].values.some((row) => String(row[1]) === "brand");
+  if (!hasBrand) {
+    db.run("ALTER TABLE products ADD COLUMN brand TEXT");
+  }
+  // رکوردهای قدیمی (و دانه‌های اولیه بدون برند) متعلق به برند UltraSur هستند
+  db.run("UPDATE products SET brand = 'UltraSur' WHERE brand IS NULL");
+
+  for (const [oldUrl, localPath] of Object.entries(LEGACY_IMAGE_MAP)) {
+    const stmt = db.prepare("SELECT COUNT(*) FROM products WHERE image = ?");
+    stmt.bind([oldUrl]);
+    const hasLegacy = stmt.step() ? Number(stmt.get()[0]) > 0 : false;
+    stmt.free();
+    if (hasLegacy) {
+      db.run("UPDATE products SET image = ? WHERE image = ?", [
+        localPath,
+        oldUrl,
+      ]);
+    }
+  }
 };
 
 // دسته‌بندی‌های پیش‌فرض منطبق بر فهرست کاتالوگ UltraSur
@@ -536,6 +607,7 @@ export default function UltraSurCatalogApp() {
   const [formData, setFormData] = useState({
     title: "",
     category: "powerbank",
+    brand: "",
     capacity: "",
     price: "",
     badge: "",
@@ -574,6 +646,7 @@ export default function UltraSurCatalogApp() {
           setStatusMessage("بارگذاری اولیه کاتالوگ اولتراسور...");
           seedProducts(db, INITIAL_PRODUCTS);
         }
+        migrateDatabase(db);
 
         if (cancelled) return;
         dbRef.current = db;
@@ -607,12 +680,39 @@ export default function UltraSurCatalogApp() {
       const matchSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
+        (p.brand && p.brand.toLowerCase().includes(q)) ||
         (p.capacity && p.capacity.toLowerCase().includes(q)) ||
         (p.badge && p.badge.toLowerCase().includes(q)) ||
         (p.specs && p.specs.some((s) => s.toLowerCase().includes(q)));
       return matchCategory && matchSearch;
     });
   }, [products, selectedCategory, searchQuery]);
+
+  // گروه‌بندی همه محصولات بر اساس دسته‌بندی برای خروجی کامل PDF
+  const categoryGroups = useMemo(() => {
+    return CATEGORIES.filter((c) => c.id !== "all")
+      .map((cat) => ({
+        ...cat,
+        items: products.filter((p) => p.category === cat.id),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, [products]);
+
+  // صفحه‌آرایی: صفحه ۱ جلد، صفحه ۲ فهرست، از صفحه ۳ محصولات به تفکیک دسته
+  const pagesForCategory = (count: number) =>
+    count === 0 ? 0 : count <= 2 ? 1 : 1 + Math.ceil((count - 2) / 3);
+
+  const categoryPages = useMemo(() => {
+    let nextPage = 3;
+    return categoryGroups.map((group) => {
+      const startPage = nextPage;
+      nextPage += pagesForCategory(group.items.length);
+      return { ...group, startPage };
+    });
+  }, [categoryGroups]);
+
+  const totalPages =
+    2 + categoryPages.reduce((s, g) => s + pagesForCategory(g.items.length), 0);
 
   // فرمت‌بندی اعداد به تومان فارسی
   const formatToman = (val: number) => {
@@ -626,11 +726,11 @@ export default function UltraSurCatalogApp() {
     setFormData({
       title: "",
       category: selectedCategory === "all" ? "powerbank" : selectedCategory,
+      brand: "",
       capacity: "",
       price: "",
       badge: "جدید",
-      image:
-        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80",
+      image: PLACEHOLDER_IMAGE,
       specs:
         "کیفیت ساخت اورجینال درجه یک اولتراسور\nپشتیبانی از فناوری Fast Charging\nگارانتی تعویض شرکتی",
     });
@@ -643,6 +743,7 @@ export default function UltraSurCatalogApp() {
     setFormData({
       title: prod.title,
       category: prod.category,
+      brand: prod.brand || "",
       capacity: prod.capacity || "",
       price: String(prod.price || ""),
       badge: prod.badge || "",
@@ -693,9 +794,7 @@ export default function UltraSurCatalogApp() {
     const priceNum = formData.price ? parseInt(formData.price, 10) : 0;
     const targetId = editingProduct ? editingProduct.id : "prod_" + Date.now();
 
-    const image =
-      formData.image ||
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80";
+    const image = formData.image || PLACEHOLDER_IMAGE;
 
     setIsModalOpen(false);
 
@@ -703,11 +802,12 @@ export default function UltraSurCatalogApp() {
       setSyncStatus("saving");
       setStatusMessage("در حال ذخیره‌سازی در دیتابیس...");
       dbRef.current.run(
-        `INSERT INTO products (id, category, title, capacity, price, badge, image, specs)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO products (id, category, title, brand, capacity, price, badge, image, specs)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(id) DO UPDATE SET
            category = excluded.category,
            title = excluded.title,
+           brand = excluded.brand,
            capacity = excluded.capacity,
            price = excluded.price,
            badge = excluded.badge,
@@ -717,6 +817,7 @@ export default function UltraSurCatalogApp() {
           targetId,
           formData.category,
           formData.title,
+          formData.brand.trim(),
           formData.capacity,
           priceNum,
           formData.badge,
@@ -843,6 +944,7 @@ export default function UltraSurCatalogApp() {
       if (dbRef.current) dbRef.current.close();
       dbRef.current = db;
       db.run(DB_SCHEMA);
+      migrateDatabase(db);
       setProducts(readAllProducts(db));
       await persistDb(db.export());
       setSyncStatus("synced");
@@ -959,6 +1061,11 @@ export default function UltraSurCatalogApp() {
             page-break-inside: avoid;
             break-inside: avoid;
           }
+
+          .catalog-toc a {
+            color: inherit;
+            text-decoration: none;
+          }
         }
       `}</style>
 
@@ -980,12 +1087,12 @@ export default function UltraSurCatalogApp() {
           {/* لوگو و نام برند */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-orange-500/20">
-              U
+              A
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-gray-200 to-orange-400 bg-clip-text text-transparent">
-                  ULTRASUR
+                  ariyatechno
                 </span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30">
                   ORIGINAL
@@ -1204,37 +1311,49 @@ export default function UltraSurCatalogApp() {
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="bg-[#131b2e] rounded-2xl border border-gray-800 hover:border-gray-700 transition-all duration-200 overflow-hidden flex flex-col justify-between group shadow-lg hover:shadow-orange-500/5"
+                    className="bg-[#131b2e] rounded-2xl border border-gray-800 hover:border-orange-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between group shadow-lg hover:shadow-orange-500/10 hover:-translate-y-0.5"
                   >
                     <div>
-                      {/* تصویر و برچسب */}
-                      <div className="relative h-52 bg-gradient-to-b from-[#1b253b] to-[#0c1220] p-4 flex items-center justify-center overflow-hidden border-b border-gray-800/60">
+                      {/* تصویر و برچسب‌ها */}
+                      <div className="relative h-56 bg-[radial-gradient(circle_at_50%_35%,#24304d_0%,#0c1220_75%)] p-4 flex items-center justify-center overflow-hidden border-b border-gray-800/60">
+                        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(249,115,22,0.08),transparent_55%)]" />
                         <img
                           src={product.image}
                           alt={product.title}
-                          className="max-h-full max-w-full object-contain filter drop-shadow-2xl group-hover:scale-105 transition duration-300"
+                          className="relative max-h-full max-w-full object-contain filter drop-shadow-2xl group-hover:scale-105 transition duration-300"
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src =
-                              "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80";
+                              PLACEHOLDER_IMAGE;
                           }}
                         />
+                        {product.brand && (
+                          <span className="absolute top-3 left-3 text-[10px] font-extrabold tracking-wider px-2.5 py-1 rounded-lg bg-[#0b0f19]/85 text-orange-400 border border-orange-500/40 backdrop-blur-sm shadow">
+                            {product.brand}
+                          </span>
+                        )}
                         {product.badge && (
-                          <span className="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-md bg-orange-500/90 text-white shadow">
+                          <span className="absolute top-3 right-3 text-[10px] font-bold px-2 py-1 rounded-lg bg-gradient-to-l from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/30">
                             {product.badge}
                           </span>
                         )}
                         <span className="absolute bottom-2.5 left-2.5 text-[10px] font-mono px-2 py-0.5 rounded bg-black/70 text-gray-300 backdrop-blur-sm">
-                          {product.capacity || "ULTRASUR"}
+                          {product.capacity || "UltraSur"}
                         </span>
                       </div>
 
                       {/* عنوان و مشخصات */}
                       <div className="p-4">
-                        <h3 className="font-bold text-sm text-white group-hover:text-orange-400 transition mb-3">
-                          {product.title}
-                        </h3>
+                        <div className="flex items-start justify-between gap-2 mb-3">
+                          <h3 className="font-bold text-sm text-white group-hover:text-orange-400 transition leading-relaxed">
+                            {product.title}
+                          </h3>
+                          <span className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-md bg-gray-800 text-gray-400 border border-gray-700">
+                            {CATEGORIES.find((c) => c.id === product.category)
+                              ?.name ?? ""}
+                          </span>
+                        </div>
 
-                        <ul className="space-y-1.5 text-xs text-gray-300 mb-2 bg-[#0b0f19] p-3 rounded-xl border border-gray-800/80">
+                        <ul className="space-y-1.5 text-xs text-gray-300 bg-[#0b0f19] p-3 rounded-xl border border-gray-800/80">
                           {product.specs &&
                             product.specs.map((spec, i) => (
                               <li
@@ -1249,29 +1368,34 @@ export default function UltraSurCatalogApp() {
                       </div>
                     </div>
 
-                    {/* فوتر قیمت و دکمه‌های کنترل */}
-                    <div className="p-4 pt-0 border-t border-gray-800/60 mt-auto">
-                      <div className="flex items-center justify-between py-2.5">
-                        <span className="text-xs text-gray-400 font-medium">
-                          قیمت عمده:
-                        </span>
-                        <div className="flex items-center gap-1.5">
-                          <input
-                            type="number"
-                            value={product.price || ""}
-                            onChange={(e) =>
-                              handleQuickPriceChange(product.id, e.target.value)
-                            }
-                            className="w-28 bg-[#0b0f19] border border-gray-700 rounded-lg px-2 py-1 text-xs text-left font-bold text-amber-400 focus:outline-none focus:border-amber-500"
-                            placeholder="قیمت..."
-                          />
-                          <span className="text-[11px] text-gray-400">
-                            تومان
+                    {/* پنل قیمت بزرگ + دکمه‌های کنترل */}
+                    <div className="px-4 pb-4 mt-auto">
+                      <div className="bg-gradient-to-l from-amber-500/15 via-orange-500/10 to-transparent border border-amber-500/30 rounded-xl p-3 mb-3">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[11px] font-semibold text-amber-200/80">
+                            قیمت عمده
                           </span>
+                          <div className="flex items-center gap-1.5 flex-1 justify-end">
+                            <input
+                              type="number"
+                              value={product.price || ""}
+                              onChange={(e) =>
+                                handleQuickPriceChange(
+                                  product.id,
+                                  e.target.value,
+                                )
+                              }
+                              className="w-36 bg-[#0b0f19] border border-amber-500/40 rounded-lg px-3 py-1.5 text-sm text-left font-black text-amber-400 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40"
+                              placeholder="قیمت..."
+                            />
+                            <span className="text-[11px] font-bold text-amber-200/70">
+                              تومان
+                            </span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 pt-2">
+                      <div className="flex items-center justify-between gap-2">
                         <button
                           onClick={() => handleEdit(product)}
                           className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-semibold py-2 rounded-xl transition flex items-center justify-center gap-1.5 border border-gray-700"
@@ -1296,15 +1420,16 @@ export default function UltraSurCatalogApp() {
             )}
           </div>
         ) : (
-          /* ================= قالب چاپی PDF مطابق با فایل ultrasur.pdf ================= */
+          /* ================= قالب چاپی PDF: جلد + فهرست انکردار + همه محصولات ================= */
           <div className="catalog-print-container">
             <div className="no-print mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-between text-xs text-amber-300">
               <div className="flex items-center gap-2">
                 <Info className="w-4 h-4 shrink-0 text-amber-400" />
                 <span>
-                  این پیش‌نمایش چاپی دقیقاً منطبق با چیدمان فایل اصلی
-                  ultrasur.pdf طراحی شده است. تغییرات ذخیره شده در دیتابیس در
-                  خروجی اعمال خواهند شد.
+                  این پیش‌نمایش شامل جلد، فهرست انکردار و همه{" "}
+                  {products.length.toLocaleString("fa-IR")} محصول به تفکیک
+                  دسته‌بندی است. با کلیک روی ردیف‌های فهرست می‌توانید به بخش
+                  مربوطه بپرید.
                 </span>
               </div>
               <button
@@ -1315,16 +1440,22 @@ export default function UltraSurCatalogApp() {
               </button>
             </div>
 
-            {/* صفحه ۱: جلد کاتالوگ */}
+            {/* صفحه ۱: جلد کاتالوگ ariyatechno */}
             <div className="catalog-page bg-[#0f172a] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-2xl flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-gray-700/60 pb-5">
-                <div>
-                  <h1 className="text-3xl font-black tracking-widest text-white flex items-center gap-2">
-                    ULTRASUR<span className="text-orange-500">.</span>
-                  </h1>
-                  <p className="text-xs text-orange-400 tracking-wider font-semibold mt-0.5">
-                    لیست لوازم جانبی و کالاهای دیجیتال
-                  </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center font-black text-white text-2xl shadow-lg shadow-orange-500/30">
+                    A
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-black tracking-wider text-white">
+                      ariyatechno
+                      <span className="text-orange-500">.</span>
+                    </h1>
+                    <p className="text-xs text-orange-400 tracking-wider font-semibold mt-0.5">
+                      کاتالوگ لوازم جانبی و کالاهای دیجیتال
+                    </p>
+                  </div>
                 </div>
                 <div className="text-left font-mono text-xs text-gray-400">
                   <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white font-bold">
@@ -1333,11 +1464,24 @@ export default function UltraSurCatalogApp() {
                 </div>
               </div>
 
+              {/* آمار کاتالوگ */}
+              <div className="flex items-center justify-center gap-3 my-6">
+                <span className="px-4 py-1.5 rounded-xl bg-orange-500/15 border border-orange-500/40 text-orange-300 text-xs font-bold">
+                  {products.length.toLocaleString("fa-IR")} محصول
+                </span>
+                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 text-xs font-bold">
+                  {categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی
+                </span>
+                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 text-xs font-bold">
+                  برند: UltraSur
+                </span>
+              </div>
+
               {/* شبکه ۸تایی محصولات جلد کاتالوگ */}
-              <div className="grid grid-cols-4 gap-4 my-8">
-                {products.slice(0, 8).map((p, idx) => (
+              <div className="grid grid-cols-4 gap-4 my-2">
+                {products.slice(0, 8).map((p) => (
                   <div
-                    key={idx}
+                    key={p.id}
                     className="bg-white/5 border border-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-center"
                   >
                     <img
@@ -1362,39 +1506,121 @@ export default function UltraSurCatalogApp() {
               </div>
             </div>
 
-            {/* صفحات محصولات به تفکیک صفحات استاندارد ۳تایی کاتالوگ */}
-            {Array.from({ length: Math.ceil(filteredProducts.length / 3) }).map(
-              (_, pageIdx) => {
-                const pageProducts = filteredProducts.slice(
-                  pageIdx * 3,
-                  pageIdx * 3 + 3,
+            {/* صفحه ۲: فهرست انکردار (ایندکس کاتالوگ) */}
+            <div className="catalog-page catalog-toc bg-[#0d1424] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-xl flex flex-col">
+              <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-6">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
+                    A
+                  </div>
+                  <span className="font-extrabold text-base tracking-wider text-white">
+                    ariyatechno
+                  </span>
+                </div>
+                <span className="text-xs text-gray-400 font-mono">
+                  صفحه ۲ • فهرست مطالب
+                </span>
+              </div>
+
+              <h2 className="text-xl font-black text-white mb-1">
+                فهرست دسته‌بندی‌های کاتالوگ
+              </h2>
+              <p className="text-xs text-gray-400 mb-6">
+                با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل می‌شوید.
+              </p>
+
+              <div className="space-y-2.5 flex-1">
+                {categoryPages.map((group) => {
+                  const Icon = group.icon;
+                  return (
+                    <a
+                      key={group.id}
+                      href={`#cat-${group.id}`}
+                      className="flex items-center gap-3 bg-[#131b2e] hover:bg-[#1a2439] border border-gray-800 hover:border-orange-500/40 rounded-xl px-4 py-3 transition-colors"
+                    >
+                      <Icon className="w-4 h-4 text-orange-400 shrink-0" />
+                      <span className="text-sm font-bold text-white">
+                        {group.name}
+                      </span>
+                      <span className="flex-1 border-b border-dotted border-gray-700 mx-2 translate-y-0.5" />
+                      <span className="text-xs text-gray-400 font-medium">
+                        {group.items.length.toLocaleString("fa-IR")} محصول
+                      </span>
+                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg px-2.5 py-1">
+                        صفحه {group.startPage.toLocaleString("fa-IR")}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
+                <span className="font-semibold tracking-wide text-orange-500/90">
+                  ariyatechno ACCESSORIES
+                </span>
+                <span className="italic">
+                  Saving on quality is meaningless.
+                </span>
+              </div>
+            </div>
+
+            {/* صفحات محصولات: همه محصولات به تفکیک دسته‌بندی */}
+            {categoryPages.map((group) => {
+              const chunks: Product[][] = [];
+              if (group.items.length > 0) {
+                chunks.push(
+                  group.items.slice(0, Math.min(2, group.items.length)),
                 );
+              }
+              for (let i = 2; i < group.items.length; i += 3) {
+                chunks.push(group.items.slice(i, i + 3));
+              }
+              return chunks.map((chunk, chunkIdx) => {
+                const pageNo = group.startPage + chunkIdx;
                 return (
                   <div
-                    key={pageIdx}
+                    key={`${group.id}-${chunkIdx}`}
+                    id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
                     className="catalog-page bg-[#0d1424] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-xl flex flex-col justify-between"
                   >
                     <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-5">
                       <div className="flex items-center gap-2.5">
                         <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
-                          U
+                          A
                         </div>
                         <span className="font-extrabold text-base tracking-wider text-white">
-                          ULTRASUR
+                          ariyatechno
+                        </span>
+                        <span className="text-xs text-gray-500 mr-2">
+                          | {group.name}
                         </span>
                       </div>
                       <span className="text-xs text-gray-400 font-mono">
-                        صفحه {pageIdx + 2} • لیست رسمی کاتالوگ
+                        صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
+                        {totalPages.toLocaleString("fa-IR")}
                       </span>
                     </div>
 
+                    {chunkIdx === 0 && (
+                      <div className="mb-4 -mt-1">
+                        <h2 className="text-lg font-black text-orange-400 flex items-center gap-2">
+                          <group.icon className="w-5 h-5" />
+                          {group.name}
+                        </h2>
+                        <p className="text-[11px] text-gray-500 mt-0.5">
+                          {group.items.length.toLocaleString("fa-IR")} محصول در
+                          این دسته‌بندی
+                        </p>
+                      </div>
+                    )}
+
                     <div className="space-y-5 flex-1">
-                      {pageProducts.map((item) => (
+                      {chunk.map((item) => (
                         <div
                           key={item.id}
                           className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-5"
                         >
-                          <div className="w-full md:w-40 h-36 bg-[#090d16] rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-800">
+                          <div className="w-full md:w-44 h-40 bg-[#090d16] rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-800">
                             <img
                               src={item.image}
                               alt={item.title}
@@ -1403,12 +1629,17 @@ export default function UltraSurCatalogApp() {
                           </div>
 
                           <div className="flex-1 w-full">
-                            <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center flex-wrap gap-2 mb-2">
                               <h3 className="text-sm font-extrabold text-white">
                                 {item.title}
                               </h3>
+                              {item.brand && (
+                                <span className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md bg-orange-500/15 text-orange-400 border border-orange-500/40">
+                                  {item.brand}
+                                </span>
+                              )}
                               {item.badge && (
-                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30">
+                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/5 text-gray-300 border border-white/15">
                                   {item.badge}
                                 </span>
                               )}
@@ -1430,11 +1661,11 @@ export default function UltraSurCatalogApp() {
                             </div>
 
                             {showPricesInPrint && (
-                              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-amber-500/10 border border-orange-500/40 px-3 py-1 rounded-xl">
-                                <span className="text-xs text-gray-300 font-medium">
-                                  قیمت عمده:
+                              <div className="w-full bg-gradient-to-l from-orange-500/25 via-amber-500/10 to-transparent border-2 border-orange-500/50 rounded-xl px-4 py-2.5 flex items-center justify-between">
+                                <span className="text-xs font-semibold text-gray-200">
+                                  قیمت عمده
                                 </span>
-                                <span className="text-xs font-black text-orange-400">
+                                <span className="text-xl font-black text-amber-400">
                                   {formatToman(item.price)}
                                 </span>
                               </div>
@@ -1446,7 +1677,11 @@ export default function UltraSurCatalogApp() {
 
                     <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
                       <span className="font-semibold tracking-wide text-orange-500/90">
-                        ULTRASUR ACCESSORIES
+                        ariyatechno ACCESSORIES
+                      </span>
+                      <span className="font-mono">
+                        صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
+                        {totalPages.toLocaleString("fa-IR")}
                       </span>
                       <span className="italic">
                         Saving on quality is meaningless.
@@ -1454,8 +1689,8 @@ export default function UltraSurCatalogApp() {
                     </div>
                   </div>
                 );
-              },
-            )}
+              });
+            })}
           </div>
         )}
       </main>
@@ -1496,6 +1731,21 @@ export default function UltraSurCatalogApp() {
                       setFormData({ ...formData, title: e.target.value })
                     }
                     placeholder="مثال: پاور بانک مدل U-P10"
+                    className="w-full bg-[#0b0f19] border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-100 focus:outline-none focus:border-orange-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1">
+                    نام برند (اختیاری)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.brand}
+                    onChange={(e) =>
+                      setFormData({ ...formData, brand: e.target.value })
+                    }
+                    placeholder="مثال: UltraSur"
                     className="w-full bg-[#0b0f19] border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-100 focus:outline-none focus:border-orange-500"
                   />
                 </div>

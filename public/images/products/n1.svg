@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#115e59"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.38" r="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" rx="48" fill="url(#bg)"/>
+  <rect width="600" height="600" rx="48" fill="url(#glow)"/>
+  <rect x="22" y="22" width="556" height="556" rx="34" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>
+  
+    <path d="M215 200 v40 q0 85 85 85 t85 -85 v-40" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" opacity="0.95"/>
+    <circle cx="215" cy="186" r="20" fill="#fff" opacity="0.95"/>
+    <circle cx="385" cy="186" r="20" fill="#fff" opacity="0.95"/>
+    <circle cx="300" cy="255" r="9" fill="#fff" opacity="0.6"/>
+  <rect x="200" y="430" width="200" height="64" rx="32" fill="#0b0f19" fill-opacity="0.55"/>
+  <text x="300" y="474" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="800" fill="#ffffff" letter-spacing="2">U-N15</text>
+  <text x="300" y="540" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#ffffff" fill-opacity="0.85" letter-spacing="6">ULTRASUR</text>
+</svg>
