@@ -854,24 +854,56 @@ export default function UltraSurCatalogApp() {
     }
   };
 
-  // آپلود عکس به عنوان Base64 فشرده
+  // آپلود عکس: تغییر اندازه و فشرده‌سازی در مرورگر قبل از ذخیره به صورت Base64
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 850000) {
-        alert("حجم تصویر نباید بیشتر از ۸۰۰ کیلوبایت باشد.");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({ ...prev, image: reader.result as string }));
-      };
-      reader.readAsDataURL(file);
+    e.target.value = "";
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      showToast("فایل انتخاب‌شده باید تصویر باشد", "error");
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const maxDim = 1024;
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          showToast("خطا در پردازش تصویر", "error");
+          return;
+        }
+        // پس‌زمینه سفید برای تصاویر شفاف چون خروجی JPEG است
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.82);
+        if (dataUrl.length > 1500000) {
+          showToast(
+            "حجم تصویر پس از فشرده‌سازی همچنان زیاد است؛ تصویر کوچک‌تری انتخاب کنید",
+            "error",
+          );
+          return;
+        }
+        setFormData((prev) => ({ ...prev, image: dataUrl }));
+        showToast("تصویر پردازش و آماده ذخیره شد");
+      };
+      img.onerror = () => showToast("خطا در باز کردن تصویر", "error");
+      img.src = reader.result as string;
+    };
+    reader.onerror = () => showToast("خطا در خواندن فایل", "error");
+    reader.readAsDataURL(file);
   };
 
   const handlePrintPdf = () => {
-    window.print();
+    // قالب چاپی فقط در تب pdf-preview رندر می‌شود؛ اول به آن برو، بعد چاپ کن
+    setActiveTab("pdf-preview");
+    setTimeout(() => window.print(), 150);
   };
 
   return (
@@ -888,46 +920,44 @@ export default function UltraSurCatalogApp() {
         }
 
         @media print {
-          body {
-            background-color: #ffffff !important;
-            color: #111827 !important;
+          /* حفظ رنگ‌های تم تیره کاتالوگ در خروجی PDF */
+          * {
             print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
+          }
+
+          body {
+            background-color: #0b0f19 !important;
           }
 
           .no-print {
             display: none !important;
           }
 
-          .print-only {
-            display: block !important;
-          }
-
           .catalog-print-container {
             width: 100% !important;
             padding: 0 !important;
             margin: 0 !important;
-            background: white !important;
+            background: #0b0f19 !important;
           }
 
           .catalog-page {
             page-break-after: always;
             break-after: page;
-            min-height: 100vh;
             padding: 24px 20px;
             box-sizing: border-box;
-            border-bottom: 2px dashed #cbd5e1;
-            background: #ffffff !important;
-            color: #0f172a !important;
+            border-radius: 0 !important;
+            margin-bottom: 0 !important;
+          }
+
+          .catalog-page:last-child {
+            page-break-after: auto;
+            break-after: auto;
           }
 
           .print-card {
-            border: 1px solid #cbd5e1 !important;
-            background: #ffffff !important;
-            box-shadow: none !important;
             page-break-inside: avoid;
             break-inside: avoid;
-            color: #0f172a !important;
           }
         }
       `}</style>
@@ -1254,7 +1284,7 @@ export default function UltraSurCatalogApp() {
                             handleDelete(product.id, product.title)
                           }
                           className="p-2 bg-gray-800 hover:bg-rose-900/40 text-gray-400 hover:text-rose-400 rounded-xl transition border border-gray-700"
-                          title="حذف محصول از سرور"
+                          title="حذف محصول از دیتابیس"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -1438,8 +1468,8 @@ export default function UltraSurCatalogApp() {
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
                 <Tag className="w-4 h-4 text-orange-500" />
                 {editingProduct
-                  ? "ویرایش اطلاعات محصول در دیتابیس ابری"
-                  : "افزودن محصول جدید به دیتابیس ابری"}
+                  ? "ویرایش اطلاعات محصول در دیتابیس محلی"
+                  : "افزودن محصول جدید به دیتابیس محلی"}
               </h2>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -1545,6 +1575,18 @@ export default function UltraSurCatalogApp() {
                     />
                   </label>
                 </div>
+                {formData.image && (
+                  <div className="mt-2 flex items-center gap-3">
+                    <img
+                      src={formData.image}
+                      alt="پیش‌نمایش تصویر محصول"
+                      className="h-16 w-16 object-contain bg-[#0b0f19] border border-gray-700 rounded-lg p-1"
+                    />
+                    <span className="text-[10px] text-gray-500">
+                      تصویر انتخاب‌شده پس از فشرده‌سازی در دیتابیس ذخیره می‌شود
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -1576,7 +1618,7 @@ export default function UltraSurCatalogApp() {
                   className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 shadow-md shadow-orange-500/20 transition flex items-center gap-1.5"
                 >
                   <Check className="w-4 h-4" />
-                  ذخیره در سرور ابری
+                  ذخیره در دیتابیس
                 </button>
               </div>
             </form>
