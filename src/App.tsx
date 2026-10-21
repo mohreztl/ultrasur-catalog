@@ -4,7 +4,6 @@ import {
   Plus,
   Edit2,
   Trash2,
-  Printer,
   RotateCcw,
   Download,
   Check,
@@ -33,8 +32,9 @@ import initSqlJs, {
   type SqlJsStatic,
 } from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
+import { IMPORTED_PRODUCTS } from "./importedProducts";
 
-interface Product {
+export interface Product {
   id: string;
   category: string;
   title: string;
@@ -59,6 +59,11 @@ const DB_SCHEMA = `
     badge TEXT,
     image TEXT,
     specs TEXT NOT NULL DEFAULT '[]'
+  );
+
+  CREATE TABLE IF NOT EXISTS meta (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL
   );
 `;
 
@@ -221,6 +226,8 @@ const CATEGORIES = [
   { id: "neckband", name: "هندزفری گردنی", icon: Headphones },
   { id: "holder", name: "هولدر ۳۶۰ درجه", icon: Smartphone },
   { id: "speaker-acc", name: "اسپیکر و هدفون", icon: Headphones },
+  { id: "charger", name: "شارژر دیواری و وایرلس", icon: BatteryCharging },
+  { id: "other", name: "سایر محصولات", icon: Layers },
 ];
 
 // دیتابیس اولیه استخراج‌شده دقیق از کاتالوگ ultrasur.pdf
@@ -584,12 +591,31 @@ const INITIAL_PRODUCTS: Product[] = [
   },
 ];
 
+// دانه کامل: محصولات اولیه کاتالوگ + محصولات واردشده از پوشه فروشگاه
+const SEED_PRODUCTS: Product[] = [...INITIAL_PRODUCTS, ...IMPORTED_PRODUCTS];
+
+// افزودن یک‌باره محصولات جدید به دیتابیس‌های موجود (نسخه‌بندی دانه)
+const SEED_VERSION = 2;
+const syncSeedVersion = (db: SqlJsDatabase): void => {
+  const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
+  const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
+  if (version >= SEED_VERSION) return;
+  const existing = new Set(readAllProducts(db).map((p) => p.id));
+  const missing = SEED_PRODUCTS.filter((p) => !existing.has(p.id));
+  if (missing.length > 0) seedProducts(db, missing);
+  db.run(
+    "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_version', ?)",
+    [String(SEED_VERSION)],
+  );
+};
+
 export default function UltraSurCatalogApp() {
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>(SEED_PRODUCTS);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showPricesInPrint, setShowPricesInPrint] = useState(true);
   const [activeTab, setActiveTab] = useState("manager"); // 'manager' | 'pdf-preview'
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
 
   // وضعیت پایگاه داده SQLite محلی
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("connecting");
@@ -643,10 +669,11 @@ export default function UltraSurCatalogApp() {
         const rowCount =
           countResult.length > 0 ? Number(countResult[0].values[0][0]) : 0;
         if (rowCount === 0) {
-          setStatusMessage("بارگذاری اولیه کاتالوگ اولتراسور...");
-          seedProducts(db, INITIAL_PRODUCTS);
+          setStatusMessage("بارگذاری اولیه کاتالوگ ariyatechno...");
+          seedProducts(db, SEED_PRODUCTS);
         }
         migrateDatabase(db);
+        syncSeedVersion(db);
 
         if (cancelled) return;
         dbRef.current = db;
@@ -716,7 +743,7 @@ export default function UltraSurCatalogApp() {
 
   // فرمت‌بندی اعداد به تومان فارسی
   const formatToman = (val: number) => {
-    if (!val && val !== 0) return "استعلام بگیرید";
+    if (!val) return "تماس بگیرید";
     return Number(val).toLocaleString("fa-IR") + " تومان";
   };
 
@@ -884,7 +911,7 @@ export default function UltraSurCatalogApp() {
       setSyncStatus("saving");
       setStatusMessage("در حال بازیابی کاتالوگ پیش‌فرض...");
       dbRef.current.run("DELETE FROM products");
-      seedProducts(dbRef.current, INITIAL_PRODUCTS);
+      seedProducts(dbRef.current, SEED_PRODUCTS);
       setProducts(readAllProducts(dbRef.current));
       await persistDb(dbRef.current.export());
       setSyncStatus("synced");
@@ -945,6 +972,7 @@ export default function UltraSurCatalogApp() {
       dbRef.current = db;
       db.run(DB_SCHEMA);
       migrateDatabase(db);
+      syncSeedVersion(db);
       setProducts(readAllProducts(db));
       await persistDb(db.export());
       setSyncStatus("synced");
@@ -1002,10 +1030,59 @@ export default function UltraSurCatalogApp() {
     reader.readAsDataURL(file);
   };
 
-  const handlePrintPdf = () => {
-    // قالب چاپی فقط در تب pdf-preview رندر می‌شود؛ اول به آن برو، بعد چاپ کن
-    setActiveTab("pdf-preview");
-    setTimeout(() => window.print(), 150);
+  // خروجی فایل PDF واحد: رندر صفحات کاتالوگ به تصویر و مونتاژ با jsPDF
+  // (بدون هدر/آدرس سایت مرورگر و بدون حاشیه‌های اضافه چاپ)
+  const handleDownloadPdfFile = async () => {
+    if (isExportingPdf) return;
+    setIsExportingPdf(true);
+    try {
+      setActiveTab("pdf-preview");
+      await new Promise((r) => setTimeout(r, 250));
+      await document.fonts.ready;
+      const nodes = Array.from(
+        document.querySelectorAll<HTMLElement>(".catalog-page"),
+      );
+      if (nodes.length === 0) throw new Error("no catalog pages rendered");
+      const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
+        import("jspdf"),
+        import("html2canvas-pro"),
+      ]);
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+      const pageW = 210;
+      const pageH = 297;
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        const canvas = await html2canvas(node, {
+          scale: 2,
+          backgroundColor: getComputedStyle(node).backgroundColor,
+          useCORS: true,
+        });
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+        const imgW = pageW;
+        const imgH = (canvas.height / canvas.width) * pageW;
+        if (i > 0) pdf.addPage();
+        if (imgH <= pageH) {
+          pdf.addImage(dataUrl, "JPEG", 0, (pageH - imgH) / 2, imgW, imgH);
+        } else {
+          const scale = pageH / imgH;
+          const w = imgW * scale;
+          pdf.addImage(dataUrl, "JPEG", (pageW - w) / 2, 0, w, pageH);
+        }
+      }
+      pdf.save("ariyatechno-catalog.pdf");
+      showToast(
+        `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) دانلود شد`,
+      );
+    } catch (err) {
+      console.error("PDF export failed:", err);
+      showToast("خطا در ساخت فایل PDF", "error");
+    } finally {
+      setIsExportingPdf(false);
+    }
   };
 
   return (
@@ -1015,10 +1092,8 @@ export default function UltraSurCatalogApp() {
     >
       {/* استایل اختصاصی چاپ برای خروجی تمیز بدون هدرها و ابزارک‌های اضافی */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
-        
         * {
-          font-family: 'Vazirmatn', sans-serif;
+          font-family: 'Dana', Tahoma, sans-serif;
         }
 
         @media print {
@@ -1048,7 +1123,9 @@ export default function UltraSurCatalogApp() {
             break-after: page;
             padding: 24px 20px;
             box-sizing: border-box;
+            border: none !important;
             border-radius: 0 !important;
+            box-shadow: none !important;
             margin-bottom: 0 !important;
           }
 
@@ -1175,12 +1252,17 @@ export default function UltraSurCatalogApp() {
             </button>
 
             <button
-              onClick={handlePrintPdf}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-indigo-600/20"
-              title="خروجی PDF استاندارد کاتالوگ A4"
+              onClick={handleDownloadPdfFile}
+              disabled={isExportingPdf}
+              className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-indigo-600/20"
+              title="دانلود فایل PDF کاتالوگ بدون هدر و آدرس سایت"
             >
-              <Printer className="w-4 h-4" />
-              خروجی PDF
+              {isExportingPdf ? (
+                <RefreshCw className="w-4 h-4 animate-spin" />
+              ) : (
+                <FileDown className="w-4 h-4" />
+              )}
+              {isExportingPdf ? "در حال ساخت..." : "دانلود فایل PDF"}
             </button>
 
             <button
@@ -1389,7 +1471,7 @@ export default function UltraSurCatalogApp() {
                               placeholder="قیمت..."
                             />
                             <span className="text-[11px] font-bold text-amber-200/70">
-                              تومان
+                              {product.price ? "تومان" : "تماس بگیرید"}
                             </span>
                           </div>
                         </div>
@@ -1433,15 +1515,21 @@ export default function UltraSurCatalogApp() {
                 </span>
               </div>
               <button
-                onClick={handlePrintPdf}
-                className="bg-amber-500 hover:bg-amber-600 text-black font-extrabold px-4 py-2 rounded-xl transition shrink-0"
+                onClick={handleDownloadPdfFile}
+                disabled={isExportingPdf}
+                className="bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-black font-extrabold px-4 py-2 rounded-xl transition shrink-0 flex items-center gap-2"
               >
-                خروجی PDF کاتالوگ
+                {isExportingPdf && (
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                )}
+                {isExportingPdf
+                  ? "در حال ساخت فایل..."
+                  : "دانلود فایل PDF کاتالوگ"}
               </button>
             </div>
 
             {/* صفحه ۱: جلد کاتالوگ ariyatechno */}
-            <div className="catalog-page bg-[#0f172a] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-2xl flex flex-col justify-between">
+            <div className="catalog-page bg-[#0f172a] text-white p-8 mb-8 flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-gray-700/60 pb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center font-black text-white text-2xl shadow-lg shadow-orange-500/30">
@@ -1507,7 +1595,7 @@ export default function UltraSurCatalogApp() {
             </div>
 
             {/* صفحه ۲: فهرست انکردار (ایندکس کاتالوگ) */}
-            <div className="catalog-page catalog-toc bg-[#0d1424] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-xl flex flex-col">
+            <div className="catalog-page catalog-toc bg-[#0d1424] text-white p-8 mb-8 flex flex-col">
               <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-6">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
@@ -1581,7 +1669,7 @@ export default function UltraSurCatalogApp() {
                   <div
                     key={`${group.id}-${chunkIdx}`}
                     id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
-                    className="catalog-page bg-[#0d1424] text-white rounded-3xl p-8 mb-8 border border-gray-800 shadow-xl flex flex-col justify-between"
+                    className="catalog-page bg-[#0d1424] text-white p-8 mb-8 flex flex-col justify-between"
                   >
                     <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-5">
                       <div className="flex items-center gap-2.5">
@@ -1620,7 +1708,7 @@ export default function UltraSurCatalogApp() {
                           key={item.id}
                           className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-5"
                         >
-                          <div className="w-full md:w-44 h-40 bg-[#090d16] rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-800">
+                          <div className="w-full md:w-52 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
                             <img
                               src={item.image}
                               alt={item.title}
