@@ -652,6 +652,13 @@ export default function UltraSurCatalogApp() {
     try {
       setActiveTab("pdf-preview");
       await new Promise((r) => setTimeout(r, 250));
+      // Explicitly activate every weight before capture so html2canvas paints
+      // with IRANSansX instead of falling back to Tahoma in its clone canvas.
+      await Promise.all(
+        ["400", "500", "600", "700", "800", "900"].map((w) =>
+          document.fonts.load(`${w} 16px IRANSansX`),
+        ),
+      );
       await document.fonts.ready;
       const nodes = Array.from(
         document.querySelectorAll<HTMLElement>(".catalog-page"),
