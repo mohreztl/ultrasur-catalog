@@ -26,13 +26,15 @@ import {
   RefreshCw,
   CheckCircle2,
   AlertCircle,
+  Speaker,
+  Monitor,
 } from "lucide-react";
 import initSqlJs, {
   type Database as SqlJsDatabase,
   type SqlJsStatic,
 } from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
-import { IMPORTED_PRODUCTS } from "./importedProducts";
+import { CATALOG_PRODUCTS } from "./catalogProducts";
 
 export interface Product {
   id: string;
@@ -148,46 +150,6 @@ const seedProducts = (db: SqlJsDatabase, products: Product[]): void => {
 
 const PLACEHOLDER_IMAGE = "images/placeholder.svg";
 
-// نگاشت تصاویر قدیمی (Unsplash) به فایل‌های محلی؛ دسترسی به unsplash در برخی شبکه‌ها مسدود است
-const LEGACY_IMAGE_MAP: Record<string, string> = {
-  "https://images.unsplash.com/photo-1609592426365-1886861611d2?w=600&auto=format&fit=crop&q=80":
-    "images/products/p1.svg",
-  "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=600&auto=format&fit=crop&q=80":
-    "images/products/p2.svg",
-  "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80":
-    "images/products/p3.svg",
-  "https://images.unsplash.com/photo-1618478594486-c65b899c4936?w=600&auto=format&fit=crop&q=80":
-    "images/products/p4.svg",
-  "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&auto=format&fit=crop&q=80":
-    "images/products/p5.svg",
-  "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80":
-    "images/products/e1.svg",
-  "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600&auto=format&fit=crop&q=80":
-    "images/products/e2.svg",
-  "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&auto=format&fit=crop&q=80":
-    "images/products/e3.svg",
-  "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80":
-    "images/products/e4.svg",
-  "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=600&auto=format&fit=crop&q=80":
-    "images/products/e5.svg",
-  "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&auto=format&fit=crop&q=80":
-    "images/products/w1.svg",
-  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80":
-    "images/products/w2.svg",
-  "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&auto=format&fit=crop&q=80":
-    "images/products/w3.svg",
-  "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80":
-    "images/products/c1.svg",
-  "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80":
-    "images/products/c2.svg",
-  "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80":
-    "images/products/c3.svg",
-  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80":
-    "images/products/cb1.svg",
-  "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&auto=format&fit=crop&q=80":
-    "images/products/sp1.svg",
-};
-
 // ارتقای دیتابیس‌های قدیمی: افزودن ستون brand، نسبت دادن برند به رکوردها و جایگزینی تصاویر unsplash
 const migrateDatabase = (db: SqlJsDatabase): void => {
   const cols = db.exec("PRAGMA table_info(products)");
@@ -198,411 +160,39 @@ const migrateDatabase = (db: SqlJsDatabase): void => {
   }
   // رکوردهای قدیمی (و دانه‌های اولیه بدون برند) متعلق به برند UltraSur هستند
   db.run("UPDATE products SET brand = 'UltraSur' WHERE brand IS NULL");
-
-  for (const [oldUrl, localPath] of Object.entries(LEGACY_IMAGE_MAP)) {
-    const stmt = db.prepare("SELECT COUNT(*) FROM products WHERE image = ?");
-    stmt.bind([oldUrl]);
-    const hasLegacy = stmt.step() ? Number(stmt.get()[0]) > 0 : false;
-    stmt.free();
-    if (hasLegacy) {
-      db.run("UPDATE products SET image = ? WHERE image = ?", [
-        localPath,
-        oldUrl,
-      ]);
-    }
-  }
 };
 
-// دسته‌بندی‌های پیش‌فرض منطبق بر فهرست کاتالوگ UltraSur
+// دسته‌بندی‌های کاتالوگ (ترتیب فهرست)
 const CATEGORIES = [
   { id: "all", name: "همه محصولات", icon: Layers },
   { id: "powerbank", name: "پاور بانک", icon: BatteryCharging },
   { id: "airpods", name: "ایرپاد و هندزفری بلوتوث", icon: Headphones },
   { id: "smartwatch", name: "ساعت هوشمند", icon: Watch },
   { id: "car-charger", name: "شارژر فندکی", icon: Car },
-  { id: "aux-cable", name: "کابل AUX", icon: Cable },
+  { id: "charger", name: "شارژر دیواری و وایرلس", icon: BatteryCharging },
   { id: "cables", name: "کابل‌های شارژ سریع", icon: Cable },
+  { id: "aux-cable", name: "کابل AUX", icon: Cable },
   { id: "wired-earphone", name: "هندزفری سیمی", icon: Headphones },
   { id: "neckband", name: "هندزفری گردنی", icon: Headphones },
+  { id: "headphone", name: "هدفون", icon: Headphones },
   { id: "holder", name: "هولدر ۳۶۰ درجه", icon: Smartphone },
-  { id: "speaker-acc", name: "اسپیکر و هدفون", icon: Headphones },
-  { id: "charger", name: "شارژر دیواری و وایرلس", icon: BatteryCharging },
+  { id: "speaker-acc", name: "اسپیکر و OTG", icon: Speaker },
+  { id: "computer-acc", name: "لوازم کامپیوتر", icon: Monitor },
   { id: "other", name: "سایر محصولات", icon: Layers },
 ];
 
-// دیتابیس اولیه استخراج‌شده دقیق از کاتالوگ ultrasur.pdf
-const INITIAL_PRODUCTS: Product[] = [
-  {
-    id: "p1",
-    category: "powerbank",
-    title: "پاور بانک مدل U-P10",
-    capacity: "۲۰,۰۰۰ میلی‌آمپر ساعت",
-    specs: [
-      "ظرفیت: ۲۰۰۰۰ میلی آمپر ساعت",
-      "تعداد درگاه‌های خروجی: ۳ عدد",
-      "دو درگاه USB با شارژ سریع QC3.0",
-      "یک درگاه تایپ‌سی ۲۲.۵ وات خروجی PD",
-      "دارای نمایشگر درصد شارژ باتری LED",
-    ],
-    price: 1480000,
-    badge: "22.5W Fast Charge",
-    image:
-      "https://images.unsplash.com/photo-1609592426365-1886861611d2?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "p2",
-    category: "powerbank",
-    title: "پاور بانک مدل U-P4",
-    capacity: "۲۰,۰۰۰ میلی‌آمپر ساعت",
-    specs: [
-      "ظرفیت: ۲۰۰۰۰ میلی آمپر ساعت",
-      "ورودی تایپ‌سی فست‌شارژ و میکرو نرمال",
-      "خروجی USB دو عدد QC3.0",
-      "خروجی PD: یک عدد ۲۲.۵ وات توان خروجی",
-      "دارای نمایشگر دقیق دیجیتال درصد شارژ",
-    ],
-    price: 1580000,
-    badge: "High Performance",
-    image:
-      "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "p3",
-    category: "powerbank",
-    title: "پاور بانک مدل U-P8",
-    capacity: "۲۰,۰۰۰ میلی‌آمپر ساعت",
-    specs: [
-      "ظرفیت باتری: ۲۰۰۰۰ میلی آمپر",
-      "پورت‌های USB: دو پورت با شارژ سریع QC3.0",
-      "پورت Type-C: یک پورت با توان خروجی ۲۲.۵W PD",
-      "ورودی شارژ فست از طریق پورت Type-C",
-      "دارای نمایشگر اختصاصی درصد شارژ",
-    ],
-    price: 1520000,
-    badge: "QC 3.0 + PD",
-    image:
-      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "p4",
-    category: "powerbank",
-    title: "پاور بانک وایرلس مگ‌سیف U-PW5",
-    capacity: "۱۰,۰۰۰ میلی‌آمپر ساعت",
-    specs: [
-      "ظرفیت: ۱۰,۰۰۰ میلی آمپر ساعت",
-      "شارژ بی‌سیم مگ‌سیف MagSafe + پایه نگهدارنده تاشو",
-      "توان خروجی شارژ بی سیم: ۱۵ وات واقعی",
-      "درگاه خروجی PD تایپ‌سی ۲۲.۵ وات",
-      "درگاه خروجی USB QC3.0",
-    ],
-    price: 1688000,
-    badge: "Wireless MagSafe 15W",
-    image:
-      "https://images.unsplash.com/photo-1618478594486-c65b899c4936?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "p5",
-    category: "powerbank",
-    title: "پاور بانک مدل U-P9 (بدنه تمام فلزی)",
-    capacity: "۲۰,۰۰۰ میلی‌آمپر ساعت",
-    specs: [
-      "ظرفیت باتری ۲۰۰۰۰ میلی آمپر ساعت",
-      "جنس بدنه آلومینیوم مات مقاوم + نمایشگر دیجیتال",
-      "دو پورت USB خروجی با فناوری کوالکام QC3.0",
-      "پورت ورودی/خروجی Type-C با توان ۲۲.۵ وات",
-      "پورت ورودی جانبی میکرو USB",
-    ],
-    price: 1620000,
-    badge: "Full Metal Body",
-    image:
-      "https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "e1",
-    category: "airpods",
-    title: "ایرپاد بلوتوثی مدل U-E10",
-    capacity: "باتری ۳۳۰mAh",
-    specs: [
-      "حذف نویز فعال هیبریدی (Active Noise Cancelling - ANC)",
-      "ظرفیت باتری هر ایرباد: ۳۰ میلی آمپر ساعت",
-      "ظرفیت باتری کیس شارژ: ۳۰۰ میلی آمپر ساعت",
-      "درگاه شارژ سریع Type-C به همراه نشانگر وضعیت",
-      "کیفیت صدای Super Bass با تفکیک عالی فرکانسی",
-    ],
-    price: 1248000,
-    badge: "Active ANC Pro",
-    image:
-      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "e2",
-    category: "airpods",
-    title: "ایرپاد بلوتوثی مدل U-E4",
-    capacity: "کیس ۳۰۰mAh",
-    specs: [
-      "پشتیبانی کامل از فناوری حذف نویز فعال ANC",
-      "قابلیت شارژ وایرلس بیسیم Wireless Charging",
-      "پنل‌های لمسی هوشمند لمس خازنی + سوئیچ آنی",
-      "مدت زمان نگهداری شارژ: تا ۵ ساعت مداوم با کیس",
-      "زمان شارژ کامل کیس: فقط ۱ ساعت",
-    ],
-    price: 1428000,
-    badge: "Wireless Charging",
-    image:
-      "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "e3",
-    category: "airpods",
-    title: "ایرپاد بلوتوثی مدل U-E2",
-    capacity: "کیس ۳۰۰mAh",
-    specs: [
-      "زمان مکالمه و پخش موسیقی تا ۴ ساعت مداوم",
-      "درگاه شارژ لایتنینگ و سازگاری کامل با iOS/Android",
-      "دارای حسگر لمسی حساس روی دسته ایرفون",
-      "طراحی ارگونومیک نیمه‌باز مطابق گوش انسان",
-      "زمان مورد نیاز شارژ سریع: ۱ ساعت",
-    ],
-    price: 808000,
-    badge: "Best Value",
-    image:
-      "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "e4",
-    category: "airpods",
-    title: "ایرپاد بلوتوثی گیمینگ U-E6 با بدنه چرمی",
-    capacity: "کیس ۳۰۰mAh LED",
-    specs: [
-      "طراحی خاص با روکش چرم مرغوب و شیک روی کیس شارژ",
-      "حذف نویز تماس شفاف و محیطی (ENC)",
-      "دارای نمایشگر هوشمند LED درصد شارژ دقیق روی کیس",
-      "تراشه بلوتوث نسخه ۵.۳ با حداقل تاخیر در بازی",
-      "میکروفون دوتایی با وضوح بالا برای مکالمات شفاف",
-    ],
-    price: 1080000,
-    badge: "Leather Edition + LED",
-    image:
-      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "e5",
-    category: "airpods",
-    title: "ایرپاد بلوتوثی اولتراسور U-E7",
-    capacity: "همراه با بند سیلیکونی",
-    specs: [
-      "حذف نویز مکالمه محیطی ENC Dual Mic",
-      "بند آویز اورجینال متصل به کیس برای حمل آسان",
-      "پخش موسیقی مداوم تا ۴ ساعت و استندبای ۷۰ ساعت",
-      "پورت شارژ فوق سریع Type-C",
-      "مقاوم در برابر تعریق و قطرات آب",
-    ],
-    price: 998000,
-    badge: "Lanyard Design",
-    image:
-      "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "w1",
-    category: "smartwatch",
-    title: "ساعت هوشمند مدل U-W1 Ultra",
-    capacity: "باتری ۲۷۰mAh",
-    specs: [
-      "صفحه نمایش ۲.۰۲ اینچی تمام لمسی HD",
-      "فریم تیتانیومی مقاوم با بند اوشن لوکس (Ocean Band)",
-      "باتری ۲۷۰ میلی‌آمپر با شارژدهی تا ۷ روز کاری",
-      "پشتیبانی از هوش مصنوعی ChatGPT، قطب‌نما، دستیار صوتی",
-      "پایش ۲۴ ساعته ضربان قلب، اکسیژن خون SpO2 و فشار خون",
-    ],
-    price: 1850000,
-    badge: "ChatGPT & Compass",
-    image:
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "w2",
-    category: "smartwatch",
-    title: "ساعت هوشمند مدل U-W2 (بند استیل)",
-    capacity: "باتری ۲۵۰mAh",
-    specs: [
-      "طراحی لوکس مدیریتی با بند فلزی مشکی استیل ضدزنگ",
-      "نمایشگر تمام لمسی ۲ اینچ با رزولوشن فوق‌العاده ۳۲۰×۳۹۰",
-      "قابلیت مکالمه بلوتوثی با اسپیکر و میکروفون HD داخلی",
-      "باتری ۲۵۰ میلی‌آمپر با شارژدهی استثنایی تا ۱۵ روز در استندبای",
-      "چیپست پردازشی پرسرعت و روان BT8955B",
-    ],
-    price: 1980000,
-    badge: "Stainless Steel Band",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "w3",
-    category: "smartwatch",
-    title: "ساعت هوشمند اسپرت U-W2 Rounder",
-    capacity: "باتری ۲۰۰mAh",
-    specs: [
-      "صفحه نمایش دایره‌ای ۱.۵۳ اینچی با کیفیت ۳۶۰×۳۶۰ پیکسل",
-      "طراحی تاکتیکال و ضد ضربه مناسب ورزشکاران",
-      "شارژر مغناطیسی فست + مسیریابی و گام‌شمار پیشرفته",
-      "پایش دقیق خواب، استرس و سنسورهای بیومتریک پزشکی",
-      "پشتیبانی کامل از پیام‌های فارسی و نوتیفیکیشن‌ها",
-    ],
-    price: 1720000,
-    badge: "Round Tactical",
-    image:
-      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "c1",
-    category: "car-charger",
-    title: "شارژر فندکی توربو مدل U-B1",
-    capacity: "توان خروجی ۴۸W",
-    specs: [
-      "بدنه فلزی مقاوم از آلیاژ روی ضد حرارت",
-      "پورت خروجی Type-C با توان ۳۰ وات PD",
-      "پورت خروجی USB با توان ۱۸ وات QC3.0",
-      "ولتاژ ورودی ۱۲ الی ۲۴ ولت (سازگار با خودرو و کامیون)",
-      "دارای حلقه نورانی LED فیروزه‌ای زیبا در شب",
-    ],
-    price: 358000,
-    badge: "48W Turbo Metal",
-    image:
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "c2",
-    category: "car-charger",
-    title: "شارژر فندکی شفاف مدل U-B2",
-    capacity: "۱۸W فست‌شارژ",
-    specs: [
-      "طراحی مدرن شیشه‌ای سایبرپانک با قابلیت مشاهده قطعات داخلی",
-      "پورت USB-A با فناوری کوالکام QC3.0 و توان ۱۸ وات",
-      "سیستم هوشمند کنترل دما و محافظت در برابر نوسان",
-      "بدنه پلی‌کربنات نسوز شفاف ضدخش",
-      "ولتاژ ورودی ۱۲ تا ۲۴ ولت اتوماتیک",
-    ],
-    price: 168000,
-    badge: "Transparent Style",
-    image:
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "c3",
-    category: "car-charger",
-    title: "شارژر فندکی دو پورت تایپ‌سی U-B3",
-    capacity: "توان کلی ۶۰ وات",
-    specs: [
-      "دو عدد پورت خروجی مستقل Type-C PD فوق پرسرعت",
-      "توان کل خروجی: ۶۰ وات واقعی با قابلیت شارژ لپ‌تاپ و تبلت",
-      "متریال ترکیبی شیشه نشکن دودی و آلیاژ آلومینیومی",
-      "پشتیبانی از فناوری‌های PD 3.0, PPS, QC 4.0",
-      "مکانیزم حفاظتی ۸ لایه در برابر اتصال کوتاه",
-    ],
-    price: 420000,
-    badge: "Dual PD 60W",
-    image:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "cb1",
-    category: "aux-cable",
-    title: "کابل AUX کنفی مدل U-A1",
-    capacity: "طول ۱۲۰ سانتی‌متر",
-    specs: [
-      "کانکتورهای جک ۳.۵ میلی‌متری طلایی با رسانایی بدون نویز",
-      "طول کابل: ۱۲۰ سانتی‌متر استاندارد",
-      "روکش کنفی بافته شده فوق‌العاده مقاوم و ضد گره",
-      "جنس پوسته کانکتورها آلومینیوم مات مشکی اولتراسور",
-      "انتقال صدای کریستالی با خلوص Hi-Fi Audio",
-    ],
-    price: 118000,
-    badge: "Hi-Fi Gold Plug",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "cb3",
-    category: "cables",
-    title: "کابل فست ۱۰۰ وات اولتراسور U-D8",
-    capacity: "توان ۱۰۰ وات ۵ آمپر",
-    specs: [
-      "پشتیبانی از فناوری شارژ ۱۰۰ وات واقعی (20V/5A)",
-      "مناسب شارژ مک‌بوک، لپ‌تاپ‌های تایپ‌سی و پرچمداران موبایل",
-      "جنس بدنه: کنف فشرده ضد سایش و پارگی",
-      "سر سیم‌های آلومینیومی تقویت‌شده ضد شکستگی SR",
-      "طول استاندارد ۱۰۰ سانتی‌متر",
-    ],
-    price: 198000,
-    badge: "100W Super PD",
-    image:
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "n1",
-    category: "neckband",
-    title: "هندزفری گردنی ماراتن U-N15",
-    capacity: "باتری ۵۰۰mAh (۶۰ ساعت کارکرد)",
-    specs: [
-      "باتری ۵۰۰ میلی‌آمپری با پخش مداوم شگفت‌انگیز ۶۰ ساعت",
-      "زمان استندبای آماده به کار تا ۱۰۰۰ ساعت",
-      "زمان شارژ شدن کامل: ۴ ساعت",
-      "سری‌های ارگونومیک فلزی مجهز به مگنت آهنربایی",
-      "صدای بم عمیق Extra Bass با پورت محافظت شده",
-    ],
-    price: 788000,
-    badge: "60 Hours Playtime",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "h1",
-    category: "holder",
-    title: "هولدر تلسکوپی ۳۶۰ درجه UF1",
-    capacity: "پایه مکنده وکیوم ژله‌ای",
-    specs: [
-      "بدنه از جنس پلاستیک مقاوم ABS نشکن",
-      "امکان چرخش کامل ۳۶۰ درجه مفصلی به همراه بازوی تلسکوپی کشویی",
-      "سازگار با تمامی گوشی‌ها از سایز ۴.۵ تا ۶.۸ اینچ",
-      "اتصال دوگانه به داشبورد و شیشه با ساکشن وکیوم و ژل نانو نچسب",
-      "گیره خرچنگی قفل‌شونده با رهاسازی تک لمسی",
-    ],
-    price: 245000,
-    badge: "Crab Clamp Lock",
-    image:
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "sp1",
-    category: "speaker-acc",
-    title: "اسپیکر قابل حمل اولتراسور U-S40",
-    capacity: "باتری ۱۵۰۰mAh",
-    specs: [
-      "توان خروجی ۵ وات واقعی با بیس کوبنده و تفکیک عالی",
-      "باتری لیتیومی ۱۵۰۰ میلی‌آمپر با پخش مداوم ۸ الی ۱۰ ساعت",
-      "دارای ولوم کنترل چرخشی دقیق و لذت‌بخش در جلوی دستگاه",
-      "درگاه شارژ تایپ‌سی + بند بافته شده برای جابجایی آسان",
-      "پشتیبانی از بلوتوث، فلش USB، کارت حافظه TF و AUX",
-    ],
-    price: 680000,
-    badge: "Rotary Volume Control",
-    image:
-      "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&auto=format&fit=crop&q=80",
-  },
-];
+// دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
+const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// دانه کامل: محصولات اولیه کاتالوگ + محصولات واردشده از پوشه فروشگاه
-const SEED_PRODUCTS: Product[] = [...INITIAL_PRODUCTS, ...IMPORTED_PRODUCTS];
-
-// افزودن یک‌باره محصولات جدید به دیتابیس‌های موجود (نسخه‌بندی دانه)
-const SEED_VERSION = 2;
+// نسخه‌بندی دانه — نسخه ۳: جایگزینی کامل فهرست محصولات
+const SEED_VERSION = 3;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
   if (version >= SEED_VERSION) return;
-  const existing = new Set(readAllProducts(db).map((p) => p.id));
-  const missing = SEED_PRODUCTS.filter((p) => !existing.has(p.id));
-  if (missing.length > 0) seedProducts(db, missing);
+  // نسخه ۳: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
+  db.run("DELETE FROM products");
+  seedProducts(db, SEED_PRODUCTS);
   db.run(
     "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_version', ?)",
     [String(SEED_VERSION)],
@@ -616,6 +206,10 @@ export default function UltraSurCatalogApp() {
   const [showPricesInPrint, setShowPricesInPrint] = useState(true);
   const [activeTab, setActiveTab] = useState("manager"); // 'manager' | 'pdf-preview'
   const [isExportingPdf, setIsExportingPdf] = useState(false);
+  const [exportProgress, setExportProgress] = useState<{
+    current: number;
+    total: number;
+  } | null>(null);
 
   // وضعیت پایگاه داده SQLite محلی
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("connecting");
@@ -725,21 +319,39 @@ export default function UltraSurCatalogApp() {
       .filter((group) => group.items.length > 0);
   }, [products]);
 
-  // صفحه‌آرایی: صفحه ۱ جلد، صفحه ۲ فهرست، از صفحه ۳ محصولات به تفکیک دسته
+  // صفحه‌آرایی: جلد + فهرست چندصفحه‌ای + محصولات به تفکیک دسته + پشت‌جلد
+  const TOC_ROWS_PER_PAGE = 14;
+
   const pagesForCategory = (count: number) =>
     count === 0 ? 0 : count <= 2 ? 1 : 1 + Math.ceil((count - 2) / 3);
 
+  const tocPages = Math.max(
+    1,
+    Math.ceil(categoryGroups.length / TOC_ROWS_PER_PAGE),
+  );
+  const contentStart = 2 + tocPages;
+
   const categoryPages = useMemo(() => {
-    let nextPage = 3;
+    let nextPage = contentStart;
     return categoryGroups.map((group) => {
       const startPage = nextPage;
       nextPage += pagesForCategory(group.items.length);
       return { ...group, startPage };
     });
-  }, [categoryGroups]);
+  }, [categoryGroups, contentStart]);
 
+  const tocChunks = useMemo(() => {
+    const chunks: (typeof categoryPages)[] = [];
+    for (let i = 0; i < categoryPages.length; i += TOC_ROWS_PER_PAGE) {
+      chunks.push(categoryPages.slice(i, i + TOC_ROWS_PER_PAGE));
+    }
+    return chunks;
+  }, [categoryPages]);
+
+  // آخرین شماره صفحه = پشت‌جلد
   const totalPages =
-    2 + categoryPages.reduce((s, g) => s + pagesForCategory(g.items.length), 0);
+    contentStart +
+    categoryPages.reduce((s, g) => s + pagesForCategory(g.items.length), 0);
 
   // فرمت‌بندی اعداد به تومان فارسی
   const formatToman = (val: number) => {
@@ -1035,7 +647,6 @@ export default function UltraSurCatalogApp() {
   const handleDownloadPdfFile = async () => {
     if (isExportingPdf) return;
     setIsExportingPdf(true);
-    // ابعاد دقیق A4 با رزولوشن 96dpi؛ صفحه‌ها دقیقاً نسبت ۲۱۰×۲۹۷ می‌گیرند
     const A4_W = 794;
     const A4_H = 1123;
     try {
@@ -1046,42 +657,39 @@ export default function UltraSurCatalogApp() {
         document.querySelectorAll<HTMLElement>(".catalog-page"),
       );
       if (nodes.length === 0) throw new Error("no catalog pages rendered");
-      // اعمال ابعاد ثابت A4 روی هر صفحه تا خروجی بدون حاشیه سفید باشد
+      // قفل نسبت A4 برای هر صفحه تا خروجی بدون حاشیه سفید باشد
       for (const node of nodes) {
         node.style.width = `${A4_W}px`;
         node.style.height = `${A4_H}px`;
         node.style.overflow = "hidden";
       }
-      // اندازه‌گیری مختصات ردیف‌های فهرست برای لینک‌های داخلی PDF
+      // مختصات ردیف‌های فهرست برای لینک‌های داخلی PDF
       const tocLinks: Array<{
+        nodeIdx: number;
         x: number;
         y: number;
         w: number;
         h: number;
         page: number;
       }> = [];
-      const tocNode = nodes[1];
-      if (tocNode) {
-        const tocRect = tocNode.getBoundingClientRect();
-        for (const a of tocNode.querySelectorAll<HTMLAnchorElement>(
-          "a[href^='#cat-']",
-        )) {
-          const href = a.getAttribute("href");
-          if (!href) continue;
-          const group = categoryPages.find(
-            (g) => `cat-${g.id}` === href.slice(1),
-          );
-          if (!group) continue;
-          const r = a.getBoundingClientRect();
-          tocLinks.push({
-            x: r.left - tocRect.left,
-            y: r.top - tocRect.top,
-            w: r.width,
-            h: r.height,
-            page: group.startPage,
+      nodes.forEach((node, nodeIdx) => {
+        if (!node.classList.contains("catalog-toc")) return;
+        const base = node.getBoundingClientRect();
+        node
+          .querySelectorAll<HTMLAnchorElement>("a[data-target-page]")
+          .forEach((a) => {
+            const page = Number(a.dataset.targetPage);
+            const r = a.getBoundingClientRect();
+            tocLinks.push({
+              nodeIdx,
+              x: r.left - base.left,
+              y: r.top - base.top,
+              w: r.width,
+              h: r.height,
+              page,
+            });
           });
-        }
-      }
+      });
       try {
         const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
           import("jspdf"),
@@ -1095,24 +703,24 @@ export default function UltraSurCatalogApp() {
         const pageW = 210;
         const pageH = 297;
         const k = pageW / A4_W;
+        // کیفیت تطبیقی: برای کاتالوگ‌های حجیم سبک‌تر
+        const scale = nodes.length > 150 ? 2 : nodes.length > 60 ? 2.25 : 2.5;
+        const quality = nodes.length > 150 ? 0.82 : 0.9;
         for (let i = 0; i < nodes.length; i++) {
-          const node = nodes[i];
-          const canvas = await html2canvas(node, {
-            scale: 2.5,
-            backgroundColor: getComputedStyle(node).backgroundColor,
+          setExportProgress({ current: i + 1, total: nodes.length });
+          const canvas = await html2canvas(nodes[i], {
+            scale,
+            backgroundColor: getComputedStyle(nodes[i]).backgroundColor,
             useCORS: true,
           });
-          const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+          const dataUrl = canvas.toDataURL("image/jpeg", quality);
           if (i > 0) pdf.addPage();
-          // نسبت صفحه دقیقاً A4 است؛ تصویر تمام‌صفحه بدون حاشیه سفید
           pdf.addImage(dataUrl, "JPEG", 0, 0, pageW, pageH);
-          if (i === 1) {
-            // لینک‌های داخلی ردیف‌های فهرست به صفحه شروع هر دسته‌بندی
-            for (const l of tocLinks) {
-              pdf.link(l.x * k, l.y * k, l.w * k, l.h * k, {
-                pageNumber: l.page,
-              });
-            }
+          for (const l of tocLinks) {
+            if (l.nodeIdx !== i) continue;
+            pdf.link(l.x * k, l.y * k, l.w * k, l.h * k, {
+              pageNumber: l.page,
+            });
           }
         }
         pdf.save("ariyatechno-catalog.pdf");
@@ -1128,9 +736,10 @@ export default function UltraSurCatalogApp() {
       }
     } catch (err) {
       console.error("PDF export failed:", err);
-      showToast("خطا در ساخت فایل PDF", "error");
+      showToast("خطا در ساخت فایل PDF");
     } finally {
       setIsExportingPdf(false);
+      setExportProgress(null);
     }
   };
 
@@ -1142,7 +751,7 @@ export default function UltraSurCatalogApp() {
       {/* استایل اختصاصی چاپ برای خروجی تمیز بدون هدرها و ابزارک‌های اضافی */}
       <style>{`
         * {
-          font-family: 'Dana', Tahoma, sans-serif;
+          font-family: 'IRANSansX', Tahoma, sans-serif;
         }
 
         @media print {
@@ -1311,7 +920,11 @@ export default function UltraSurCatalogApp() {
               ) : (
                 <FileDown className="w-4 h-4" />
               )}
-              {isExportingPdf ? "در حال ساخت..." : "دانلود فایل PDF"}
+              {isExportingPdf
+                ? exportProgress
+                  ? `صفحه ${exportProgress.current.toLocaleString("fa-IR")} از ${exportProgress.total.toLocaleString("fa-IR")}`
+                  : "در حال ساخت..."
+                : "دانلود فایل PDF"}
             </button>
 
             <button
@@ -1572,7 +1185,9 @@ export default function UltraSurCatalogApp() {
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                 )}
                 {isExportingPdf
-                  ? "در حال ساخت فایل..."
+                  ? exportProgress
+                    ? `صفحه ${exportProgress.current.toLocaleString("fa-IR")} از ${exportProgress.total.toLocaleString("fa-IR")}`
+                    : "در حال ساخت فایل..."
                   : "دانلود فایل PDF کاتالوگ"}
               </button>
             </div>
@@ -1610,7 +1225,7 @@ export default function UltraSurCatalogApp() {
                   {categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی
                 </span>
                 <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 text-xs font-bold">
-                  برند: UltraSur
+                  ariyatechno
                 </span>
               </div>
 
@@ -1643,63 +1258,69 @@ export default function UltraSurCatalogApp() {
               </div>
             </div>
 
-            {/* صفحه ۲: فهرست انکردار (ایندکس کاتالوگ) */}
-            <div className="catalog-page catalog-toc bg-[#0d1424] text-white p-8 mb-8 flex flex-col">
-              <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-6">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
-                    A
+            {/* فهرست انکردار چندصفحه‌ای (ایندکس کاتالوگ) */}
+            {tocChunks.map((tocRows, tocIdx) => (
+              <div
+                key={`toc-${tocIdx}`}
+                className="catalog-page catalog-toc bg-[#0d1424] text-white p-8 mb-8 flex flex-col"
+              >
+                <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-6">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
+                      A
+                    </div>
+                    <span className="font-extrabold text-base tracking-wider text-white">
+                      ariyatechno
+                    </span>
                   </div>
-                  <span className="font-extrabold text-base tracking-wider text-white">
-                    ariyatechno
+                  <span className="text-xs text-gray-400 font-mono">
+                    صفحه {(2 + tocIdx).toLocaleString("fa-IR")} • فهرست مطالب
                   </span>
                 </div>
-                <span className="text-xs text-gray-400 font-mono">
-                  صفحه ۲ • فهرست مطالب
-                </span>
-              </div>
 
-              <h2 className="text-xl font-black text-white mb-1">
-                فهرست دسته‌بندی‌های کاتالوگ
-              </h2>
-              <p className="text-xs text-gray-400 mb-6">
-                با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل می‌شوید.
-              </p>
+                <h2 className="text-xl font-black text-white mb-1">
+                  فهرست دسته‌بندی‌های کاتالوگ
+                </h2>
+                <p className="text-xs text-gray-400 mb-6">
+                  با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل می‌شوید.
+                </p>
 
-              <div className="space-y-2.5 flex-1">
-                {categoryPages.map((group) => {
-                  const Icon = group.icon;
-                  return (
-                    <a
-                      key={group.id}
-                      href={`#cat-${group.id}`}
-                      className="flex items-center gap-3 bg-[#131b2e] hover:bg-[#1a2439] border border-gray-800 hover:border-orange-500/40 rounded-xl px-4 py-3 transition-colors"
-                    >
-                      <Icon className="w-4 h-4 text-orange-400 shrink-0" />
-                      <span className="text-sm font-bold text-white">
-                        {group.name}
-                      </span>
-                      <span className="flex-1 border-b border-dotted border-gray-700 mx-2 translate-y-0.5" />
-                      <span className="text-xs text-gray-400 font-medium">
-                        {group.items.length.toLocaleString("fa-IR")} محصول
-                      </span>
-                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg px-2.5 py-1">
-                        صفحه {group.startPage.toLocaleString("fa-IR")}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
+                <div className="space-y-2 flex-1">
+                  {tocRows.map((group) => {
+                    const Icon = group.icon;
+                    return (
+                      <a
+                        key={group.id}
+                        href={`#cat-${group.id}`}
+                        data-target-page={group.startPage}
+                        className="flex items-center gap-3 bg-[#131b2e] hover:bg-[#1a2439] border border-gray-800 hover:border-orange-500/40 rounded-xl px-4 py-2.5 transition-colors"
+                      >
+                        <Icon className="w-4 h-4 text-orange-400 shrink-0" />
+                        <span className="text-sm font-bold text-white">
+                          {group.name}
+                        </span>
+                        <span className="flex-1 border-b border-dotted border-gray-700 mx-2 translate-y-0.5" />
+                        <span className="text-xs text-gray-400 font-medium">
+                          {group.items.length.toLocaleString("fa-IR")} محصول
+                        </span>
+                        <span className="text-xs font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg px-2.5 py-1">
+                          صفحه {group.startPage.toLocaleString("fa-IR")}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
 
-              <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
-                <span className="font-semibold tracking-wide text-orange-500/90">
-                  ariyatechno ACCESSORIES
-                </span>
-                <span className="italic">
-                  Saving on quality is meaningless.
-                </span>
+                <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
+                  <span className="font-semibold tracking-wide text-orange-500/90">
+                    ariyatechno ACCESSORIES
+                  </span>
+                  <span className="italic">
+                    Saving on quality is meaningless.
+                  </span>
+                </div>
               </div>
-            </div>
+            ))}
 
             {/* صفحات محصولات: همه محصولات به تفکیک دسته‌بندی */}
             {categoryPages.map((group) => {
@@ -1718,9 +1339,9 @@ export default function UltraSurCatalogApp() {
                   <div
                     key={`${group.id}-${chunkIdx}`}
                     id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
-                    className="catalog-page bg-[#0d1424] text-white p-8 mb-8 flex flex-col justify-between"
+                    className="catalog-page bg-[#0d1424] text-white p-6 mb-8 flex flex-col justify-between"
                   >
-                    <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-5">
+                    <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
                       <div className="flex items-center gap-2.5">
                         <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
                           A
@@ -1751,13 +1372,13 @@ export default function UltraSurCatalogApp() {
                       </div>
                     )}
 
-                    <div className="space-y-5 flex-1">
+                    <div className="space-y-3 flex-1">
                       {chunk.map((item) => (
                         <div
                           key={item.id}
-                          className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-5"
+                          className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-3 flex flex-col md:flex-row items-center gap-3"
                         >
-                          <div className="w-full md:w-64 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
+                          <div className="w-full md:w-72 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
                             <img
                               src={item.image}
                               alt={item.title}
@@ -1766,25 +1387,29 @@ export default function UltraSurCatalogApp() {
                           </div>
 
                           <div className="flex-1 w-full">
-                            <div className="flex items-center flex-wrap gap-2 mb-2">
-                              <h3 className="text-sm font-extrabold text-white">
+                            <div className="mb-2">
+                              <h3 className="text-sm font-extrabold text-white leading-snug line-clamp-2">
                                 {item.title}
                               </h3>
-                              {item.brand && (
-                                <span className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md bg-orange-500/15 text-orange-400 border border-orange-500/40">
-                                  {item.brand}
-                                </span>
-                              )}
-                              {item.badge && (
-                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/5 text-gray-300 border border-white/15">
-                                  {item.badge}
-                                </span>
+                              {(item.brand || item.badge) && (
+                                <div className="flex items-center flex-wrap gap-2 mt-1.5">
+                                  {item.brand && (
+                                    <span className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md bg-orange-500/15 text-orange-400 border border-orange-500/40">
+                                      {item.brand}
+                                    </span>
+                                  )}
+                                  {item.badge && (
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/5 text-gray-300 border border-white/15">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </div>
                               )}
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-300 mb-3">
                               {item.specs &&
-                                item.specs.map((sp, sIdx) => (
+                                item.specs.slice(0, 6).map((sp, sIdx) => (
                                   <div
                                     key={sIdx}
                                     className="flex items-start gap-1.5 py-0.5"
@@ -1792,7 +1417,9 @@ export default function UltraSurCatalogApp() {
                                     <span className="text-orange-500 font-bold">
                                       •
                                     </span>
-                                    <span className="leading-snug">{sp}</span>
+                                    <span className="leading-snug line-clamp-2">
+                                      {sp}
+                                    </span>
                                   </div>
                                 ))}
                             </div>
@@ -1828,6 +1455,25 @@ export default function UltraSurCatalogApp() {
                 );
               });
             })}
+
+            {/* پشت‌جلد */}
+            <div className="catalog-page bg-[#0f172a] text-white p-8 mb-8 flex flex-col items-center justify-center text-center">
+              <div className="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center font-black text-white text-3xl">
+                A
+              </div>
+              <div className="mt-5 text-3xl font-black tracking-wider">
+                ariyatechno.
+              </div>
+              <div className="mt-2 text-sm text-orange-400 font-semibold">
+                کاتالوگ لوازم جانبی و کالاهای دیجیتال
+              </div>
+              <div className="mt-8 text-xs text-gray-400 leading-7">
+                صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
+              </div>
+              <div className="mt-auto pt-8 text-[10px] text-gray-500 font-mono">
+                {totalPages.toLocaleString("fa-IR")} • پایان کاتالوگ
+              </div>
+            </div>
           </div>
         )}
       </main>
