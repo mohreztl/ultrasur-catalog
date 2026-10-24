@@ -35,6 +35,10 @@ import initSqlJs, {
 } from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
 import { CATALOG_PRODUCTS } from "./catalogProducts";
+import {
+  CATALOG_PALETTES,
+  catalogStyles,
+} from "./catalogTheme";
 
 export interface Product {
   id: string;
@@ -204,6 +208,16 @@ export default function UltraSurCatalogApp() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showPricesInPrint, setShowPricesInPrint] = useState(true);
+  const [paletteId, setPaletteId] = useState<string>(
+    () => localStorage.getItem("catalog-palette") || CATALOG_PALETTES[0].id,
+  );
+  const palette =
+    CATALOG_PALETTES.find((pl) => pl.id === paletteId) ?? CATALOG_PALETTES[0];
+  const cs = catalogStyles(palette);
+  const choosePalette = (id: string) => {
+    setPaletteId(id);
+    localStorage.setItem("catalog-palette", id);
+  };
   const [activeTab, setActiveTab] = useState("manager"); // 'manager' | 'pdf-preview'
   const [isExportingPdf, setIsExportingPdf] = useState(false);
   const [exportProgress, setExportProgress] = useState<{
@@ -916,6 +930,27 @@ export default function UltraSurCatalogApp() {
               محصول جدید
             </button>
 
+            <div
+              className="flex items-center gap-1.5"
+              title="پالت رنگی خروجی PDF"
+            >
+              {CATALOG_PALETTES.map((pl) => (
+                <button
+                  key={pl.id}
+                  type="button"
+                  onClick={() => choosePalette(pl.id)}
+                  title={pl.name}
+                  aria-label={pl.name}
+                  className="w-5 h-5 rounded-full border-2 transition"
+                  style={{
+                    backgroundColor: pl.swatch,
+                    borderColor:
+                      pl.id === palette.id ? "#ffffff" : "transparent",
+                  }}
+                />
+              ))}
+            </div>
+
             <button
               onClick={handleDownloadPdfFile}
               disabled={isExportingPdf}
@@ -1183,6 +1218,32 @@ export default function UltraSurCatalogApp() {
                   مربوطه بپرید.
                 </span>
               </div>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[10px] font-bold opacity-70 ml-1">
+                  پالت رنگی:
+                </span>
+                {CATALOG_PALETTES.map((pl) => (
+                  <button
+                    key={pl.id}
+                    type="button"
+                    onClick={() => choosePalette(pl.id)}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[10px] font-bold transition"
+                    style={{
+                      backgroundColor: pl.swatchBg,
+                      borderColor:
+                        pl.id === palette.id ? pl.accent : pl.border,
+                      color: pl.id === palette.id ? pl.accentSoft : pl.muted,
+                    }}
+                  >
+                    <span
+                      className="w-3 h-3 rounded-full"
+                      style={{ backgroundColor: pl.accent }}
+                    />
+                    {pl.name}
+                  </button>
+                ))}
+              </div>
+
               <button
                 onClick={handleDownloadPdfFile}
                 disabled={isExportingPdf}
@@ -1200,24 +1261,24 @@ export default function UltraSurCatalogApp() {
             </div>
 
             {/* صفحه ۱: جلد کاتالوگ ariyatechno */}
-            <div className="catalog-page bg-[#0f172a] text-white p-8 mb-8 flex flex-col justify-between">
-              <div className="flex justify-between items-center border-b border-gray-700/60 pb-5">
+            <div className="catalog-page p-8 mb-8 flex flex-col justify-between" style={cs.cover}>
+              <div className="flex justify-between items-center border-b pb-5" style={cs.line}>
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center font-black text-white text-2xl shadow-lg shadow-orange-500/30">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-2xl shadow-lg" style={cs.logoBig}>
                     A
                   </div>
                   <div>
-                    <h1 className="text-3xl font-black tracking-wider text-white">
+                    <h1 className="text-3xl font-black tracking-wider" style={cs.text}>
                       ariyatechno
-                      <span className="text-orange-500">.</span>
+                      <span style={cs.accent}>.</span>
                     </h1>
-                    <p className="text-xs text-orange-400 font-semibold mt-0.5">
+                    <p className="text-xs font-semibold mt-0.5" style={cs.accentSoft}>
                       کاتالوگ لوازم جانبی و کالاهای دیجیتال
                     </p>
                   </div>
                 </div>
-                <div className="text-left font-mono text-xs text-gray-400">
-                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white font-bold">
+                <div className="text-left font-mono text-xs" style={cs.muted}>
+                  <span className="px-3 py-1 rounded-full border font-bold" style={cs.chipSolid}>
                     OFFICIAL CATALOGUE
                   </span>
                 </div>
@@ -1225,13 +1286,13 @@ export default function UltraSurCatalogApp() {
 
               {/* آمار کاتالوگ */}
               <div className="flex items-center justify-center gap-3 my-6">
-                <span className="px-4 py-1.5 rounded-xl bg-orange-500/15 border border-orange-500/40 text-orange-300 text-xs font-bold">
+                <span className="px-4 py-1.5 rounded-xl border text-xs font-bold" style={cs.chipAccent}>
                   {products.length.toLocaleString("fa-IR")} محصول
                 </span>
-                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 text-xs font-bold">
+                <span className="px-4 py-1.5 rounded-xl border text-xs font-bold" style={cs.chipSoft}>
                   {categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی
                 </span>
-                <span className="px-4 py-1.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 text-xs font-bold">
+                <span className="px-4 py-1.5 rounded-xl border text-xs font-bold" style={cs.chipSoft}>
                   ariyatechno
                 </span>
               </div>
@@ -1241,25 +1302,25 @@ export default function UltraSurCatalogApp() {
                 {products.slice(0, 8).map((p) => (
                   <div
                     key={p.id}
-                    className="bg-white/5 border border-white/10 rounded-2xl p-3 flex flex-col items-center justify-center text-center"
+                    className="border rounded-2xl p-3 flex flex-col items-center justify-center text-center" style={cs.gridCard}
                   >
                     <img
                       src={p.image}
                       alt={p.title}
                       className="h-28 w-28 object-contain mb-2 filter drop-shadow-md"
                     />
-                    <span className="text-[11px] font-medium text-gray-200 line-clamp-1">
+                    <span className="text-[11px] font-medium line-clamp-1" style={cs.text}>
                       {p.title}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="text-center pt-6 border-t border-gray-700/60">
-                <p className="text-lg font-bold tracking-widest text-orange-400 uppercase">
+              <div className="text-center pt-6 border-t" style={cs.line}>
+                <p className="text-lg font-bold tracking-widest uppercase" style={cs.accentSoft}>
                   Saving on quality is meaningless.
                 </p>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs mt-1" style={cs.muted}>
                   صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
                 </p>
               </div>
@@ -1269,26 +1330,26 @@ export default function UltraSurCatalogApp() {
             {tocChunks.map((tocRows, tocIdx) => (
               <div
                 key={`toc-${tocIdx}`}
-                className="catalog-page catalog-toc bg-[#0d1424] text-white p-8 mb-8 flex flex-col"
+                className="catalog-page catalog-toc p-8 mb-8 flex flex-col" style={cs.page}
               >
-                <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-6">
+                <div className="flex justify-between items-center border-b pb-3 mb-6" style={cs.line}>
                   <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs" style={cs.logoTile}>
                       A
                     </div>
-                    <span className="font-extrabold text-base tracking-wider text-white">
+                    <span className="font-extrabold text-base tracking-wider" style={cs.text}>
                       ariyatechno
                     </span>
                   </div>
-                  <span className="text-xs text-gray-400 font-mono">
+                  <span className="text-xs font-mono" style={cs.muted}>
                     صفحه {(2 + tocIdx).toLocaleString("fa-IR")} • فهرست مطالب
                   </span>
                 </div>
 
-                <h2 className="text-xl font-black text-white mb-1">
+                <h2 className="text-xl font-black mb-1" style={cs.text}>
                   فهرست دسته‌بندی‌های کاتالوگ
                 </h2>
-                <p className="text-xs text-gray-400 mb-6">
+                <p className="text-xs mb-6" style={cs.muted}>
                   با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل می‌شوید.
                 </p>
 
@@ -1300,17 +1361,17 @@ export default function UltraSurCatalogApp() {
                         key={group.id}
                         href={`#cat-${group.id}`}
                         data-target-page={group.startPage}
-                        className="flex items-center gap-3 bg-[#131b2e] hover:bg-[#1a2439] border border-gray-800 hover:border-orange-500/40 rounded-xl px-4 py-2.5 transition-colors"
+                        className="flex items-center gap-3 border rounded-xl px-4 py-2.5 transition-colors" style={cs.row}
                       >
-                        <Icon className="w-4 h-4 text-orange-400 shrink-0" />
-                        <span className="text-sm font-bold text-white">
+                        <Icon className="w-4 h-4 shrink-0" style={cs.accent} />
+                        <span className="text-sm font-bold" style={cs.text}>
                           {group.name}
                         </span>
-                        <span className="flex-1 border-b border-dotted border-gray-700 mx-2 translate-y-0.5" />
-                        <span className="text-xs text-gray-400 font-medium">
+                        <span className="flex-1 border-b border-dotted mx-2 translate-y-0.5" style={cs.dotted} />
+                        <span className="text-xs font-medium" style={cs.muted}>
                           {group.items.length.toLocaleString("fa-IR")} محصول
                         </span>
-                        <span className="text-xs font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg px-2.5 py-1">
+                        <span className="text-xs font-black border rounded-lg px-2.5 py-1" style={cs.pageBadge}>
                           صفحه {group.startPage.toLocaleString("fa-IR")}
                         </span>
                       </a>
@@ -1318,8 +1379,8 @@ export default function UltraSurCatalogApp() {
                   })}
                 </div>
 
-                <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
-                  <span className="font-semibold tracking-wide text-orange-500/90">
+                <div className="pt-4 mt-5 border-t flex justify-between items-center text-xs" style={cs.rule}>
+                  <span className="font-semibold tracking-wide" style={cs.footerBrand}>
                     ariyatechno ACCESSORIES
                   </span>
                   <span className="italic">
@@ -1346,21 +1407,21 @@ export default function UltraSurCatalogApp() {
                   <div
                     key={`${group.id}-${chunkIdx}`}
                     id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
-                    className="catalog-page bg-[#0d1424] text-white p-6 mb-8 flex flex-col justify-between"
+                    className="catalog-page p-6 mb-8 flex flex-col justify-between" style={cs.page}
                   >
-                    <div className="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+                    <div className="flex justify-between items-center border-b pb-3 mb-4" style={cs.line}>
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center font-black text-white text-xs">
+                        <div className="w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs" style={cs.logoTile}>
                           A
                         </div>
-                        <span className="font-extrabold text-base tracking-wider text-white">
+                        <span className="font-extrabold text-base tracking-wider" style={cs.text}>
                           ariyatechno
                         </span>
-                        <span className="text-xs text-gray-500 mr-2">
+                        <span className="text-xs mr-2" style={cs.faint}>
                           | {group.name}
                         </span>
                       </div>
-                      <span className="text-xs text-gray-400 font-mono">
+                      <span className="text-xs font-mono" style={cs.muted}>
                         صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
                         {totalPages.toLocaleString("fa-IR")}
                       </span>
@@ -1368,11 +1429,11 @@ export default function UltraSurCatalogApp() {
 
                     {chunkIdx === 0 && (
                       <div className="mb-4 -mt-1">
-                        <h2 className="text-lg font-black text-orange-400 flex items-center gap-2">
+                        <h2 className="text-lg font-black flex items-center gap-2" style={cs.accent}>
                           <group.icon className="w-5 h-5" />
                           {group.name}
                         </h2>
-                        <p className="text-[11px] text-gray-500 mt-0.5">
+                        <p className="text-[11px] mt-0.5" style={cs.faint}>
                           {group.items.length.toLocaleString("fa-IR")} محصول در
                           این دسته‌بندی
                         </p>
@@ -1383,9 +1444,9 @@ export default function UltraSurCatalogApp() {
                       {chunk.map((item) => (
                         <div
                           key={item.id}
-                          className="print-card bg-[#131b2e] border border-gray-800 rounded-2xl p-3 flex flex-col md:flex-row items-center gap-3"
+                          className="print-card border rounded-2xl p-3 flex flex-col md:flex-row items-center gap-3" style={cs.card}
                         >
-                          <div className="w-full md:w-72 aspect-square bg-[#090d16] rounded-xl flex items-center justify-center p-3 shrink-0 border border-gray-800">
+                          <div className="w-full md:w-72 aspect-square rounded-xl flex items-center justify-center p-3 shrink-0 border" style={cs.imageBox}>
                             <img
                               src={item.image}
                               alt={item.title}
@@ -1395,18 +1456,18 @@ export default function UltraSurCatalogApp() {
 
                           <div className="flex-1 w-full">
                             <div className="mb-2">
-                              <h3 className="text-sm font-extrabold text-white leading-snug line-clamp-2">
+                              <h3 className="text-sm font-extrabold leading-snug line-clamp-2" style={cs.text}>
                                 {item.title}
                               </h3>
                               {(item.brand || item.badge) && (
                                 <div className="flex items-center flex-wrap gap-2 mt-1.5">
                                   {item.brand && (
-                                    <span className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md bg-orange-500/15 text-orange-400 border border-orange-500/40">
+                                    <span className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md border" style={cs.brandChip}>
                                       {item.brand}
                                     </span>
                                   )}
                                   {item.badge && (
-                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/5 text-gray-300 border border-white/15">
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full border" style={cs.badgeChip}>
                                       {item.badge}
                                     </span>
                                   )}
@@ -1414,14 +1475,14 @@ export default function UltraSurCatalogApp() {
                               )}
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-300 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs mb-3" style={cs.muted}>
                               {item.specs &&
                                 item.specs.slice(0, 6).map((sp, sIdx) => (
                                   <div
                                     key={sIdx}
                                     className="flex items-start gap-1.5 py-0.5"
                                   >
-                                    <span className="text-orange-500 font-bold">
+                                    <span className="font-bold" style={cs.bullet}>
                                       •
                                     </span>
                                     <span className="leading-snug line-clamp-2">
@@ -1432,11 +1493,11 @@ export default function UltraSurCatalogApp() {
                             </div>
 
                             {showPricesInPrint && (
-                              <div className="w-full bg-gradient-to-l from-orange-500/25 via-amber-500/10 to-transparent border-2 border-orange-500/50 rounded-xl px-4 py-2.5 flex items-center justify-between">
-                                <span className="text-xs font-semibold text-gray-200">
+                              <div className="w-full border-2 rounded-xl px-4 py-2.5 flex items-center justify-between" style={cs.priceBox}>
+                                <span className="text-xs font-semibold" style={cs.priceLabel}>
                                   قیمت عمده
                                 </span>
-                                <span className="text-xl font-black text-amber-400">
+                                <span className="text-xl font-black" style={cs.priceValue}>
                                   {formatToman(item.price)}
                                 </span>
                               </div>
@@ -1446,8 +1507,8 @@ export default function UltraSurCatalogApp() {
                       ))}
                     </div>
 
-                    <div className="pt-4 mt-5 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
-                      <span className="font-semibold tracking-wide text-orange-500/90">
+                    <div className="pt-4 mt-5 border-t flex justify-between items-center text-xs" style={cs.rule}>
+                      <span className="font-semibold tracking-wide" style={cs.footerBrand}>
                         ariyatechno ACCESSORIES
                       </span>
                       <span className="font-mono">
@@ -1464,20 +1525,20 @@ export default function UltraSurCatalogApp() {
             })}
 
             {/* پشت‌جلد */}
-            <div className="catalog-page bg-[#0f172a] text-white p-8 mb-8 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center font-black text-white text-3xl">
+            <div className="catalog-page p-8 mb-8 flex flex-col items-center justify-center text-center" style={cs.cover}>
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-3xl" style={cs.logoTile}>
                 A
               </div>
               <div className="mt-5 text-3xl font-black tracking-wider">
                 ariyatechno.
               </div>
-              <div className="mt-2 text-sm text-orange-400 font-semibold">
+              <div className="mt-2 text-sm font-semibold" style={cs.accentSoft}>
                 کاتالوگ لوازم جانبی و کالاهای دیجیتال
               </div>
-              <div className="mt-8 text-xs text-gray-400 leading-7">
+              <div className="mt-8 text-xs leading-7" style={cs.muted}>
                 صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
               </div>
-              <div className="mt-auto pt-8 text-[10px] text-gray-500 font-mono">
+              <div className="mt-auto pt-8 text-[10px] font-mono" style={cs.faint}>
                 {totalPages.toLocaleString("fa-IR")} • پایان کاتالوگ
               </div>
             </div>
