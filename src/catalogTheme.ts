@@ -369,7 +369,7 @@ export type CatalogStyleKey =
   | "priceValue"
   | "footerBrand";
 
-/** Literal inline styles per catalog element — inline colors render reliably in html2canvas. */
+/** Literal inline styles per catalog element — inline colors render reliably in the export rasterizer. */
 export function catalogStyles(
   p: CatalogPalette,
 ): Record<CatalogStyleKey, CSSProperties> {
