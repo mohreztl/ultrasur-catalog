@@ -39,6 +39,7 @@ import {
   CATALOG_PALETTES,
   catalogStyles,
 } from "./catalogTheme";
+import { CATALOG_FONTS } from "./catalogFonts";
 
 export interface Product {
   id: string;
@@ -218,6 +219,25 @@ export default function UltraSurCatalogApp() {
     setPaletteId(id);
     localStorage.setItem("catalog-palette", id);
   };
+  // فونت قابل انتخاب برای خروجی کاتالوگ
+  const [fontId, setFontId] = useState<string>(
+    () => localStorage.getItem("catalog-font") || CATALOG_FONTS[0].id,
+  );
+  const font = CATALOG_FONTS.find((f) => f.id === fontId) ?? CATALOG_FONTS[0];
+  const chooseFont = (id: string) => {
+    setFontId(id);
+    localStorage.setItem("catalog-font", id);
+  };
+  // نمایش/پنهان‌سازی محصولات بدون قیمت در خروجی
+  const [showPriceless, setShowPriceless] = useState<boolean>(
+    () => localStorage.getItem("catalog-priceless") !== "0",
+  );
+  const togglePriceless = () => {
+    setShowPriceless((v) => {
+      localStorage.setItem("catalog-priceless", v ? "0" : "1");
+      return !v;
+    });
+  };
   const [activeTab, setActiveTab] = useState("manager"); // 'manager' | 'pdf-preview'
   const [isExportingPdf, setIsExportingPdf] = useState(false);
   const [exportProgress, setExportProgress] = useState<{
@@ -323,15 +343,21 @@ export default function UltraSurCatalogApp() {
     });
   }, [products, selectedCategory, searchQuery]);
 
+  // محصولات قابل نمایش در خروجی (با امکان حذف محصولات بدون قیمت)
+  const catalogProducts = useMemo(
+    () => (showPriceless ? products : products.filter((p) => p.price > 0)),
+    [products, showPriceless],
+  );
+
   // گروه‌بندی همه محصولات بر اساس دسته‌بندی برای خروجی کامل PDF
   const categoryGroups = useMemo(() => {
     return CATEGORIES.filter((c) => c.id !== "all")
       .map((cat) => ({
         ...cat,
-        items: products.filter((p) => p.category === cat.id),
+        items: catalogProducts.filter((p) => p.category === cat.id),
       }))
       .filter((group) => group.items.length > 0);
-  }, [products]);
+  }, [catalogProducts]);
 
   // صفحه‌آرایی: جلد + فهرست چندصفحه‌ای + محصولات به تفکیک دسته + پشت‌جلد
   const TOC_ROWS_PER_PAGE = 14;
@@ -666,11 +692,11 @@ export default function UltraSurCatalogApp() {
     try {
       setActiveTab("pdf-preview");
       await new Promise((r) => setTimeout(r, 250));
-      // Explicitly activate every weight before capture so html2canvas paints
-      // with IRANSansX instead of falling back to Tahoma in its clone canvas.
+      // Explicitly activate every weight of the selected font before capture so
+      // html2canvas paints with it instead of falling back in its clone canvas.
       await Promise.all(
         ["400", "500", "600", "700", "800", "900"].map((w) =>
-          document.fonts.load(`${w} 16px IRANSansX`),
+          document.fonts.load(`${w} 16px '${font.family}'`),
         ),
       );
       await document.fonts.ready;
@@ -772,7 +798,7 @@ export default function UltraSurCatalogApp() {
       {/* استایل اختصاصی چاپ برای خروجی تمیز بدون هدرها و ابزارک‌های اضافی */}
       <style>{`
         * {
-          font-family: 'IRANSansX', Tahoma, sans-serif;
+          font-family: '${font.family}', Tahoma, sans-serif;
         }
 
         @media print {
@@ -951,6 +977,19 @@ export default function UltraSurCatalogApp() {
               ))}
             </div>
 
+            <select
+              value={fontId}
+              onChange={(e) => chooseFont(e.target.value)}
+              title="فونت خروجی PDF"
+              className="bg-gray-900/60 border border-gray-700/80 text-gray-200 text-xs rounded-lg px-2 py-2 cursor-pointer"
+            >
+              {CATALOG_FONTS.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.name}
+                </option>
+              ))}
+            </select>
+
             <button
               onClick={handleDownloadPdfFile}
               disabled={isExportingPdf}
@@ -1034,6 +1073,15 @@ export default function UltraSurCatalogApp() {
                 className="rounded accent-orange-500 cursor-pointer"
               />
               <span>نمایش قیمت‌ها در نسخه کاتالوگ و خروجی PDF</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer bg-gray-900/60 px-3 py-1.5 rounded-lg border border-gray-700/80 hover:border-gray-600 transition">
+              <input
+                type="checkbox"
+                checked={showPriceless}
+                onChange={togglePriceless}
+                className="rounded accent-orange-500 cursor-pointer"
+              />
+              <span>نمایش محصولات بدون قیمت (تماس بگیرید) در خروجی</span>
             </label>
             <span className="text-gray-500">|</span>
             <span className="text-gray-400">
@@ -1213,7 +1261,7 @@ export default function UltraSurCatalogApp() {
                 <Info className="w-4 h-4 shrink-0 text-amber-400" />
                 <span>
                   این پیش‌نمایش شامل جلد، فهرست انکردار و همه{" "}
-                  {products.length.toLocaleString("fa-IR")} محصول به تفکیک
+                  {catalogProducts.length.toLocaleString("fa-IR")} محصول به تفکیک
                   دسته‌بندی است. با کلیک روی ردیف‌های فهرست می‌توانید به بخش
                   مربوطه بپرید.
                 </span>
@@ -1242,6 +1290,30 @@ export default function UltraSurCatalogApp() {
                     {pl.name}
                   </button>
                 ))}
+                <span className="text-[10px] font-bold opacity-70 ml-1">
+                  فونت:
+                </span>
+                {CATALOG_FONTS.map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => chooseFont(f.id)}
+                    className="px-2.5 py-1 rounded-lg border text-[11px] font-bold transition"
+                    style={{
+                      fontFamily: f.family,
+                      backgroundColor:
+                        f.id === font.id
+                          ? "rgba(245, 158, 11, 0.2)"
+                          : "transparent",
+                      borderColor:
+                        f.id === font.id ? "#fbbf24" : "rgba(245, 158, 11, 0.3)",
+                      color:
+                        f.id === font.id ? "#fcd34d" : "rgba(252, 211, 77, 0.7)",
+                    }}
+                  >
+                    {f.name}
+                  </button>
+                ))}
               </div>
 
               <button
@@ -1264,8 +1336,12 @@ export default function UltraSurCatalogApp() {
             <div className="catalog-page p-8 mb-8 flex flex-col justify-between" style={cs.cover}>
               <div className="flex justify-between items-center border-b pb-5" style={cs.line}>
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-2xl shadow-lg" style={cs.logoBig}>
-                    A
+                  <div className="w-11 h-11 rounded-xl overflow-hidden shadow-lg" style={cs.logoBig}>
+                    <img
+                      src="images/logo.png"
+                      alt="لوگوی ariyatechno"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h1 className="text-3xl font-black tracking-wider" style={cs.text}>
@@ -1287,7 +1363,7 @@ export default function UltraSurCatalogApp() {
               {/* آمار کاتالوگ */}
               <div className="flex items-center justify-center gap-3 my-6">
                 <span className="px-4 py-1.5 rounded-xl border text-xs font-bold" style={cs.chipAccent}>
-                  {products.length.toLocaleString("fa-IR")} محصول
+                  {catalogProducts.length.toLocaleString("fa-IR")} محصول
                 </span>
                 <span className="px-4 py-1.5 rounded-xl border text-xs font-bold" style={cs.chipSoft}>
                   {categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی
@@ -1299,7 +1375,7 @@ export default function UltraSurCatalogApp() {
 
               {/* شبکه ۸تایی محصولات جلد کاتالوگ */}
               <div className="grid grid-cols-4 gap-4 my-2">
-                {products.slice(0, 8).map((p) => (
+                {catalogProducts.slice(0, 8).map((p) => (
                   <div
                     key={p.id}
                     className="border rounded-2xl p-3 flex flex-col items-center justify-center text-center" style={cs.gridCard}
@@ -1334,9 +1410,13 @@ export default function UltraSurCatalogApp() {
               >
                 <div className="flex justify-between items-center border-b pb-3 mb-6" style={cs.line}>
                   <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs" style={cs.logoTile}>
-                      A
-                    </div>
+                    <div className="w-7 h-7 rounded-lg overflow-hidden" style={cs.logoTile}>
+                          <img
+                            src="images/logo.png"
+                            alt="لوگوی ariyatechno"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                     <span className="font-extrabold text-base tracking-wider" style={cs.text}>
                       ariyatechno
                     </span>
@@ -1411,8 +1491,12 @@ export default function UltraSurCatalogApp() {
                   >
                     <div className="flex justify-between items-center border-b pb-3 mb-4" style={cs.line}>
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs" style={cs.logoTile}>
-                          A
+                        <div className="w-7 h-7 rounded-lg overflow-hidden" style={cs.logoTile}>
+                          <img
+                            src="images/logo.png"
+                            alt="لوگوی ariyatechno"
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <span className="font-extrabold text-base tracking-wider" style={cs.text}>
                           ariyatechno
@@ -1526,8 +1610,12 @@ export default function UltraSurCatalogApp() {
 
             {/* پشت‌جلد */}
             <div className="catalog-page p-8 mb-8 flex flex-col items-center justify-center text-center" style={cs.cover}>
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-3xl" style={cs.logoTile}>
-                A
+              <div className="w-16 h-16 rounded-2xl overflow-hidden" style={cs.logoTile}>
+                <img
+                  src="images/logo.png"
+                  alt="لوگوی ariyatechno"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="mt-5 text-3xl font-black tracking-wider">
                 ariyatechno.
