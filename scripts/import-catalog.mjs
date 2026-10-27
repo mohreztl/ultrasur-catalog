@@ -117,137 +117,297 @@ const norm = (s) =>
     .toLowerCase();
 
 // ---------------------------------------------------------------------------
-// Category mapping (ids must match CATEGORIES in src/App.tsx)
+// Category mapping — mirrors the site mega-menu (https://ariyatechno.com/):
+// 16 top-level categories in menu order. Ids must match CATEGORIES in
+// src/App.tsx. Child slugs come from the menu's sub-category links.
 // ---------------------------------------------------------------------------
-const BUCKETS = new Set(["کابل و شارژر", "هدفون و هندزفری"]);
-
-/** Priority rules over every non-bucket product_cat label. */
-const SPECIFIC_RULES = [
-  ["holder", (l) => l.startsWith("هولدر")],
-  ["airpods", (l) => l.includes("ایرپاد") || l.includes("هندزفری بلوتوثی")],
-  ["neckband", (l) => l.includes("هدفون پشت گردنی")],
-  [
-    "wired-earphone",
-    (l) => l.includes("هندزفری سیم") || l.includes("هدفون سیم"),
-  ],
-  ["headphone", (l) => l.includes("هدفون بی سیم") || l.includes("هدست گیمینگ")],
-  ["smartwatch", (l) => l.includes("ساعت هوشمند")],
-  ["powerbank", (l) => l.includes("پاوربانک") || l.includes("پاور بانک")],
-  ["car-charger", (l) => l.includes("فندکی")],
-  [
-    "charger",
-    (l) =>
-      l.includes("شارژر وایرلس") ||
-      l.startsWith("شارژر دیواری") ||
-      l.includes("آداپتور شارژ"),
-  ],
-  ["aux-cable", (l) => l.includes("ایوایکس") || l.includes("aux")],
-  ["cables", (l) => l.includes("کابل")],
-  ["speaker-acc", (l) => l.includes("اسپیکر")],
-  [
-    "computer-acc",
-    (l) =>
-      l.includes("فلش") ||
-      l.includes("دانگل") ||
-      l.includes("مبدل") ||
-      l.includes("otg") ||
-      l.includes("او جی") ||
-      l.includes("محصولات کامپیوتری") ||
-      l.includes("موس") ||
-      l.includes("هاب") ||
-      l.includes("میکروفون"),
-  ],
+const SITE_CATEGORIES = [
+  {
+    id: "cable-and-charger",
+    name: "کابل و شارژر",
+    children: [
+      "other-cables",
+      "multi-way-charger",
+      "wall-charger",
+      "iphone-wall-charger",
+      "samsung-wall-charger",
+      "corporate-wall-charger",
+      "wireless-charger",
+      "كابل-اولتراسور",
+      "aux",
+      "c-c-cable",
+      "cable-c-j",
+      "hdmi-cable",
+      "type-b-cable",
+      "iphone-cable",
+      "iwax-cable",
+      "type-c-cable",
+      "multipurpose-cable",
+      "type-c-to-type-c-cable",
+      "network-cable",
+      "micro-cable",
+      "capsules",
+    ],
+  },
+  {
+    id: "headphones-and-hands-free",
+    name: "هدفون و هندزفری",
+    children: [
+      "airpods",
+      "gaming",
+      "wireless",
+      "neck-back",
+      "wired",
+      "bluetooth-handsfree",
+      "type-c-wired-handsfree",
+      "wired-handsfree-with-pin-socket",
+      "lightning-wired-handsfree",
+    ],
+  },
+  {
+    id: "speaker",
+    name: "اسپیکر",
+    children: ["party-box-speaker", "portable-speaker", "computer-speaker"],
+  },
+  {
+    id: "holder",
+    name: "هولدر",
+    children: [
+      "dashboard-holder",
+      "air-conditioner-valve-holder",
+      "desktop-holder",
+      "laptop-holder",
+      "magnetic-holder",
+      "wireless-holder",
+    ],
+  },
+  {
+    id: "converter",
+    name: "مبدل",
+    children: ["otg-converter", "wireless-converter", "wired-converter"],
+  },
+  {
+    id: "power-bank",
+    name: "پاوربانک",
+    children: [
+      "10000-mah-power-bank",
+      "20000-mah-power-bank",
+      "30000-mah-power-bank",
+      "high-capacity-power-bank",
+    ],
+  },
+  {
+    id: "dongle",
+    name: "دانگل",
+    children: ["hdmi-dongle", "wi-fi-dongle", "bluetooth-dongle"],
+  },
+  {
+    id: "computer-products",
+    name: "محصولات کامپیوتری",
+    children: [
+      "android-box",
+      "wireless-keyboard",
+      "wired-keyboard",
+      "laptop-power-cable",
+      "wireless-mouse",
+      "wired-mouse",
+      "gaming-mouse-and-keyboard",
+      "microphone",
+      "hub",
+    ],
+  },
+  {
+    id: "rame",
+    name: "رم",
+    children: ["128-gb-ram", "16-gb-ram", "32-gb-ram", "64-gb-ram", "8-gb-ram"],
+  },
+  { id: "smart-watch", name: "ساعت هوشمند", children: [] },
+  { id: "flash", name: "فلش", children: [] },
+  { id: "lighter-and-charger", name: "فندکی و شارژر", children: [] },
+  {
+    id: "gadget",
+    name: "گجت",
+    children: [
+      "bottle",
+      "fan",
+      "key-holder",
+      "reading-and-emergency-light",
+      "game-category",
+      "other-gadgets",
+      "smart-glasses",
+      "game-ball",
+      "car-accessories",
+      "camp-supplies",
+      "masseur",
+      "blender-and-mixer",
+    ],
+  },
+  {
+    id: "glass",
+    name: "گلس",
+    children: ["او-جی", "iphone-glass", "samsung-glass", "xiaomi-glass"],
+  },
+  {
+    id: "beauty",
+    name: "بیوتی",
+    children: ["shaver", "hair-dryer", "hair-curler"],
+  },
+  { id: "frame", name: "قاب", children: [] },
 ];
 
-/** Labels that are explicitly "everything else". */
-const OTHER_RULES = [
+const PARENT_BY_SLUG = new Map();
+for (const cat of SITE_CATEGORIES) {
+  if (!PARENT_BY_SLUG.has(cat.id)) PARENT_BY_SLUG.set(cat.id, cat.id);
+  for (const child of cat.children) {
+    if (!PARENT_BY_SLUG.has(child)) PARENT_BY_SLUG.set(child, cat.id);
+  }
+}
+
+const decodeSlug = (s) => {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+};
+
+const resolveSlug = (rawSlug) => {
+  const slug = norm(decodeSlug(rawSlug));
+  return (
+    PARENT_BY_SLUG.get(slug) ?? PARENT_BY_SLUG.get(slug.replace(/ /g, "-"))
+  );
+};
+
+/** Label keywords, in priority order (fallback when slug cannot be resolved). */
+const LABEL_RULES = [
+  ["rame", (l) => l.includes("رم")],
+  ["flash", (l) => l.includes("فلش")],
+  ["lighter-and-charger", (l) => l.includes("فندکی")],
+  ["smart-watch", (l) => l.includes("ساعت")],
+  ["glass", (l) => l.includes("گلس") || l.includes("او جی")],
+  ["frame", (l) => l.includes("قاب")],
   [
-    "other",
+    "beauty",
+    (l) => l.includes("بیوتی") || l.includes("سشوار") || l.includes("اصلاح"),
+  ],
+  ["holder", (l) => l.includes("هولدر")],
+  ["power-bank", (l) => l.includes("پاور")],
+  ["speaker", (l) => l.includes("اسپیکر")],
+  ["dongle", (l) => l.includes("دانگل")],
+  [
+    "converter",
+    (l) => l.includes("مبدل") || l.includes("otg") || l.includes("او تی جی"),
+  ],
+  [
+    "computer-products",
+    (l) =>
+      l.includes("کامپیوتر") ||
+      l.includes("موس") ||
+      l.includes("هاب") ||
+      l.includes("میکروفون") ||
+      l.includes("کیبورد"),
+  ],
+  [
+    "headphones-and-hands-free",
+    (l) =>
+      l.includes("ایرپاد") ||
+      l.includes("هندزفری") ||
+      l.includes("هدفون") ||
+      l.includes("هدست"),
+  ],
+  [
+    "cable-and-charger",
+    (l) => l.includes("کابل") || l.includes("شارژر") || l.includes("آداپتور"),
+  ],
+  [
+    "gadget",
     (l) =>
       l.includes("گجت") ||
-      l.includes("قاب") ||
-      l.includes("گلس") ||
-      l.includes("عینک") ||
-      l.includes("باطری") ||
+      l.startsWith("سایر") ||
       l.includes("چراغ") ||
-      l.includes("چند راهی") ||
-      l.includes("کپسولی") ||
-      l.startsWith("سایر"),
+      l.includes("باطری"),
   ],
 ];
 
 /** Last-resort title keywords, in priority order. */
 const TITLE_RULES = [
+  ["rame", (t) => t.includes("رم")],
+  ["flash", (t) => t.includes("فلش")],
+  ["lighter-and-charger", (t) => t.includes("فندکی")],
+  ["smart-watch", (t) => t.includes("ساعت")],
+  ["glass", (t) => t.includes("گلس")],
+  ["frame", (t) => t.includes("قاب")],
   ["holder", (t) => t.includes("هولدر")],
-  ["airpods", (t) => t.includes("ایرپاد")],
-  ["neckband", (t) => t.includes("گردنی")],
-  ["powerbank", (t) => t.includes("پاور")],
-  ["car-charger", (t) => t.includes("فندکی")],
-  ["aux-cable", (t) => t.includes("ایوایکس") || t.includes("aux")],
-  ["cables", (t) => t.includes("کابل")],
-  ["charger", (t) => t.includes("شارژر")],
-  ["wired-earphone", (t) => t.includes("هندزفری")],
-  ["headphone", (t) => t.includes("هدفون")],
-  ["smartwatch", (t) => t.includes("ساعت")],
-  ["speaker-acc", (t) => t.includes("اسپیکر")],
+  ["power-bank", (t) => t.includes("پاور")],
+  ["speaker", (t) => t.includes("اسپیکر")],
+  ["dongle", (t) => t.includes("دانگل")],
   [
-    "computer-acc",
+    "converter",
+    (t) => t.includes("مبدل") || t.includes("otg") || t.includes("او تی جی"),
+  ],
+  [
+    "computer-products",
     (t) =>
-      ["فلش", "موس", "هاب", "مبدل", "دانگل", "otg", "میکروفون"].some((k) =>
+      ["موس", "هاب", "میکروفون", "کیبورد", "کامپیوتر"].some((k) =>
         t.includes(k),
       ),
   ],
+  [
+    "headphones-and-hands-free",
+    (t) =>
+      t.includes("ایرپاد") ||
+      t.includes("هندزفری") ||
+      t.includes("هدفون") ||
+      t.includes("هدست") ||
+      t.includes("گردنی"),
+  ],
+  [
+    "cable-and-charger",
+    (t) =>
+      t.includes("کابل") ||
+      t.includes("شارژر") ||
+      t.includes("aux") ||
+      t.includes("ایوایکس"),
+  ],
 ];
 
-const bucketCategory = (bucket, title) => {
-  if (bucket === "کابل و شارژر") {
-    if (title.includes("ایوایکس") || title.includes("aux")) return "aux-cable";
-    if (title.includes("کابل")) return "cables";
-    if (title.includes("شارژر")) return "charger";
-    return "cables";
-  }
-  if (title.includes("گردنی")) return "neckband";
-  if (
-    title.includes("ایرپاد") ||
-    title.includes("بلوتوث") ||
-    title.includes("tws")
-  )
-    return "airpods";
-  if (title.includes("هدفون")) return "headphone";
-  return "wired-earphone";
-};
-
-const classifyWp = (rawLabels, rawTitle) => {
-  const labels = rawLabels.map(norm);
+const classifyWp = (catEntries, rawTitle) => {
   const title = norm(rawTitle);
-  const buckets = labels.filter((l) => BUCKETS.has(l));
-  const specific = labels.filter((l) => !BUCKETS.has(l));
-  for (const [id, test] of SPECIFIC_RULES) {
-    if (specific.some(test)) return id;
+  const resolved = [];
+  const labels = [];
+  for (const entry of catEntries) {
+    if (entry.slug) {
+      const id = resolveSlug(entry.slug);
+      if (id) {
+        resolved.push(id);
+        continue;
+      }
+    }
+    labels.push(norm(entry.label));
   }
-  if (buckets.length > 0) return bucketCategory(buckets[0], title);
-  for (const [id, test] of OTHER_RULES) {
+  if (resolved.length > 0) return resolved[0];
+  for (const [id, test] of LABEL_RULES) {
     if (labels.some(test)) return id;
   }
   for (const [id, test] of TITLE_RULES) {
     if (test(title)) return id;
   }
-  return "other";
+  return "gadget";
 };
 
 /** PDF products sit in fixed catalog sections, keyed by page number. */
 const classifyPdf = (page, rawTitle) => {
   const title = norm(rawTitle);
-  if (page <= 4) return "powerbank";
-  if (page <= 6) return "airpods";
-  if (page <= 8) return "smartwatch";
-  if (page <= 10) return "car-charger";
-  if (page <= 12) return "aux-cable";
-  if (page <= 18) return "cables";
-  if (page <= 20) return "wired-earphone";
-  if (page <= 22) return "neckband";
+  if (page <= 4) return "power-bank";
+  if (page <= 6) return "headphones-and-hands-free";
+  if (page <= 8) return "smart-watch";
+  if (page <= 10) return "lighter-and-charger";
+  if (page <= 18) return "cable-and-charger";
+  if (page <= 22) return "headphones-and-hands-free";
   if (page <= 24) return "holder";
-  return title.includes("هدفون") ? "headphone" : "speaker-acc";
+  if (title.includes("هدفون")) return "headphones-and-hands-free";
+  if (title.includes("او تی جی") || title.includes("otg")) return "converter";
+  return "speaker";
 };
 
 // ---------------------------------------------------------------------------
@@ -350,9 +510,9 @@ for (const item of rawProducts) {
     continue;
   }
 
-  const catLabels = (item.cats || [])
+  const catEntries = (item.cats || [])
     .filter((c) => c.domain === "product_cat")
-    .map((c) => c.label);
+    .map((c) => ({ slug: c.slug, label: c.label }));
   const attrTerms = (item.cats || []).filter((c) =>
     (c.domain || "").startsWith("pa_"),
   );
@@ -401,7 +561,7 @@ for (const item of rawProducts) {
 
   wpOut.push({
     id: `wp-${item.id}`,
-    category: classifyWp(catLabels, item.title),
+    category: classifyWp(catEntries, item.title),
     title: item.title,
     brand,
     price,

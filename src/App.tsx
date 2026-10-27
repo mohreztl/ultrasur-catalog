@@ -28,6 +28,14 @@ import {
   AlertCircle,
   Speaker,
   Monitor,
+  Plug,
+  Usb,
+  MemoryStick,
+  HardDrive,
+  Lightbulb,
+  Shield,
+  Sparkles,
+  Frame,
 } from "lucide-react";
 import initSqlJs, {
   type Database as SqlJsDatabase,
@@ -164,35 +172,41 @@ const migrateDatabase = (db: SqlJsDatabase): void => {
   db.run("UPDATE products SET brand = 'UltraSur' WHERE brand IS NULL");
 };
 
-// دسته‌بندی‌های کاتالوگ (ترتیب فهرست)
+// دسته‌بندی‌های کاتالوگ — مطابق منوی سایت ariyatechno.com (ترتیب منو)
 const CATEGORIES = [
   { id: "all", name: "همه محصولات", icon: Layers },
-  { id: "powerbank", name: "پاور بانک", icon: BatteryCharging },
-  { id: "airpods", name: "ایرپاد و هندزفری بلوتوث", icon: Headphones },
-  { id: "smartwatch", name: "ساعت هوشمند", icon: Watch },
-  { id: "car-charger", name: "شارژر فندکی", icon: Car },
-  { id: "charger", name: "شارژر دیواری و وایرلس", icon: BatteryCharging },
-  { id: "cables", name: "کابل‌های شارژ سریع", icon: Cable },
-  { id: "aux-cable", name: "کابل AUX", icon: Cable },
-  { id: "wired-earphone", name: "هندزفری سیمی", icon: Headphones },
-  { id: "neckband", name: "هندزفری گردنی", icon: Headphones },
-  { id: "headphone", name: "هدفون", icon: Headphones },
-  { id: "holder", name: "هولدر ۳۶۰ درجه", icon: Smartphone },
-  { id: "speaker-acc", name: "اسپیکر و OTG", icon: Speaker },
-  { id: "computer-acc", name: "لوازم کامپیوتر", icon: Monitor },
-  { id: "other", name: "سایر محصولات", icon: Layers },
+  { id: "cable-and-charger", name: "کابل و شارژر", icon: Cable },
+  {
+    id: "headphones-and-hands-free",
+    name: "هدفون و هندزفری",
+    icon: Headphones,
+  },
+  { id: "speaker", name: "اسپیکر", icon: Speaker },
+  { id: "holder", name: "هولدر", icon: Smartphone },
+  { id: "converter", name: "مبدل", icon: Plug },
+  { id: "power-bank", name: "پاوربانک", icon: BatteryCharging },
+  { id: "dongle", name: "دانگل", icon: Usb },
+  { id: "computer-products", name: "محصولات کامپیوتری", icon: Monitor },
+  { id: "rame", name: "رم", icon: MemoryStick },
+  { id: "smart-watch", name: "ساعت هوشمند", icon: Watch },
+  { id: "flash", name: "فلش", icon: HardDrive },
+  { id: "lighter-and-charger", name: "فندکی و شارژر", icon: Car },
+  { id: "gadget", name: "گجت", icon: Lightbulb },
+  { id: "glass", name: "گلس", icon: Shield },
+  { id: "beauty", name: "بیوتی", icon: Sparkles },
+  { id: "frame", name: "قاب", icon: Frame },
 ];
 
 // دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
 const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// نسخه‌بندی دانه — نسخه ۳: جایگزینی کامل فهرست محصولات
-const SEED_VERSION = 3;
+// نسخه‌بندی دانه — نسخه ۴: دسته‌بندی مطابق سایت — جایگزینی کامل
+const SEED_VERSION = 4;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
   if (version >= SEED_VERSION) return;
-  // نسخه ۳: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
+  // نسخه ۴: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
   db.run("DELETE FROM products");
   seedProducts(db, SEED_PRODUCTS);
   db.run(
@@ -340,10 +354,21 @@ export default function UltraSurCatalogApp() {
     });
   }, [products, selectedCategory, searchQuery]);
 
-  // محصولات قابل نمایش در خروجی (با امکان حذف محصولات بدون قیمت)
+  // محدوده خروجی/پیش‌نمایش: همه دسته‌ها یا یک دسته خاص
+  const [catalogScope, setCatalogScope] = useState<string>(
+    () => localStorage.getItem("catalog-scope") || "all",
+  );
+  const chooseScope = (id: string) => {
+    setCatalogScope(id);
+    localStorage.setItem("catalog-scope", id);
+  };
+  // محصولات قابل نمایش در خروجی (با امکان حذف محصولات بدون قیمت و محدودسازی به یک دسته)
   const catalogProducts = useMemo(
-    () => (showPriceless ? products : products.filter((p) => p.price > 0)),
-    [products, showPriceless],
+    () =>
+      products
+        .filter((p) => (showPriceless ? true : p.price > 0))
+        .filter((p) => catalogScope === "all" || p.category === catalogScope),
+    [products, showPriceless, catalogScope],
   );
 
   // گروه‌بندی همه محصولات بر اساس دسته‌بندی برای خروجی کامل PDF
@@ -357,15 +382,19 @@ export default function UltraSurCatalogApp() {
   }, [catalogProducts]);
 
   // صفحه‌آرایی: جلد + فهرست چندصفحه‌ای + محصولات به تفکیک دسته + پشت‌جلد
-  const TOC_ROWS_PER_PAGE = 14;
+  const tocRowsPerPage =
+    categoryGroups.length > 14
+      ? Math.ceil(categoryGroups.length / Math.ceil(categoryGroups.length / 14))
+      : 14;
 
   const pagesForCategory = (count: number) =>
     count === 0 ? 0 : count <= 2 ? 1 : 1 + Math.ceil((count - 2) / 3);
 
-  const tocPages = Math.max(
-    1,
-    Math.ceil(categoryGroups.length / TOC_ROWS_PER_PAGE),
-  );
+  // خروجی تک‌دسته بدون فهرست مطالب است
+  const tocPages =
+    catalogScope === "all"
+      ? Math.max(1, Math.ceil(categoryGroups.length / tocRowsPerPage))
+      : 0;
   const contentStart = 2 + tocPages;
 
   const categoryPages = useMemo(() => {
@@ -378,12 +407,13 @@ export default function UltraSurCatalogApp() {
   }, [categoryGroups, contentStart]);
 
   const tocChunks = useMemo(() => {
+    if (catalogScope !== "all") return [];
     const chunks: (typeof categoryPages)[] = [];
-    for (let i = 0; i < categoryPages.length; i += TOC_ROWS_PER_PAGE) {
-      chunks.push(categoryPages.slice(i, i + TOC_ROWS_PER_PAGE));
+    for (let i = 0; i < categoryPages.length; i += tocRowsPerPage) {
+      chunks.push(categoryPages.slice(i, i + tocRowsPerPage));
     }
     return chunks;
-  }, [categoryPages]);
+  }, [categoryPages, tocRowsPerPage, catalogScope]);
 
   // آخرین شماره صفحه = پشت‌جلد
   const totalPages =
@@ -749,9 +779,19 @@ export default function UltraSurCatalogApp() {
         const pageW = 210;
         const pageH = 297;
         const k = pageW / A4_W;
+        // مقیاس سبک‌تر روی موبایل/تبلت تا حافظه و زمان ساخت PDF مدیریت شود
+        const isMobile =
+          window.matchMedia("(pointer: coarse)").matches ||
+          /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         // کیفیت تطبیقی: برای کاتالوگ‌های حجیم سبک‌تر
-        const scale = nodes.length > 150 ? 2 : nodes.length > 60 ? 2.25 : 2.5;
-        const quality = nodes.length > 150 ? 0.82 : 0.9;
+        const scale = isMobile
+          ? 1.5
+          : nodes.length > 150
+            ? 2
+            : nodes.length > 60
+              ? 2.25
+              : 2.5;
+        const quality = isMobile ? 0.78 : nodes.length > 150 ? 0.82 : 0.9;
         for (let i = 0; i < nodes.length; i++) {
           setExportProgress({ current: i + 1, total: nodes.length });
           // toSvg متن را دقیقاً مانند صفحه رندر می‌کند؛ rasterize دستی چون
@@ -762,6 +802,7 @@ export default function UltraSurCatalogApp() {
             height: A4_H,
             fontEmbedCSS,
           });
+          // بارگذاری مستقیم data-URI (مسیر blob کانواس را tainted می‌کند)
           const img = await new Promise<HTMLImageElement>((resolve, reject) => {
             const el = new Image();
             el.onload = () => resolve(el);
@@ -775,6 +816,8 @@ export default function UltraSurCatalogApp() {
           if (!ctx) throw new Error("canvas 2d context unavailable");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           const dataUrl = canvas.toDataURL("image/jpeg", quality);
+          // نفس‌کشیدن مرورگر بین صفحات (به‌ویژه iOS)
+          await new Promise((r) => setTimeout(r, 0));
           if (i > 0) pdf.addPage();
           pdf.addImage(dataUrl, "JPEG", 0, 0, pageW, pageH);
           for (const l of tocLinks) {
@@ -784,9 +827,32 @@ export default function UltraSurCatalogApp() {
             });
           }
         }
-        pdf.save("ariyatechno-catalog.pdf");
+        const fileName =
+          catalogScope === "all"
+            ? "ariyatechno-catalog.pdf"
+            : `ariyatechno-${catalogScope}.pdf`;
+        const pdfBlob = pdf.output("blob");
+        const pdfFile = new File([pdfBlob], fileName, {
+          type: "application/pdf",
+        });
+        const isIOS =
+          /iP(hone|ad|od)/.test(navigator.userAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        if (
+          isIOS &&
+          typeof navigator.share === "function" &&
+          navigator.canShare?.({ files: [pdfFile] })
+        ) {
+          // دانلود مستقیم فایل‌های حجیم در iOS نامطمئن است؛ برگه اشتراک‌گذاری مطمئن‌تر است
+          await navigator.share({
+            files: [pdfFile],
+            title: "کاتالوگ ariyatechno",
+          });
+        } else {
+          pdf.save(fileName);
+        }
         showToast(
-          `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) دانلود شد`,
+          `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) آماده شد`,
         );
       } finally {
         for (const node of nodes) {
@@ -1000,6 +1066,20 @@ export default function UltraSurCatalogApp() {
               {CATALOG_FONTS.map((f) => (
                 <option key={f.id} value={f.id}>
                   {f.name}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={catalogScope}
+              onChange={(e) => chooseScope(e.target.value)}
+              title="دستهٔ خروجی PDF"
+              className="bg-gray-900/60 border border-gray-700/80 text-gray-200 text-xs rounded-lg px-2 py-2 cursor-pointer"
+            >
+              <option value="all">همه دسته‌ها</option>
+              {CATEGORIES.filter((c) => c.id !== "all").map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
                 </option>
               ))}
             </select>
@@ -1274,10 +1354,9 @@ export default function UltraSurCatalogApp() {
               <div className="flex items-center gap-2">
                 <Info className="w-4 h-4 shrink-0 text-amber-400" />
                 <span>
-                  این پیش‌نمایش شامل جلد، فهرست انکردار و همه{" "}
-                  {catalogProducts.length.toLocaleString("fa-IR")} محصول به
-                  تفکیک دسته‌بندی است. با کلیک روی ردیف‌های فهرست می‌توانید به
-                  بخش مربوطه بپرید.
+                  {catalogScope === "all"
+                    ? `این پیش‌نمایش شامل جلد، فهرست انکردار و همه ${catalogProducts.length.toLocaleString("fa-IR")} محصول به تفکیک دسته‌بندی است. با کلیک روی ردیف‌های فهرست می‌توانید به بخش مربوطه بپرید.`
+                    : `این پیش‌نمایش فقط دستهٔ «${CATEGORIES.find((c) => c.id === catalogScope)?.name}» شامل ${catalogProducts.length.toLocaleString("fa-IR")} محصول است؛ خروجی PDF همین دسته خواهد بود.`}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -1331,6 +1410,23 @@ export default function UltraSurCatalogApp() {
                     {f.name}
                   </button>
                 ))}
+                <span className="text-[10px] font-bold opacity-70 ml-1">
+                  دستهٔ خروجی:
+                </span>
+                <select
+                  value={catalogScope}
+                  onChange={(e) => chooseScope(e.target.value)}
+                  className="bg-transparent border border-amber-500/40 text-amber-200 text-[11px] font-bold rounded-lg px-2 py-1 cursor-pointer"
+                >
+                  <option className="bg-gray-900" value="all">
+                    همه دسته‌ها
+                  </option>
+                  {CATEGORIES.filter((c) => c.id !== "all").map((c) => (
+                    <option className="bg-gray-900" key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <button
@@ -1407,7 +1503,9 @@ export default function UltraSurCatalogApp() {
                   className="px-4 py-1.5 rounded-xl border text-xs font-bold"
                   style={cs.chipSoft}
                 >
-                  {categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی
+                  {catalogScope === "all"
+                    ? `${categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی`
+                    : CATEGORIES.find((c) => c.id === catalogScope)?.name}
                 </span>
                 <span
                   className="px-4 py-1.5 rounded-xl border text-xs font-bold"
