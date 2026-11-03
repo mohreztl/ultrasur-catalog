@@ -149,6 +149,7 @@ const SITE_CATEGORIES = [
       "network-cable",
       "micro-cable",
       "capsules",
+      "charging-adapter",
     ],
   },
   {
@@ -255,6 +256,26 @@ const SITE_CATEGORIES = [
     children: ["shaver", "hair-dryer", "hair-curler"],
   },
   { id: "frame", name: "قاب", children: [] },
+  { id: "electrical-multi-way", name: "چند راهی برق", children: [] },
+  {
+    id: "battery",
+    name: "باطری",
+    children: [
+      "syringe-pen-battery",
+      "half-pen-syringe-battery",
+      "regular-pen-card-battery",
+      "ordinary-half-size-card-battery",
+      "alkaline-pen-battery",
+      "half-size-alkaline-battery",
+      "medium-size-battery-c",
+      "large-size-battery-d",
+      "remote-control-battery",
+      "coin-battery",
+      "rechargeable-battery",
+      "9-vult-book-battery",
+      "hearing-aid-battery",
+    ],
+  },
 ];
 
 const PARENT_BY_SLUG = new Map();
@@ -321,13 +342,10 @@ const LABEL_RULES = [
     "cable-and-charger",
     (l) => l.includes("کابل") || l.includes("شارژر") || l.includes("آداپتور"),
   ],
+  ["battery", (l) => l.includes("باطری")],
   [
     "gadget",
-    (l) =>
-      l.includes("گجت") ||
-      l.startsWith("سایر") ||
-      l.includes("چراغ") ||
-      l.includes("باطری"),
+    (l) => l.includes("گجت") || l.startsWith("سایر") || l.includes("چراغ"),
   ],
 ];
 

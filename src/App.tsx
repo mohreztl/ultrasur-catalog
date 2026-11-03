@@ -36,6 +36,8 @@ import {
   Shield,
   Sparkles,
   Frame,
+  Battery,
+  Zap,
 } from "lucide-react";
 import initSqlJs, {
   type Database as SqlJsDatabase,
@@ -195,18 +197,20 @@ const CATEGORIES = [
   { id: "glass", name: "گلس", icon: Shield },
   { id: "beauty", name: "بیوتی", icon: Sparkles },
   { id: "frame", name: "قاب", icon: Frame },
+  { id: "electrical-multi-way", name: "چند راهی برق", icon: Zap },
+  { id: "battery", name: "باطری", icon: Battery },
 ];
 
 // دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
 const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// نسخه‌بندی دانه — نسخه ۷: حذف محصولات با موجودی انبار کمتر از ۵ (به‌جز اسپیکر) — جایگزینی کامل
-const SEED_VERSION = 7;
+// نسخه‌بندی دانه — نسخه ۸: بروزرسانی قیمت‌ها و موجودی‌ها از بکاپ جدید + دسته‌بندی منطبق با سایت — جایگزینی کامل
+const SEED_VERSION = 8;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
   if (version >= SEED_VERSION) return;
-  // نسخه ۷: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
+  // نسخه ۸: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
   db.run("DELETE FROM products");
   seedProducts(db, SEED_PRODUCTS);
   db.run(
@@ -1713,11 +1717,11 @@ export default function UltraSurCatalogApp() {
                       {chunk.map((item) => (
                         <div
                           key={item.id}
-                          className="print-card border rounded-2xl p-3 flex flex-col md:flex-row items-center gap-3"
+                          className="print-card border rounded-2xl p-3 flex flex-row items-center gap-3"
                           style={cs.card}
                         >
                           <div
-                            className="w-full md:w-72 aspect-square rounded-xl flex items-center justify-center p-3 shrink-0 border"
+                            className="w-72 aspect-square rounded-xl flex items-center justify-center p-3 shrink-0 border"
                             style={cs.imageBox}
                           >
                             <img
@@ -1758,7 +1762,7 @@ export default function UltraSurCatalogApp() {
                             </div>
 
                             <div
-                              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1 text-xs mb-3"
+                              className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs mb-3"
                               style={cs.muted}
                             >
                               {item.specs &&
