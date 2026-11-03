@@ -200,13 +200,13 @@ const CATEGORIES = [
 // دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
 const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// نسخه‌بندی دانه — نسخه ۵: حذف محصولات ناموجود — جایگزینی کامل
-const SEED_VERSION = 5;
+// نسخه‌بندی دانه — نسخه ۶: حذف محصولات کاتالوگ اولترا سور و دسته‌های کم‌محصول — جایگزینی کامل
+const SEED_VERSION = 6;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
   if (version >= SEED_VERSION) return;
-  // نسخه ۵: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
+  // نسخه ۶: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
   db.run("DELETE FROM products");
   seedProducts(db, SEED_PRODUCTS);
   db.run(
