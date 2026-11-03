@@ -505,6 +505,7 @@ const wpImageJobs = new Map(); // thumbId -> { destName, urls[] }
 let skippedTrash = 0;
 let skippedOutOfStock = 0;
 let skippedCatalogProduct = 0;
+let skippedLowStock = 0;
 let noThumb = 0;
 
 for (const item of rawProducts) {
@@ -531,6 +532,17 @@ for (const item of rawProducts) {
   const attrTerms = (item.cats || []).filter((c) =>
     (c.domain || "").startsWith("pa_"),
   );
+
+  const category = classifyWp(catEntries, item.title);
+
+  // محصولات با موجودی انبار کمتر از ۵ حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
+  // _stock خالی = مدیریت موجودی غیرفعال → محصول حفظ می‌شود
+  const stockText = String(metas._stock ?? "").trim();
+  const stockNum = stockText === "" ? NaN : Number(stockText);
+  if (category !== "speaker" && Number.isFinite(stockNum) && stockNum < 5) {
+    skippedLowStock += 1;
+    continue;
+  }
 
   const price = Math.floor(Number(metas._price) || 0);
 
@@ -576,7 +588,7 @@ for (const item of rawProducts) {
 
   wpOut.push({
     id: `wp-${item.id}`,
-    category: classifyWp(catEntries, item.title),
+    category,
     title: item.title,
     brand,
     price,
@@ -586,29 +598,6 @@ for (const item of rawProducts) {
 }
 
 let products = [...wpOut, ...pdfOut];
-
-// ---------------------------------------------------------------------------
-// دسته‌بندی‌هایی که کمتر از ۵ محصول دارند حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
-// ---------------------------------------------------------------------------
-const MIN_CATEGORY_PRODUCTS = 5;
-const CATEGORY_EXEMPT = new Set(["speaker"]);
-const prelimCounts = {};
-for (const p of products)
-  prelimCounts[p.category] = (prelimCounts[p.category] || 0) + 1;
-const droppedCategories = Object.keys(prelimCounts).filter(
-  (c) => prelimCounts[c] < MIN_CATEGORY_PRODUCTS && !CATEGORY_EXEMPT.has(c),
-);
-const droppedSet = new Set(droppedCategories);
-let skippedSmallCategories = 0;
-if (droppedSet.size > 0) {
-  products = products.filter((p) => {
-    if (droppedSet.has(p.category)) {
-      skippedSmallCategories += 1;
-      return false;
-    }
-    return true;
-  });
-}
 
 // ---------------------------------------------------------------------------
 // Category statistics
@@ -793,8 +782,7 @@ const report = {
   skippedTrash,
   skippedOutOfStock,
   skippedCatalogProduct,
-  skippedSmallCategories,
-  droppedCategories,
+  skippedLowStock,
   wpWithoutImage: noThumb,
   categoryCounts: counts,
   images: {

@@ -652,15 +652,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4850",
-    "category": "holder",
-    "title": "فندکی PVC شفاف دو پورت 12 وات با خروجی (PD+USB)برند POWER SOUL مدل SP-001",
-    "brand": "",
-    "price": 435000,
-    "image": "images/placeholder.svg",
-    "specs": []
-  },
-  {
     "id": "wp-4851",
     "category": "holder",
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S23 FE MAGSAFE (CASE SAMSUNG)",
@@ -981,6 +972,15 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 0,
     "image": "images/wp/6315.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6419",
+    "category": "glass",
+    "title": "گلس سوپر ايكس او جي  SUPER X GLASS (OG)",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/6571.png",
     "specs": []
   },
   {
@@ -1341,15 +1341,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "wp-6946",
-    "category": "cable-and-charger",
-    "title": "کابل AUX IOS ایوایکس آیفونی طرح انکر (ANKER)",
-    "brand": "",
-    "price": 218000,
-    "image": "images/wp/6947.webp",
-    "specs": []
-  },
-  {
     "id": "wp-6950",
     "category": "cable-and-charger",
     "title": "ایوایکس به تایپ سی GUFZ مدل AX45",
@@ -1370,15 +1361,6 @@ export const CATALOG_PRODUCTS: Product[] = [
       "رنگ: قرمز",
       "رنگ: مشکی"
     ]
-  },
-  {
-    "id": "wp-6990",
-    "category": "cable-and-charger",
-    "title": "شارژر سه پین 20 وات آیفونی های کپی",
-    "brand": "",
-    "price": 1760000,
-    "image": "images/wp/6991.webp",
-    "specs": []
   },
   {
     "id": "wp-6997",
@@ -1459,15 +1441,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 830000,
     "image": "images/wp/7098.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-7103",
-    "category": "flash",
-    "title": "فلش 64GB سامسونگ FIT PLUS سرعت 3.1",
-    "brand": "",
-    "price": 1890000,
-    "image": "images/wp/7104.webp",
     "specs": []
   },
   {
@@ -1716,15 +1689,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-7268",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری آیفون ULTRASUR مدل U14",
-    "brand": "",
-    "price": 234970,
-    "image": "images/wp/7269.webp",
-    "specs": []
-  },
-  {
     "id": "wp-7275",
     "category": "headphones-and-hands-free",
     "title": "هندزفری سیمدار لایتنینگ AMAYA مدل AEP06 آمایا",
@@ -1749,15 +1713,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 1750000,
     "image": "images/wp/7284.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-7292",
-    "category": "headphones-and-hands-free",
-    "title": "هدست بلوتوث اولتراسور (ULTRASUR) مدل HS2",
-    "brand": "",
-    "price": 2590000,
-    "image": "images/wp/7293.webp",
     "specs": []
   },
   {
@@ -1815,6 +1770,15 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-2301",
+    "category": "computer-products",
+    "title": "باطری شیرینگ قلمی 4 عددی پاناتک (panatech) (جعبه 10عددی)",
+    "brand": "",
+    "price": 74000,
+    "image": "images/wp/2305.webp",
+    "specs": []
+  },
+  {
     "id": "wp-2306",
     "category": "cable-and-charger",
     "title": "شارژر فست پکدار10 وات سامسونگ (سریAAA)",
@@ -1863,15 +1827,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2324",
-    "category": "cable-and-charger",
-    "title": "کابل شارژر 2.4 آمپر TPE تایپ سی برند OFYI مدل CA20T",
-    "brand": "",
-    "price": 128000,
-    "image": "images/wp/2326.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2327",
     "category": "cable-and-charger",
     "title": "کابل شارژر کنفی آیفون اولتراسور ULTRASUR مدل C15I",
@@ -1893,15 +1848,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "wp-7341",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری بلوتوث دورگردنی ULTRASUR مدل N25",
-    "brand": "",
-    "price": 1980000,
-    "image": "images/wp/7342.webp",
-    "specs": []
-  },
-  {
     "id": "wp-7344",
     "category": "headphones-and-hands-free",
     "title": "هندزفری پرووان PHB3306-PROONE",
@@ -1913,26 +1859,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "wp-7347",
-    "category": "headphones-and-hands-free",
-    "title": "هدفون بلوتوث P08",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/7350.webp",
-    "specs": [
-      "رنگ: زرد"
-    ]
-  },
-  {
-    "id": "wp-7352",
-    "category": "headphones-and-hands-free",
-    "title": "هدست سلبریت CELEBRAT مدل GM3",
-    "brand": "",
-    "price": 3790000,
-    "image": "images/wp/7353.webp",
-    "specs": []
-  },
-  {
     "id": "wp-7355",
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث گردنی لمسی",
@@ -1942,30 +1868,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-7370",
-    "category": "holder",
-    "title": "هلدر 2210 HISKA",
-    "brand": "",
-    "price": 530000,
-    "image": "images/wp/7371.webp",
-    "specs": []
-  },
-  {
     "id": "wp-7388",
     "category": "holder",
     "title": "هولدر دریچه کولری PROONE مدل PHL1120",
     "brand": "",
     "price": 0,
     "image": "images/wp/7389.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-7407",
-    "category": "holder",
-    "title": "هولدر موبایل PROONE مدل PHL1175",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/7408.webp",
     "specs": []
   },
   {
@@ -2215,24 +2123,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2455",
-    "category": "holder",
-    "title": "هولدر لپ تاپ  HISKA 2021",
-    "brand": "",
-    "price": 3419560,
-    "image": "images/wp/3926.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2456",
-    "category": "holder",
-    "title": "هولدر لپ تاپ HISKA 2020",
-    "brand": "",
-    "price": 2812895,
-    "image": "images/wp/3925.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2464",
     "category": "holder",
     "title": "هولدر شارژر وایرلسی  LDNIO مدل MW21_1",
@@ -2242,39 +2132,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2465",
-    "category": "holder",
-    "title": "هولدر آیینه ای  HISKA مدل 2111",
-    "brand": "",
-    "price": 594371,
-    "image": "images/wp/7401.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2466",
-    "category": "holder",
-    "title": "هولدر رومیزی LDNIO مدل MG07",
-    "brand": "",
-    "price": 540000,
-    "image": "images/wp/3934.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2476",
     "category": "holder",
     "title": "هولدر  دریچه کولری 2110 HISKA",
     "brand": "",
     "price": 630000,
     "image": "images/wp/7399.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2478",
-    "category": "holder",
-    "title": "هولدر پایه داشبوردی ULTRAمدل F3",
-    "brand": "",
-    "price": 489092,
-    "image": "images/wp/7403.webp",
     "specs": []
   },
   {
@@ -2371,15 +2234,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2584",
-    "category": "cable-and-charger",
-    "title": "کابل 120 وات برند ULTRA مدل C10C(کابل مختص گوشی MI)",
-    "brand": "",
-    "price": 387000,
-    "image": "images/wp/4380.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2587",
     "category": "cable-and-charger",
     "title": "کابل شارژر سامسونگ S4",
@@ -2390,33 +2244,6 @@ export const CATALOG_PRODUCTS: Product[] = [
       "رنگ: سفید",
       "رنگ: مشکی"
     ]
-  },
-  {
-    "id": "wp-2590",
-    "category": "cable-and-charger",
-    "title": "کابل شارژر 2.4 آمپر TPE میکرو برند OFYI مدل CA20",
-    "brand": "",
-    "price": 65797,
-    "image": "images/wp/3849.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2595",
-    "category": "cable-and-charger",
-    "title": "کابل تایپ سی کنفیMC DODO مدل CA 2710",
-    "brand": "",
-    "price": 367839,
-    "image": "images/wp/2599.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2602",
-    "category": "cable-and-charger",
-    "title": "کابل تایپ سی کنفی MC DODO مدل CA 746",
-    "brand": "",
-    "price": 367000,
-    "image": "images/wp/2604.webp",
-    "specs": []
   },
   {
     "id": "wp-2609",
@@ -2527,15 +2354,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4070",
-    "category": "cable-and-charger",
-    "title": "OTG TYPE C LDNIO LC140",
-    "brand": "",
-    "price": 235000,
-    "image": "images/wp/4082.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4071",
     "category": "cable-and-charger",
     "title": "OTG آیفون مدل REXER",
@@ -2599,39 +2417,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4096",
-    "category": "cable-and-charger",
-    "title": "شارژر اورجینال TRANYO مدل AP3",
-    "brand": "",
-    "price": 934813,
-    "image": "images/wp/4110.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4097",
     "category": "cable-and-charger",
     "title": "شارژر پکدار سه پین سرجعبه 45w وات Low standby برد 4511 گیرین پک با هلوگرام سامسونگ",
     "brand": "",
     "price": 2890000,
     "image": "images/wp/6669.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4098",
-    "category": "cable-and-charger",
-    "title": "شارژر رومیزی HISKA HR 07",
-    "brand": "",
-    "price": 870000,
-    "image": "images/wp/6715.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4127",
-    "category": "cable-and-charger",
-    "title": "کابل ایو ایکس آیفون  HISKA W46",
-    "brand": "",
-    "price": 360579,
-    "image": "images/wp/4151.webp",
     "specs": []
   },
   {
@@ -2653,24 +2444,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4131",
-    "category": "cable-and-charger",
-    "title": "کابل ایوایکس تایپ سی FIRST YOU",
-    "brand": "",
-    "price": 168000,
-    "image": "images/wp/4173.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4183",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی 10 متری HDMI برند ویلوت(WELOT)",
-    "brand": "",
-    "price": 709089,
-    "image": "images/wp/4193.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4184",
     "category": "cable-and-charger",
     "title": "کابل کنفی 5 متری HDMI برند ویلوت(WELOT)",
@@ -2680,39 +2453,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4301",
-    "category": "gadget",
-    "title": "عینک هوشمند PROONE مدل PSG41",
-    "brand": "",
-    "price": 3240000,
-    "image": "images/wp/4310.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4302",
-    "category": "gadget",
-    "title": "چراغ 4 حالته HISKA مدل HR22(چراغ مطالعه,چراغ خواب,چراغ قوه ,چراغ دیواری)",
-    "brand": "",
-    "price": 2257860,
-    "image": "images/wp/4311.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4304",
     "category": "gadget",
     "title": "پکیج تمیز کننده PROONE مدل PGC503",
     "brand": "",
     "price": 845000,
     "image": "images/wp/4315.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4306",
-    "category": "cable-and-charger",
-    "title": "هاب شارژر وایرلس PDتوربو شارژ 32 وات HISKA مدل AH320",
-    "brand": "",
-    "price": 1522117,
-    "image": "images/wp/7071.webp",
     "specs": []
   },
   {
@@ -2731,24 +2477,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 5680000,
     "image": "images/wp/6688.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4322",
-    "category": "cable-and-charger",
-    "title": "کابل و شارژر پکدار 120وات Mi",
-    "brand": "",
-    "price": 810038,
-    "image": "images/wp/6691.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4323",
-    "category": "cable-and-charger",
-    "title": "شارژر وایرلس هولدری 5 کاره 25.5 وات LDNIO مدل WL01",
-    "brand": "",
-    "price": 1922258,
-    "image": "images/wp/4331.webp",
     "specs": []
   },
   {
@@ -2830,24 +2558,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 798000,
     "image": "images/wp/3960.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-3816",
-    "category": "cable-and-charger",
-    "title": "کابل آیفون  GRAND مدل GK20",
-    "brand": "",
-    "price": 291457,
-    "image": "images/wp/4383.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-3831",
-    "category": "cable-and-charger",
-    "title": "کابل آیفون کنفی برند KING",
-    "brand": "",
-    "price": 212000,
-    "image": "images/wp/3832.webp",
     "specs": []
   },
   {
@@ -2939,15 +2649,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-3917",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی سر فلزی  فست شارژ K54 آیفون",
-    "brand": "",
-    "price": 165000,
-    "image": "images/wp/3918.webp",
-    "specs": []
-  },
-  {
     "id": "wp-3927",
     "category": "holder",
     "title": "هولدر مگنتی NITUمدل NH38",
@@ -2972,15 +2673,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 430000,
     "image": "images/wp/7398.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-3955",
-    "category": "holder",
-    "title": "هولدر دریچه کولری XO مدل C126",
-    "brand": "",
-    "price": 430000,
-    "image": "images/wp/7376.webp",
     "specs": []
   },
   {
@@ -3011,15 +2703,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 2080000,
     "image": "images/wp/7310.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-3971",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری بلوتوث دورگردنی ULTRA مدل N20",
-    "brand": "",
-    "price": 1980000,
-    "image": "images/wp/7339.webp",
     "specs": []
   },
   {
@@ -3068,33 +2751,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-3993",
-    "category": "holder",
-    "title": "هولدر دریچه کولری  LDNIO مدل MG13",
-    "brand": "",
-    "price": 590000,
-    "image": "images/wp/7366.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4411",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد HAINO TEKO AIR-5 اورجینال",
-    "brand": "",
-    "price": 1190000,
-    "image": "images/wp/4412.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4433",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد ULTRA SUR  مدل E7",
-    "brand": "",
-    "price": 2340000,
-    "image": "images/wp/4438.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4440",
     "category": "headphones-and-hands-free",
     "title": "ایرپاد ULTRA SUR مدل E2",
@@ -3122,24 +2778,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4457",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد آیفون پرو 2(ANC)با شارژر C.C",
-    "brand": "",
-    "price": 1806088,
-    "image": "images/wp/4459.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4472",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد رو گوشی LDNIO مدل T07",
-    "brand": "",
-    "price": 3150000,
-    "image": "images/wp/4474.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4480",
     "category": "headphones-and-hands-free",
     "title": "ایرپاد سامسونگ BUDS 3 PRO BLACK",
@@ -3158,12 +2796,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4520",
-    "category": "headphones-and-hands-free",
-    "title": "هدست بلوتوث دور گردنی K18",
+    "id": "wp-4497",
+    "category": "computer-products",
+    "title": "میکروفن BOYA مدل M1 PRO",
     "brand": "",
-    "price": 1560000,
-    "image": "images/wp/7358.webp",
+    "price": 1545000,
+    "image": "images/wp/4498.webp",
     "specs": []
   },
   {
@@ -3233,24 +2871,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "wp-4551",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری سلبریت ارجینال CELEBRATE مدل G37 تایپ سی",
-    "brand": "",
-    "price": 468000,
-    "image": "images/wp/4557.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4564",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری وایسون (YISSON) مدل CX330",
-    "brand": "",
-    "price": 141308,
-    "image": "images/wp/4574.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4576",
     "category": "cable-and-charger",
     "title": "کابل 65Wدو سر تایپ سی LDNIO مدل LC 631",
@@ -3266,15 +2886,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 545000,
     "image": "images/wp/4584.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4578",
-    "category": "cable-and-charger",
-    "title": "کابل شارژ چندکاره فست شارژ 100 وات الدینیو  LDNIO مدل LC25",
-    "brand": "",
-    "price": 730000,
-    "image": "images/wp/6939.webp",
     "specs": []
   },
   {
@@ -3308,15 +2919,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4588",
-    "category": "holder",
-    "title": "هولدر پایه داشبوردی Earldom مدل EH194",
-    "brand": "",
-    "price": 735000,
-    "image": "images/wp/7378.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4589",
     "category": "holder",
     "title": "هولدر پایه داشبوردی Earldom مدل EH70",
@@ -3344,39 +2946,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4593",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی تایپ سی 25W LDINIO مدل LS851",
-    "brand": "",
-    "price": 193000,
-    "image": "images/wp/4608.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4594",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی HDMI دو متری MACDODO مدل CA7180",
-    "brand": "",
-    "price": 1580000,
-    "image": "images/wp/4609.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4595",
     "category": "cable-and-charger",
     "title": "کابل آیوایکس تایپ سی AUX Earldom مدل AUX73",
     "brand": "",
     "price": 328000,
     "image": "images/wp/4610.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4618",
-    "category": "cable-and-charger",
-    "title": "شارژر وایرلس هولدری 5 کاره 25.5 وات الدینیو LDNIO مدل WL02",
-    "brand": "",
-    "price": 2560000,
-    "image": "images/wp/6682.webp",
     "specs": []
   },
   {
@@ -3389,30 +2964,21 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-4624",
+    "category": "dongle",
+    "title": "دانگل بلوتوث Earldom مدل BR22",
+    "brand": "",
+    "price": 589000,
+    "image": "images/wp/4646.webp",
+    "specs": []
+  },
+  {
     "id": "wp-4626",
     "category": "cable-and-charger",
     "title": "شارژر  12وات دو پورت (MCDODO (USB مدل 507",
     "brand": "",
     "price": 770000,
     "image": "images/wp/6663.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4627",
-    "category": "cable-and-charger",
-    "title": "شارژر فست 20 وات MCDODO مدل CH7170",
-    "brand": "",
-    "price": 1250000,
-    "image": "images/wp/6666.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4629",
-    "category": "lighter-and-charger",
-    "title": "فندکی ارجینال LDNIO مدل C1",
-    "brand": "",
-    "price": 1480000,
-    "image": "images/wp/7139.webp",
     "specs": []
   },
   {
@@ -3467,24 +3033,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 694567,
     "image": "images/wp/7014.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4027",
-    "category": "cable-and-charger",
-    "title": "شارژر 4 تایی تمام اتومات ORGINAL CFL 819",
-    "brand": "",
-    "price": 878000,
-    "image": "images/wp/4031.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4037",
-    "category": "cable-and-charger",
-    "title": "شارژر20 وات آیفون AAA",
-    "brand": "",
-    "price": 2897000,
-    "image": "images/wp/4043.webp",
     "specs": []
   },
   {
@@ -3604,39 +3152,12 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4178",
-    "category": "cable-and-charger",
-    "title": "شارژر وایرلس LED سه حالته PROONE مدل PWL815",
-    "brand": "",
-    "price": 1395191,
-    "image": "images/wp/7049.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4186",
-    "category": "cable-and-charger",
-    "title": "کابل C.C کتفی 100وات برند KING",
-    "brand": "",
-    "price": 254000,
-    "image": "images/wp/4191.webp",
-    "specs": []
-  },
-  {
     "id": "wp-4198",
     "category": "cable-and-charger",
     "title": "کابل TPE دوسرتایپ سی(C.C)اولترا سور(ULTRA SUR)مدل U_C11P",
     "brand": "",
     "price": 189000,
     "image": "images/wp/4199.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4212",
-    "category": "cable-and-charger",
-    "title": "کابل سه 3 کاره 100W",
-    "brand": "",
-    "price": 193584,
-    "image": "images/wp/4216.webp",
     "specs": []
   },
   {
@@ -3677,15 +3198,6 @@ export const CATALOG_PRODUCTS: Product[] = [
       "رنگ: سفید",
       "رنگ: مشکی"
     ]
-  },
-  {
-    "id": "wp-4233",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی دوسر تایپ سی چراغدار TOOCKI",
-    "brand": "",
-    "price": 521764,
-    "image": "images/wp/4234.webp",
-    "specs": []
   },
   {
     "id": "wp-4768",
@@ -3754,15 +3266,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4876",
-    "category": "lighter-and-charger",
-    "title": "فندکی pvc شفاف 2 پورت 55 وات با خروجی (pd+usb) مدل w104",
-    "brand": "",
-    "price": 498000,
-    "image": "images/wp/7158.webp",
-    "specs": []
-  },
-  {
     "id": "wp-6289",
     "category": "cable-and-charger",
     "title": "آداپتور شارژر 20 وات آیفون (2 پین)",
@@ -3783,28 +3286,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "image": "images/wp/6962.webp",
     "specs": [
       "برند شارژر: ios"
-    ]
-  },
-  {
-    "id": "wp-6294",
-    "category": "headphones-and-hands-free",
-    "title": "هدفون الدینیو H01",
-    "brand": "",
-    "price": 4850000,
-    "image": "images/wp/7296.webp",
-    "specs": [
-      "رنگ: مشکی"
-    ]
-  },
-  {
-    "id": "wp-6295",
-    "category": "headphones-and-hands-free",
-    "title": "هدست سلبریت مدل A28",
-    "brand": "",
-    "price": 3780000,
-    "image": "images/wp/7320.webp",
-    "specs": [
-      "رنگ: مشکی"
     ]
   },
   {
