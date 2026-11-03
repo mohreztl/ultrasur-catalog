@@ -720,9 +720,13 @@ export default function UltraSurCatalogApp() {
     setIsExportingPdf(true);
     const A4_W = 794;
     const A4_H = 1123;
+    // مرحله فعلی برای پیام خطای قابل پیگیری (به‌ویژه عیب‌یابی iOS)
+    let stage = "آماده‌سازی";
     try {
+      stage = "نمایش پیش‌نمایش کاتالوگ";
       setActiveTab("pdf-preview");
       await new Promise((r) => setTimeout(r, 250));
+      stage = "آماده‌سازی فونت‌ها";
       // Explicitly activate every weight of the selected font before capture so
       // the rasterized output paints with it instead of falling back.
       await Promise.all(
@@ -769,12 +773,28 @@ export default function UltraSurCatalogApp() {
           });
       });
       try {
+        stage = "بارگذاری ماژول PDF";
         const [{ jsPDF }, { getFontEmbedCSS, toSvg }] = await Promise.all([
           import("jspdf"),
           import("html-to-image"),
         ]);
         // تعبیه یک‌باره فونت‌ها (SVG خروجی فقط فونت‌های درون‌خط را می‌شناسد)
-        const fontEmbedCSS = await getFontEmbedCSS(nodes[0]);
+        const fullFontCSS = await getFontEmbedCSS(nodes[0]);
+        // فقط فونت انتخاب‌شده را تعبیه کن؛ CSS کامل (~۱ مگابایت با ۲۲ فونت)
+        // data-URI هر صفحه را آن‌قدر بزرگ می‌کند که iOS در decode آن شکست می‌خورد
+        const familyPattern = new RegExp(
+          `font-family\\s*:\\s*['"]?${font.family}['"]?`,
+          "i",
+        );
+        const familyFaces = fullFontCSS
+          .split("@font-face")
+          .filter((block) => familyPattern.test(block));
+        const fontEmbedCSS =
+          familyFaces.length > 0
+            ? familyFaces
+                .map((block, idx) => (idx === 0 ? block : `@font-face${block}`))
+                .join("")
+            : fullFontCSS;
         const pdf = new jsPDF({
           orientation: "portrait",
           unit: "mm",
@@ -796,7 +816,27 @@ export default function UltraSurCatalogApp() {
               ? 2.25
               : 2.5;
         const quality = isMobile ? 0.78 : nodes.length > 150 ? 0.82 : 0.9;
+        // بارگذاری SVG در <img> با مهلت زمانی تا iOS در حالت معلق نماند
+        const loadSvgImage = (url: string) =>
+          new Promise<HTMLImageElement>((resolve, reject) => {
+            const el = new Image();
+            const timer = window.setTimeout(() => {
+              el.onload = null;
+              el.onerror = null;
+              reject(new Error("SVG rasterize timeout"));
+            }, 30000);
+            el.onload = () => {
+              window.clearTimeout(timer);
+              resolve(el);
+            };
+            el.onerror = () => {
+              window.clearTimeout(timer);
+              reject(new Error("SVG rasterize failed"));
+            };
+            el.src = url;
+          });
         for (let i = 0; i < nodes.length; i++) {
+          stage = `رندر صفحه ${i + 1} از ${nodes.length}`;
           setExportProgress({ current: i + 1, total: nodes.length });
           // toSvg متن را دقیقاً مانند صفحه رندر می‌کند؛ rasterize دستی چون
           // createImage داخل html-to-image بعد از onload با decode/rAF گاهی معلق می‌ماند
@@ -806,13 +846,23 @@ export default function UltraSurCatalogApp() {
             height: A4_H,
             fontEmbedCSS,
           });
-          // بارگذاری مستقیم data-URI (مسیر blob کانواس را tainted می‌کند)
-          const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-            const el = new Image();
-            el.onload = () => resolve(el);
-            el.onerror = () => reject(new Error("SVG rasterize failed"));
-            el.src = svgUrl;
-          });
+          // مسیر اول data-URI؛ اگر iOS از decode آن شکست خورد، مسیر جایگزین blob
+          let img: HTMLImageElement;
+          try {
+            img = await loadSvgImage(svgUrl);
+          } catch {
+            const rawSvg = decodeURIComponent(
+              svgUrl.slice(svgUrl.indexOf(",") + 1),
+            );
+            const blobUrl = URL.createObjectURL(
+              new Blob([rawSvg], { type: "image/svg+xml;charset=utf-8" }),
+            );
+            try {
+              img = await loadSvgImage(blobUrl);
+            } finally {
+              URL.revokeObjectURL(blobUrl);
+            }
+          }
           const canvas = document.createElement("canvas");
           canvas.width = Math.round(A4_W * scale);
           canvas.height = Math.round(A4_H * scale);
@@ -820,6 +870,9 @@ export default function UltraSurCatalogApp() {
           if (!ctx) throw new Error("canvas 2d context unavailable");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           const dataUrl = canvas.toDataURL("image/jpeg", quality);
+          // آزادسازی حافظه کانواس (به‌ویژه iOS)
+          canvas.width = 0;
+          canvas.height = 0;
           // نفس‌کشیدن مرورگر بین صفحات (به‌ویژه iOS)
           await new Promise((r) => setTimeout(r, 0));
           if (i > 0) pdf.addPage();
@@ -831,30 +884,40 @@ export default function UltraSurCatalogApp() {
             });
           }
         }
+        stage = "ذخیره فایل";
         const fileName =
           catalogScope === "all"
             ? "ariyatechno-catalog.pdf"
             : `ariyatechno-${catalogScope}.pdf`;
         const pdfBlob = pdf.output("blob");
-        const pdfFile = new File([pdfBlob], fileName, {
-          type: "application/pdf",
-        });
         const isIOS =
           /iP(hone|ad|od)/.test(navigator.userAgent) ||
           (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-        if (
-          isIOS &&
-          typeof navigator.share === "function" &&
-          navigator.canShare?.({ files: [pdfFile] })
-        ) {
-          // دانلود مستقیم فایل‌های حجیم در iOS نامطمئن است؛ برگه اشتراک‌گذاری مطمئن‌تر است
-          await navigator.share({
-            files: [pdfFile],
-            title: "کاتالوگ ariyatechno",
-          });
-        } else {
-          pdf.save(fileName);
+        let shared = false;
+        if (isIOS && typeof navigator.share === "function") {
+          try {
+            const pdfFile = new File([pdfBlob], fileName, {
+              type: "application/pdf",
+            });
+            if (navigator.canShare?.({ files: [pdfFile] })) {
+              // دانلود مستقیم فایل‌های حجیم در iOS نامطمئن است؛ برگه اشتراک‌گذاری مطمئن‌تر است
+              await navigator.share({
+                files: [pdfFile],
+                title: "کاتالوگ ariyatechno",
+              });
+              shared = true;
+            }
+          } catch (shareErr) {
+            if ((shareErr as Error)?.name === "AbortError") {
+              // کاربر برگه اشتراک‌گذاری را بست — همان لغو عمدی است
+              shared = true;
+            } else {
+              // بدون ژست کاربر (NotAllowedError) یا File قدیمی → دانلود مستقیم
+              console.warn("Web Share failed, falling back to save:", shareErr);
+            }
+          }
         }
+        if (!shared) pdf.save(fileName);
         showToast(
           `فایل PDF کاتالوگ (${nodes.length.toLocaleString("fa-IR")} صفحه) آماده شد`,
         );
@@ -866,8 +929,8 @@ export default function UltraSurCatalogApp() {
         }
       }
     } catch (err) {
-      console.error("PDF export failed:", err);
-      showToast("خطا در ساخت فایل PDF");
+      console.error("PDF export failed at stage:", stage, err);
+      showToast(`خطا در ساخت فایل PDF (مرحله: ${stage})`, "error");
     } finally {
       setIsExportingPdf(false);
       setExportProgress(null);
