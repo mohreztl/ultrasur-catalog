@@ -524,6 +524,7 @@ let skippedTrash = 0;
 let skippedOutOfStock = 0;
 let skippedCatalogProduct = 0;
 let skippedLowStock = 0;
+let skippedNoQuantity = 0;
 let noThumb = 0;
 
 for (const item of rawProducts) {
@@ -553,11 +554,15 @@ for (const item of rawProducts) {
 
   const category = classifyWp(catEntries, item.title);
 
-  // محصولات با موجودی انبار کمتر از ۵ حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
-  // _stock خالی = مدیریت موجودی غیرفعال → محصول حفظ می‌شود
+  // «موجود» ولی بدون تعداد = در عمل ناموجود → حذف
+  // محصولات با موجودی انبار کمتر از ۵ هم حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
   const stockText = String(metas._stock ?? "").trim();
   const stockNum = stockText === "" ? NaN : Number(stockText);
-  if (category !== "speaker" && Number.isFinite(stockNum) && stockNum < 5) {
+  if (!Number.isFinite(stockNum) || stockNum <= 0) {
+    skippedNoQuantity += 1;
+    continue;
+  }
+  if (category !== "speaker" && stockNum < 5) {
     skippedLowStock += 1;
     continue;
   }
@@ -801,6 +806,7 @@ const report = {
   skippedOutOfStock,
   skippedCatalogProduct,
   skippedLowStock,
+  skippedNoQuantity,
   wpWithoutImage: noThumb,
   categoryCounts: counts,
   images: {

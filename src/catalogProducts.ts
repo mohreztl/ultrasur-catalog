@@ -4,470 +4,6 @@ import type { Product } from "./App";
 
 export const CATALOG_PRODUCTS: Product[] = [
   {
-    "id": "wp-74",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد 2 آیفون ZAA (لیبل سبز Redington)",
-    "brand": "ios",
-    "price": 480000,
-    "image": "images/wp/1138.webp",
-    "specs": [
-      "برند ایرپاد: ios"
-    ]
-  },
-  {
-    "id": "wp-77",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد LDINIO مدل T02",
-    "brand": "",
-    "price": 745000,
-    "image": "images/wp/1137.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-79",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد HISKA مدل 559F",
-    "brand": "",
-    "price": 1150000,
-    "image": "images/wp/1135.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-81",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد HISKA مدل 529F",
-    "brand": "hiska",
-    "price": 1090000,
-    "image": "images/wp/1134.webp",
-    "specs": [
-      "برند ایرپاد: hiska"
-    ]
-  },
-  {
-    "id": "wp-84",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد HISKA مدل 473F",
-    "brand": "hiska",
-    "price": 860000,
-    "image": "images/wp/1133.webp",
-    "specs": [
-      "برند ایرپاد: hiska"
-    ]
-  },
-  {
-    "id": "wp-86",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد HISKA PRO4",
-    "brand": "hiska",
-    "price": 990000,
-    "image": "images/wp/1132.webp",
-    "specs": [
-      "برند ایرپاد: hiska"
-    ]
-  },
-  {
-    "id": "wp-88",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد GRAND 24",
-    "brand": "grand",
-    "price": 1350000,
-    "image": "images/wp/1131.webp",
-    "specs": [
-      "برند ایرپاد: grand"
-    ]
-  },
-  {
-    "id": "wp-90",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد GRAND 22",
-    "brand": "grand",
-    "price": 1240000,
-    "image": "images/wp/1149.webp",
-    "specs": [
-      "برند ایرپاد: grand"
-    ]
-  },
-  {
-    "id": "wp-92",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد آیفون پرو 2(ANC) با شارژر C.C (لیبل سبز Redington)",
-    "brand": "ios",
-    "price": 850000,
-    "image": "images/wp/1144.webp",
-    "specs": [
-      "برند ایرپاد: ios"
-    ]
-  },
-  {
-    "id": "wp-94",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد 3 آیفون AAA(لیبل سبز Redington)",
-    "brand": "",
-    "price": 550000,
-    "image": "images/wp/1142.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-906",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد بلوتوثی MC DODO مدل HP-0041",
-    "brand": "",
-    "price": 950000,
-    "image": "images/wp/1129.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-908",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد بلوتوثی MC DODO مدل HP-3300",
-    "brand": "",
-    "price": 1390000,
-    "image": "images/wp/1128.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-910",
-    "category": "headphones-and-hands-free",
-    "title": "ایرپاد بلوتوثی MC DODO مدل 278",
-    "brand": "ios",
-    "price": 1360000,
-    "image": "images/wp/1127.webp",
-    "specs": [
-      "برند ایرپاد: ios"
-    ]
-  },
-  {
-    "id": "wp-1031",
-    "category": "cable-and-charger",
-    "title": "فندکی 2 پورت FIRST YOU مدل F023",
-    "brand": "",
-    "price": 145000,
-    "image": "images/wp/1032.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-1035",
-    "category": "cable-and-charger",
-    "title": "فندکی اورجينال LDNIO مدل C1",
-    "brand": "",
-    "price": 545000,
-    "image": "images/wp/1036.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-1037",
-    "category": "cable-and-charger",
-    "title": "فندکی و کابل اورجینال دو پورت 36 وات LDNIO مدل C510Q",
-    "brand": "",
-    "price": 398000,
-    "image": "images/wp/1038.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-1039",
-    "category": "cable-and-charger",
-    "title": "فندکی 2 پورت 60 وات LDNIO مدل C103 با کابل دوسر تايپ سی",
-    "brand": "",
-    "price": 428000,
-    "image": "images/wp/1040.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-1043",
-    "category": "cable-and-charger",
-    "title": "کابل اصلی دو سر تایپ سی S22",
-    "brand": "samsung",
-    "price": 49000,
-    "image": "images/wp/1044.webp",
-    "specs": [
-      "برند کابل: samsung"
-    ]
-  },
-  {
-    "id": "wp-1046",
-    "category": "cable-and-charger",
-    "title": "کابل تایپ سی سامسونگ مدل S8 (اورجینال چین)",
-    "brand": "samsung",
-    "price": 18600,
-    "image": "images/wp/1047.webp",
-    "specs": [
-      "برند کابل: samsung"
-    ]
-  },
-  {
-    "id": "wp-1048",
-    "category": "cable-and-charger",
-    "title": "کابل شارژر پکدار اصلی تایپ سی S10",
-    "brand": "samsung",
-    "price": 39700,
-    "image": "images/wp/1049.webp",
-    "specs": [
-      "برند کابل: samsung"
-    ]
-  },
-  {
-    "id": "wp-1054",
-    "category": "headphones-and-hands-free",
-    "title": "هدست بلوتوث 430 FAST PLUS",
-    "brand": "Fast Plus",
-    "price": 798000,
-    "image": "images/wp/1055.webp",
-    "specs": [
-      "headset-brand: Fast Plus"
-    ]
-  },
-  {
-    "id": "wp-1057",
-    "category": "headphones-and-hands-free",
-    "title": "هدست بلوتوث دورگردنی اورجینال SAMSUNG LEVEL U2",
-    "brand": "samsung",
-    "price": 2780000,
-    "image": "images/wp/1058.webp",
-    "specs": [
-      "headset-brand: samsung"
-    ]
-  },
-  {
-    "id": "wp-1059",
-    "category": "headphones-and-hands-free",
-    "title": "هدست عروسکی KT59",
-    "brand": "",
-    "price": 390000,
-    "image": "images/wp/1060.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-1074",
-    "category": "holder",
-    "title": "هولدر 2109 HISKA",
-    "brand": "",
-    "price": 308000,
-    "image": "images/wp/1075.webp",
-    "specs": [
-      "brand-holder: HISKA"
-    ]
-  },
-  {
-    "id": "wp-1080",
-    "category": "holder",
-    "title": "هولدر پايه داشبوردی ULTRA مدل F1",
-    "brand": "",
-    "price": 387000,
-    "image": "images/wp/1081.webp",
-    "specs": [
-      "brand-holder: ULTRASUR"
-    ]
-  },
-  {
-    "id": "wp-1082",
-    "category": "holder",
-    "title": "هولدر شارژر وايرلسی LDNIO مدل MW21_ 1",
-    "brand": "",
-    "price": 505000,
-    "image": "images/wp/1083.webp",
-    "specs": [
-      "brand-holder: LDNIO"
-    ]
-  },
-  {
-    "id": "wp-1084",
-    "category": "holder",
-    "title": "هندزفری XO مدل XOS6",
-    "brand": "xo",
-    "price": 118000,
-    "image": "images/wp/1085.webp",
-    "specs": [
-      "برند هندزفری: xo"
-    ]
-  },
-  {
-    "id": "wp-1086",
-    "category": "holder",
-    "title": "هندزفری XO مدل EP52",
-    "brand": "xo",
-    "price": 142000,
-    "image": "images/wp/1087.webp",
-    "specs": [
-      "برند هندزفری: xo"
-    ]
-  },
-  {
-    "id": "wp-1088",
-    "category": "holder",
-    "title": "هندزفری XO مدل EP53",
-    "brand": "xo",
-    "price": 139000,
-    "image": "images/wp/1089.webp",
-    "specs": [
-      "برند هندزفری: xo"
-    ]
-  },
-  {
-    "id": "wp-1090",
-    "category": "holder",
-    "title": "هندزفری اورجینال سلبریت مدل D1",
-    "brand": "سلبریت",
-    "price": 88600,
-    "image": "images/wp/1091.webp",
-    "specs": [
-      "برند هندزفری: سلبریت"
-    ]
-  },
-  {
-    "id": "wp-1092",
-    "category": "holder",
-    "title": "هندزفری اورجینال سلبریت مدل G26",
-    "brand": "سلبریت",
-    "price": 93400,
-    "image": "images/wp/1093.webp",
-    "specs": [
-      "برند هندزفری: سلبریت"
-    ]
-  },
-  {
-    "id": "wp-1096",
-    "category": "headphones-and-hands-free",
-    "title": "هدست گیم PROONE مدل PHG3860",
-    "brand": "proone",
-    "price": 568000,
-    "image": "images/wp/1097.webp",
-    "specs": [
-      "headset-brand: proone"
-    ]
-  },
-  {
-    "id": "wp-1098",
-    "category": "headphones-and-hands-free",
-    "title": "هدفون استريو بی سیم GRAND مدل GH239",
-    "brand": "proone",
-    "price": 1185000,
-    "image": "images/wp/1099.webp",
-    "specs": [
-      "headset-brand: proone"
-    ]
-  },
-  {
-    "id": "wp-1101",
-    "category": "power-bank",
-    "title": "پاور بانک 10.000 MC DODO مدل MC 442",
-    "brand": "MC DODO",
-    "price": 935000,
-    "image": "images/wp/1102.webp",
-    "specs": [
-      "برند پاوربانک: MC DODO"
-    ]
-  },
-  {
-    "id": "wp-1103",
-    "category": "power-bank",
-    "title": "پاور بانک 10.000 مک سيف  ULTRA SUR مدل PW5",
-    "brand": "ULTRASUR",
-    "price": 1760000,
-    "image": "images/wp/1104.webp",
-    "specs": [
-      "برند پاوربانک: ULTRASUR"
-    ]
-  },
-  {
-    "id": "wp-1105",
-    "category": "power-bank",
-    "title": "پاور بانک 20.000 آمپر MI",
-    "brand": "MI",
-    "price": 965000,
-    "image": "images/wp/1106.webp",
-    "specs": [
-      "برند پاوربانک: MI"
-    ]
-  },
-  {
-    "id": "wp-1107",
-    "category": "power-bank",
-    "title": "پاوربانک 20.000 ميلی آمپر REMAX مدل RPP11",
-    "brand": "REMAX",
-    "price": 980000,
-    "image": "images/wp/1108.webp",
-    "specs": [
-      "برند پاوربانک: REMAX"
-    ]
-  },
-  {
-    "id": "wp-1109",
-    "category": "power-bank",
-    "title": "پاوربانک 20.000 ميلی آمپر REMAX مدل 38 RPP",
-    "brand": "REMAX",
-    "price": 1565000,
-    "image": "images/wp/1110.webp",
-    "specs": [
-      "برند پاوربانک: REMAX"
-    ]
-  },
-  {
-    "id": "wp-1112",
-    "category": "power-bank",
-    "title": "پاوربانک 20.000 ميلی آمپر REMAX مدل 672 RPP",
-    "brand": "REMAX",
-    "price": 1455000,
-    "image": "images/wp/1113.webp",
-    "specs": [
-      "برند پاوربانک: REMAX"
-    ]
-  },
-  {
-    "id": "wp-1114",
-    "category": "power-bank",
-    "title": "پاوربانک 20000 فست شارژ ULTRA مدل P4+",
-    "brand": "ULTRASUR",
-    "price": 1345000,
-    "image": "images/wp/1116.webp",
-    "specs": [
-      "برند پاوربانک: ULTRASUR"
-    ]
-  },
-  {
-    "id": "wp-1158",
-    "category": "cable-and-charger",
-    "title": "کابل HDMI SONY مدل HE20",
-    "brand": "SONY",
-    "price": 149000,
-    "image": "images/wp/1160.webp",
-    "specs": [
-      "computer-cable-brand: SONY"
-    ]
-  },
-  {
-    "id": "wp-1164",
-    "category": "cable-and-charger",
-    "title": "کابل HISKA HDMI 2M",
-    "brand": "HISKA",
-    "price": 479000,
-    "image": "images/wp/1165.webp",
-    "specs": [
-      "computer-cable-brand: HISKA"
-    ]
-  },
-  {
-    "id": "wp-1166",
-    "category": "cable-and-charger",
-    "title": "کابل HISKA HDMI 3M",
-    "brand": "HISKA",
-    "price": 399000,
-    "image": "images/wp/1167.webp",
-    "specs": [
-      "computer-cable-brand: HISKA"
-    ]
-  },
-  {
-    "id": "wp-1177",
-    "category": "cable-and-charger",
-    "title": "کابل  HDMI 1.5M مچر 185",
-    "brand": "MACHER",
-    "price": 138000,
-    "image": "images/wp/1181.webp",
-    "specs": [
-      "computer-cable-brand: MACHER"
-    ]
-  },
-  {
     "id": "wp-2382",
     "category": "holder",
     "title": "کابل آیفون سر فلزی کپسولی",
@@ -828,69 +364,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-6419",
-    "category": "glass",
-    "title": "گلس سوپر ايكس او جي  SUPER X GLASS (OG)",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6571.png",
-    "specs": []
-  },
-  {
-    "id": "wp-6423",
-    "category": "cable-and-charger",
-    "title": "كابل تايپ سي برزنتي كپسولي",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6427.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6428",
-    "category": "gadget",
-    "title": "محافظ لنز دوربين  آيفوني",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6431.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6429",
-    "category": "gadget",
-    "title": "تبديل سه به دو برنجي ارت دار 16 آمپر MERKAN",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6433.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6434",
-    "category": "frame",
-    "title": "قاب سيليكوني مگ سيف دار(MAG SAFE) آيفوني",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6438.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6436",
-    "category": "gadget",
-    "title": "جك اصلي تايپ سي سامسونگ (SAMSUNG)",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6442.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6445",
-    "category": "gadget",
-    "title": "فندك الكترونيكي تايپ سي BLOWING مدل LHJ32",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6452.webp",
-    "specs": []
-  },
-  {
     "id": "wp-6446",
     "category": "cable-and-charger",
     "title": "كابل كپي آيفون",
@@ -906,15 +379,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 0,
     "image": "images/wp/6455.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6471",
-    "category": "gadget",
-    "title": "كابل آيفون سر فلزي كپسولي",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6586.png",
     "specs": []
   },
   {
@@ -1101,18 +565,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-6907",
-    "category": "cable-and-charger",
-    "title": "کابل تایپ سی سامسونگ مدل S10 (ارجینال چین)",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6908.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
-  },
-  {
     "id": "wp-6950",
     "category": "cable-and-charger",
     "title": "ایوایکس به تایپ سی GFUZ مدل AX45",
@@ -1120,19 +572,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 256000,
     "image": "images/wp/6951.webp",
     "specs": []
-  },
-  {
-    "id": "wp-6954",
-    "category": "cable-and-charger",
-    "title": "کابل KLUMIN آیفون مدل DC02",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6955.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: قرمز",
-      "رنگ: مشکی"
-    ]
   },
   {
     "id": "wp-6997",
@@ -1299,18 +738,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
-    "id": "wp-7210",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری ارجینال سلبریت مدل G27",
-    "brand": "",
-    "price": 345000,
-    "image": "images/wp/7211.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
-  },
-  {
     "id": "wp-7216",
     "category": "headphones-and-hands-free",
     "title": "هندزفری سیمدار سوزنی SY-43",
@@ -1441,18 +868,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 1480000,
     "image": "images/wp/7323.webp",
     "specs": []
-  },
-  {
-    "id": "wp-7333",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری بلوتوث سونی مدل XB80BS",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/7334.webp",
-    "specs": [
-      "رنگ: قرمز",
-      "رنگ: مشکی"
-    ]
   },
   {
     "id": "wp-7344",
@@ -1605,18 +1020,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 265000,
     "image": "images/wp/7574.webp",
     "specs": []
-  },
-  {
-    "id": "wp-2321",
-    "category": "cable-and-charger",
-    "title": "جک اصلی تایپ سی سامسونگ (SAMSUNG)",
-    "brand": "",
-    "price": 115000,
-    "image": "images/wp/7480.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
   },
   {
     "id": "wp-2324",
@@ -2247,18 +1650,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 106579,
     "image": "images/wp/6818.webp",
     "specs": []
-  },
-  {
-    "id": "wp-2671",
-    "category": "headphones-and-hands-free",
-    "title": "هندزفری بلوتوث ارجینال TRANYO مدل M24",
-    "brand": "",
-    "price": 798000,
-    "image": "images/wp/7597.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
   },
   {
     "id": "wp-4307",
@@ -3001,19 +2392,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "image": "images/wp/6962.webp",
     "specs": [
       "برند شارژر: ios"
-    ]
-  },
-  {
-    "id": "wp-6300",
-    "category": "headphones-and-hands-free",
-    "title": "هدست بلوتوث عروسک گربه ای مدل MLS-602",
-    "brand": "",
-    "price": 1580000,
-    "image": "images/wp/7313.webp",
-    "specs": [
-      "رنگ: آبی کم‌رنگ",
-      "رنگ: سبز روشن",
-      "رنگ: سفید"
     ]
   }
 ];
