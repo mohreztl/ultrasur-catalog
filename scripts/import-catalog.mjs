@@ -623,6 +623,28 @@ for (const item of rawProducts) {
 let products = [...wpOut, ...pdfOut];
 
 // ---------------------------------------------------------------------------
+// Image overrides: fixed image URLs for products whose backup lacks thumbnails
+// (scripts/image-overrides.json = { "<id>": { "url": "...", "file": "..." } })
+// ---------------------------------------------------------------------------
+const overridesFile = path.join(repoRoot, "scripts", "image-overrides.json");
+let imageOverrides = {};
+try {
+  imageOverrides = JSON.parse(await fs.readFile(overridesFile, "utf8"));
+} catch {
+  imageOverrides = {};
+}
+let overriddenImages = 0;
+for (const p of products) {
+  const ov = imageOverrides[p.id];
+  if (!ov || !ov.url || !ov.file) continue;
+  p.image = `images/wp/${ov.file}`;
+  if (!wpImageJobs.has(ov.file)) {
+    wpImageJobs.set(ov.file, { destName: ov.file, urls: [ov.url] });
+  }
+  overriddenImages += 1;
+}
+
+// ---------------------------------------------------------------------------
 // Category statistics
 // ---------------------------------------------------------------------------
 const counts = {};
@@ -808,6 +830,7 @@ const report = {
   skippedLowStock,
   skippedNoQuantity,
   wpWithoutImage: noThumb,
+  imageOverrides: overriddenImages,
   categoryCounts: counts,
   images: {
     downloaded,

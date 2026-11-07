@@ -9,7 +9,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل آیفون سر فلزی کپسولی",
     "brand": "",
     "price": 168000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-2382.png",
     "specs": []
   },
   {
@@ -27,7 +27,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "جک تایپ سی سیم کنفی سر فلزی پکدار",
     "brand": "",
     "price": 195000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-2394.webp",
     "specs": []
   },
   {
@@ -45,7 +45,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل اندروید برزنتی کپسولی",
     "brand": "",
     "price": 146000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-2400.png",
     "specs": []
   },
   {
@@ -63,7 +63,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "محافظ شارژر سیلیکونی 25 وات سامسونگ",
     "brand": "",
     "price": 235000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-2406.webp",
     "specs": []
   },
   {
@@ -99,7 +99,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب سیلیکونی شیائومی CASE XIAOMI CILICON",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-4842.webp",
     "specs": []
   },
   {
@@ -234,7 +234,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری سمعکی DP POWER مدل 10 (بسته های 10 ورقه )",
     "brand": "",
     "price": 51000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-4862.webp",
     "specs": []
   },
   {
@@ -279,7 +279,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل OTG یو اس بی به تایپ سی USB به TYPE C الدینیو LDNIO مدل LC140",
     "brand": "",
     "price": 235000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-4867.webp",
     "specs": []
   },
   {
@@ -342,7 +342,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل OTG فلزی تایپ سی مک دودو MC DODO",
     "brand": "",
     "price": 517000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/twin-4877.webp",
     "specs": []
   },
   {

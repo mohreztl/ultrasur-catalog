@@ -204,15 +204,27 @@ const CATEGORIES = [
 // دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
 const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// نسخه‌بندی دانه — نسخه ۹: حذف محصولات «موجود اما بدون تعداد» — جایگزینی کامل
-const SEED_VERSION = 9;
+// نسخه‌بندی دانه — نسخه ۱۰: حفظ تصاویر آپلودی کاربر هنگام جایگزینی — جایگزینی کامل
+const SEED_VERSION = 10;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;
   if (version >= SEED_VERSION) return;
-  // نسخه ۹: محصولات قبلی حذف و فهرست کامل جایگزین می‌شود
+  // نسخه ۱۰: تصاویر آپلودی کاربر (data URI) پیش از جایگزینی کامل نگه داشته می‌شوند
+  const uploadedImages: Array<[string, string]> = [];
+  const prev = db.exec(
+    "SELECT id, image FROM products WHERE image LIKE 'data:%'",
+  );
+  if (prev.length > 0) {
+    for (const row of prev[0].values) {
+      uploadedImages.push([row[0] as string, row[1] as string]);
+    }
+  }
   db.run("DELETE FROM products");
   seedProducts(db, SEED_PRODUCTS);
+  for (const [id, image] of uploadedImages) {
+    db.run("UPDATE products SET image = ? WHERE id = ?", [image, id]);
+  }
   db.run(
     "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_version', ?)",
     [String(SEED_VERSION)],
@@ -259,6 +271,29 @@ export default function UltraSurCatalogApp() {
     current: number;
     total: number;
   } | null>(null);
+
+  // مقیاس پیش‌نمایش صفحات A4: در موبایل صفحات کوچک‌تر نمایش داده می‌شوند تا بهم نریزند
+  // (فقط نمایش روی صفحه است؛ خروجی PDF با اندازه ثابت A4 گرفته می‌شود)
+  const pagesWrapRef = useRef<HTMLDivElement | null>(null);
+  const pagesStackRef = useRef<HTMLDivElement | null>(null);
+  const [fitScale, setFitScale] = useState(1);
+  const [fitHeight, setFitHeight] = useState(0);
+  useEffect(() => {
+    if (activeTab !== "pdf-preview") return;
+    const wrap = pagesWrapRef.current;
+    const stack = pagesStackRef.current;
+    if (!wrap || !stack) return;
+    const measure = () => {
+      const width = wrap.clientWidth;
+      setFitScale(width > 0 ? Math.min(1, width / 794) : 1);
+      setFitHeight(stack.offsetHeight);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(wrap);
+    observer.observe(stack);
+    return () => observer.disconnect();
+  }, [activeTab]);
 
   // وضعیت پایگاه داده SQLite محلی
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("connecting");
@@ -746,6 +781,17 @@ export default function UltraSurCatalogApp() {
         node.style.overflow = "hidden";
       }
       // مختصات ردیف‌های فهرست برای لینک‌های داخلی PDF
+      // اندازه‌گیری با getBoundingClientRect تحت تأثیر transform پیش‌نمایش است؛
+      // با تقسیم بر ضریب مقیاس، مختصات واقعی A4 بازمی‌گردد
+      let rectScale = 1;
+      const stackEl = pagesStackRef.current;
+      if (stackEl) {
+        const t = getComputedStyle(stackEl).transform;
+        if (t && t !== "none") {
+          const a = new DOMMatrixReadOnly(t).a;
+          if (a > 0) rectScale = a;
+        }
+      }
       const tocLinks: Array<{
         nodeIdx: number;
         x: number;
@@ -764,10 +810,10 @@ export default function UltraSurCatalogApp() {
             const r = a.getBoundingClientRect();
             tocLinks.push({
               nodeIdx,
-              x: r.left - base.left,
-              y: r.top - base.top,
-              w: r.width,
-              h: r.height,
+              x: (r.left - base.left) / rectScale,
+              y: (r.top - base.top) / rectScale,
+              w: r.width / rectScale,
+              h: r.height / rectScale,
               page,
             });
           });
@@ -1094,7 +1140,7 @@ export default function UltraSurCatalogApp() {
           </div>
 
           {/* دکمه‌های اقدام سریع */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={handleAddNew}
               className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-orange-500/20"
@@ -1417,7 +1463,7 @@ export default function UltraSurCatalogApp() {
         ) : (
           /* ================= قالب چاپی PDF: جلد + فهرست انکردار + همه محصولات ================= */
           <div className="catalog-print-container">
-            <div className="no-print mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-between text-xs text-amber-300">
+            <div className="no-print mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-between flex-wrap gap-3 text-xs text-amber-300">
               <div className="flex items-center gap-2">
                 <Info className="w-4 h-4 shrink-0 text-amber-400" />
                 <span>
@@ -1512,225 +1558,140 @@ export default function UltraSurCatalogApp() {
               </button>
             </div>
 
-            {/* صفحه ۱: جلد کاتالوگ ariyatechno */}
+            {/* نگهدارنده مقیاس‌دار صفحات A4 تا در موبایل درست نمایش داده شوند */}
             <div
-              className="catalog-page p-8 mb-8 flex flex-col justify-between"
-              style={cs.cover}
+              ref={pagesWrapRef}
+              style={{
+                overflow: "hidden",
+                height: fitHeight > 0 ? fitHeight * fitScale : undefined,
+              }}
             >
               <div
-                className="flex justify-between items-center border-b pb-5"
-                style={cs.line}
+                ref={pagesStackRef}
+                style={{
+                  width: 794,
+                  transformOrigin: "top right",
+                  transform: `scale(${fitScale})`,
+                }}
               >
-                <div className="flex items-center gap-3">
+                {/* صفحه ۱: جلد کاتالوگ ariyatechno */}
+                <div
+                  className="catalog-page p-8 mb-8 flex flex-col justify-between"
+                  style={cs.cover}
+                >
                   <div
-                    className="w-11 h-11 rounded-xl overflow-hidden shadow-lg"
-                    style={cs.logoBig}
+                    className="flex justify-between items-center border-b pb-5"
+                    style={cs.line}
                   >
-                    <img
-                      src="images/logo.png"
-                      alt="لوگوی ariyatechno"
-                      className="w-full h-full object-cover"
-                    />
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-11 h-11 rounded-xl overflow-hidden shadow-lg"
+                        style={cs.logoBig}
+                      >
+                        <img
+                          src="images/logo.png"
+                          alt="لوگوی ariyatechno"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h1
+                          className="text-3xl font-black tracking-wider"
+                          style={cs.text}
+                        >
+                          ariyatechno
+                          <span style={cs.accent}>.</span>
+                        </h1>
+                        <p
+                          className="text-xs font-semibold mt-0.5"
+                          style={cs.accentSoft}
+                        >
+                          کاتالوگ لوازم جانبی و کالاهای دیجیتال
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className="text-left font-mono text-xs"
+                      style={cs.muted}
+                    >
+                      <span
+                        className="px-3 py-1 rounded-full border font-bold"
+                        style={cs.chipSolid}
+                      >
+                        OFFICIAL CATALOGUE
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <h1
-                      className="text-3xl font-black tracking-wider"
-                      style={cs.text}
+
+                  {/* آمار کاتالوگ */}
+                  <div className="flex items-center justify-center gap-3 my-6">
+                    <span
+                      className="px-4 py-1.5 rounded-xl border text-xs font-bold"
+                      style={cs.chipAccent}
+                    >
+                      {catalogProducts.length.toLocaleString("fa-IR")} محصول
+                    </span>
+                    <span
+                      className="px-4 py-1.5 rounded-xl border text-xs font-bold"
+                      style={cs.chipSoft}
+                    >
+                      {catalogScope === "all"
+                        ? `${categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی`
+                        : CATEGORIES.find((c) => c.id === catalogScope)?.name}
+                    </span>
+                    <span
+                      className="px-4 py-1.5 rounded-xl border text-xs font-bold"
+                      style={cs.chipSoft}
                     >
                       ariyatechno
-                      <span style={cs.accent}>.</span>
-                    </h1>
+                    </span>
+                  </div>
+
+                  {/* شبکه ۸تایی محصولات جلد کاتالوگ */}
+                  <div className="grid grid-cols-4 gap-4 my-2">
+                    {catalogProducts.slice(0, 8).map((p) => (
+                      <div
+                        key={p.id}
+                        className="border rounded-2xl p-3 flex flex-col items-center justify-center text-center"
+                        style={cs.gridCard}
+                      >
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="h-28 w-28 object-contain mb-2 filter drop-shadow-md"
+                        />
+                        <span
+                          className="text-[11px] font-medium line-clamp-1"
+                          style={cs.text}
+                        >
+                          {p.title}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="text-center pt-6 border-t" style={cs.line}>
                     <p
-                      className="text-xs font-semibold mt-0.5"
+                      className="text-lg font-bold tracking-widest uppercase"
                       style={cs.accentSoft}
                     >
-                      کاتالوگ لوازم جانبی و کالاهای دیجیتال
+                      Saving on quality is meaningless.
+                    </p>
+                    <p className="text-xs mt-1" style={cs.muted}>
+                      صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
                     </p>
                   </div>
                 </div>
-                <div className="text-left font-mono text-xs" style={cs.muted}>
-                  <span
-                    className="px-3 py-1 rounded-full border font-bold"
-                    style={cs.chipSolid}
-                  >
-                    OFFICIAL CATALOGUE
-                  </span>
-                </div>
-              </div>
 
-              {/* آمار کاتالوگ */}
-              <div className="flex items-center justify-center gap-3 my-6">
-                <span
-                  className="px-4 py-1.5 rounded-xl border text-xs font-bold"
-                  style={cs.chipAccent}
-                >
-                  {catalogProducts.length.toLocaleString("fa-IR")} محصول
-                </span>
-                <span
-                  className="px-4 py-1.5 rounded-xl border text-xs font-bold"
-                  style={cs.chipSoft}
-                >
-                  {catalogScope === "all"
-                    ? `${categoryGroups.length.toLocaleString("fa-IR")} دسته‌بندی`
-                    : CATEGORIES.find((c) => c.id === catalogScope)?.name}
-                </span>
-                <span
-                  className="px-4 py-1.5 rounded-xl border text-xs font-bold"
-                  style={cs.chipSoft}
-                >
-                  ariyatechno
-                </span>
-              </div>
-
-              {/* شبکه ۸تایی محصولات جلد کاتالوگ */}
-              <div className="grid grid-cols-4 gap-4 my-2">
-                {catalogProducts.slice(0, 8).map((p) => (
+                {/* فهرست انکردار چندصفحه‌ای (ایندکس کاتالوگ) */}
+                {tocChunks.map((tocRows, tocIdx) => (
                   <div
-                    key={p.id}
-                    className="border rounded-2xl p-3 flex flex-col items-center justify-center text-center"
-                    style={cs.gridCard}
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="h-28 w-28 object-contain mb-2 filter drop-shadow-md"
-                    />
-                    <span
-                      className="text-[11px] font-medium line-clamp-1"
-                      style={cs.text}
-                    >
-                      {p.title}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="text-center pt-6 border-t" style={cs.line}>
-                <p
-                  className="text-lg font-bold tracking-widest uppercase"
-                  style={cs.accentSoft}
-                >
-                  Saving on quality is meaningless.
-                </p>
-                <p className="text-xs mt-1" style={cs.muted}>
-                  صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
-                </p>
-              </div>
-            </div>
-
-            {/* فهرست انکردار چندصفحه‌ای (ایندکس کاتالوگ) */}
-            {tocChunks.map((tocRows, tocIdx) => (
-              <div
-                key={`toc-${tocIdx}`}
-                className="catalog-page catalog-toc p-8 mb-8 flex flex-col"
-                style={cs.page}
-              >
-                <div
-                  className="flex justify-between items-center border-b pb-3 mb-6"
-                  style={cs.line}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className="w-7 h-7 rounded-lg overflow-hidden"
-                      style={cs.logoTile}
-                    >
-                      <img
-                        src="images/logo.png"
-                        alt="لوگوی ariyatechno"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <span
-                      className="font-extrabold text-base tracking-wider"
-                      style={cs.text}
-                    >
-                      ariyatechno
-                    </span>
-                  </div>
-                  <span className="text-xs font-mono" style={cs.muted}>
-                    صفحه {(2 + tocIdx).toLocaleString("fa-IR")} • فهرست مطالب
-                  </span>
-                </div>
-
-                <h2 className="text-xl font-black mb-1" style={cs.text}>
-                  فهرست دسته‌بندی‌های کاتالوگ
-                </h2>
-                <p className="text-xs mb-6" style={cs.muted}>
-                  با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل می‌شوید.
-                </p>
-
-                <div className="space-y-2 flex-1">
-                  {tocRows.map((group) => {
-                    const Icon = group.icon;
-                    return (
-                      <a
-                        key={group.id}
-                        href={`#cat-${group.id}`}
-                        data-target-page={group.startPage}
-                        className="flex items-center gap-3 border rounded-xl px-4 py-2.5 transition-colors"
-                        style={cs.row}
-                      >
-                        <Icon className="w-4 h-4 shrink-0" style={cs.accent} />
-                        <span className="text-sm font-bold" style={cs.text}>
-                          {group.name}
-                        </span>
-                        <span
-                          className="flex-1 border-b border-dotted mx-2 translate-y-0.5"
-                          style={cs.dotted}
-                        />
-                        <span className="text-xs font-medium" style={cs.muted}>
-                          {group.items.length.toLocaleString("fa-IR")} محصول
-                        </span>
-                        <span
-                          className="text-xs font-black border rounded-lg px-2.5 py-1"
-                          style={cs.pageBadge}
-                        >
-                          صفحه {group.startPage.toLocaleString("fa-IR")}
-                        </span>
-                      </a>
-                    );
-                  })}
-                </div>
-
-                <div
-                  className="pt-4 mt-5 border-t flex justify-between items-center text-xs"
-                  style={cs.rule}
-                >
-                  <span
-                    className="font-semibold tracking-wide"
-                    style={cs.footerBrand}
-                  >
-                    ariyatechno ACCESSORIES
-                  </span>
-                  <span className="italic">
-                    Saving on quality is meaningless.
-                  </span>
-                </div>
-              </div>
-            ))}
-
-            {/* صفحات محصولات: همه محصولات به تفکیک دسته‌بندی */}
-            {categoryPages.map((group) => {
-              const chunks: Product[][] = [];
-              if (group.items.length > 0) {
-                chunks.push(
-                  group.items.slice(0, Math.min(2, group.items.length)),
-                );
-              }
-              for (let i = 2; i < group.items.length; i += 3) {
-                chunks.push(group.items.slice(i, i + 3));
-              }
-              return chunks.map((chunk, chunkIdx) => {
-                const pageNo = group.startPage + chunkIdx;
-                return (
-                  <div
-                    key={`${group.id}-${chunkIdx}`}
-                    id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
-                    className="catalog-page p-6 mb-8 flex flex-col justify-between"
+                    key={`toc-${tocIdx}`}
+                    className="catalog-page catalog-toc p-8 mb-8 flex flex-col"
                     style={cs.page}
                   >
                     <div
-                      className="flex justify-between items-center border-b pb-3 mb-4"
+                      className="flex justify-between items-center border-b pb-3 mb-6"
                       style={cs.line}
                     >
                       <div className="flex items-center gap-2.5">
@@ -1750,125 +1711,58 @@ export default function UltraSurCatalogApp() {
                         >
                           ariyatechno
                         </span>
-                        <span className="text-xs mr-2" style={cs.faint}>
-                          | {group.name}
-                        </span>
                       </div>
                       <span className="text-xs font-mono" style={cs.muted}>
-                        صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
-                        {totalPages.toLocaleString("fa-IR")}
+                        صفحه {(2 + tocIdx).toLocaleString("fa-IR")} • فهرست
+                        مطالب
                       </span>
                     </div>
 
-                    {chunkIdx === 0 && (
-                      <div className="mb-4 -mt-1">
-                        <h2
-                          className="text-lg font-black flex items-center gap-2"
-                          style={cs.accent}
-                        >
-                          <group.icon className="w-5 h-5" />
-                          {group.name}
-                        </h2>
-                        <p className="text-[11px] mt-0.5" style={cs.faint}>
-                          {group.items.length.toLocaleString("fa-IR")} محصول در
-                          این دسته‌بندی
-                        </p>
-                      </div>
-                    )}
+                    <h2 className="text-xl font-black mb-1" style={cs.text}>
+                      فهرست دسته‌بندی‌های کاتالوگ
+                    </h2>
+                    <p className="text-xs mb-6" style={cs.muted}>
+                      با کلیک روی هر ردیف، به صفحه شروع آن دسته‌بندی منتقل
+                      می‌شوید.
+                    </p>
 
-                    <div className="space-y-3 flex-1">
-                      {chunk.map((item) => (
-                        <div
-                          key={item.id}
-                          className="print-card border rounded-2xl p-3 flex flex-row items-center gap-3"
-                          style={cs.card}
-                        >
-                          <div
-                            className="w-72 aspect-square rounded-xl flex items-center justify-center p-3 shrink-0 border"
-                            style={cs.imageBox}
+                    <div className="space-y-2 flex-1">
+                      {tocRows.map((group) => {
+                        const Icon = group.icon;
+                        return (
+                          <a
+                            key={group.id}
+                            href={`#cat-${group.id}`}
+                            data-target-page={group.startPage}
+                            className="flex items-center gap-3 border rounded-xl px-4 py-2.5 transition-colors"
+                            style={cs.row}
                           >
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              className="max-h-full max-w-full object-contain filter drop-shadow-xl"
+                            <Icon
+                              className="w-4 h-4 shrink-0"
+                              style={cs.accent}
                             />
-                          </div>
-
-                          <div className="flex-1 w-full">
-                            <div className="mb-2">
-                              <h3
-                                className="text-sm font-extrabold leading-snug line-clamp-2"
-                                style={cs.text}
-                              >
-                                {item.title}
-                              </h3>
-                              {(item.brand || item.badge) && (
-                                <div className="flex items-center flex-wrap gap-2 mt-1.5">
-                                  {item.brand && (
-                                    <span
-                                      className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md border"
-                                      style={cs.brandChip}
-                                    >
-                                      {item.brand}
-                                    </span>
-                                  )}
-                                  {item.badge && (
-                                    <span
-                                      className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
-                                      style={cs.badgeChip}
-                                    >
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-
-                            <div
-                              className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs mb-3"
+                            <span className="text-sm font-bold" style={cs.text}>
+                              {group.name}
+                            </span>
+                            <span
+                              className="flex-1 border-b border-dotted mx-2 translate-y-0.5"
+                              style={cs.dotted}
+                            />
+                            <span
+                              className="text-xs font-medium"
                               style={cs.muted}
                             >
-                              {item.specs &&
-                                item.specs.slice(0, 6).map((sp, sIdx) => (
-                                  <div
-                                    key={sIdx}
-                                    className="flex items-start gap-1.5 py-0.5"
-                                  >
-                                    <span
-                                      className="font-bold"
-                                      style={cs.bullet}
-                                    >
-                                      •
-                                    </span>
-                                    <span className="leading-snug line-clamp-2">
-                                      {sp}
-                                    </span>
-                                  </div>
-                                ))}
-                            </div>
-
-                            {showPricesInPrint && (
-                              <div
-                                className="w-full border-2 rounded-xl px-4 py-2.5 flex items-center justify-between"
-                                style={cs.priceBox}
-                              >
-                                <span
-                                  className="text-xs font-semibold"
-                                  style={cs.priceLabel}
-                                >
-                                  قیمت عمده
-                                </span>
-                                <span
-                                  className="text-xl font-black"
-                                  style={cs.priceValue}
-                                >
-                                  {formatToman(item.price)}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
+                              {group.items.length.toLocaleString("fa-IR")} محصول
+                            </span>
+                            <span
+                              className="text-xs font-black border rounded-lg px-2.5 py-1"
+                              style={cs.pageBadge}
+                            >
+                              صفحه {group.startPage.toLocaleString("fa-IR")}
+                            </span>
+                          </a>
+                        );
+                      })}
                     </div>
 
                     <div
@@ -1881,48 +1775,232 @@ export default function UltraSurCatalogApp() {
                       >
                         ariyatechno ACCESSORIES
                       </span>
-                      <span className="font-mono">
-                        صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
-                        {totalPages.toLocaleString("fa-IR")}
-                      </span>
                       <span className="italic">
                         Saving on quality is meaningless.
                       </span>
                     </div>
                   </div>
-                );
-              });
-            })}
+                ))}
 
-            {/* پشت‌جلد */}
-            <div
-              className="catalog-page p-8 mb-8 flex flex-col items-center justify-center text-center"
-              style={cs.cover}
-            >
-              <div
-                className="w-16 h-16 rounded-2xl overflow-hidden"
-                style={cs.logoTile}
-              >
-                <img
-                  src="images/logo.png"
-                  alt="لوگوی ariyatechno"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="mt-5 text-3xl font-black tracking-wider">
-                ariyatechno.
-              </div>
-              <div className="mt-2 text-sm font-semibold" style={cs.accentSoft}>
-                کاتالوگ لوازم جانبی و کالاهای دیجیتال
-              </div>
-              <div className="mt-8 text-xs leading-7" style={cs.muted}>
-                صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
-              </div>
-              <div
-                className="mt-auto pt-8 text-[10px] font-mono"
-                style={cs.faint}
-              >
-                {totalPages.toLocaleString("fa-IR")} • پایان کاتالوگ
+                {/* صفحات محصولات: همه محصولات به تفکیک دسته‌بندی */}
+                {categoryPages.map((group) => {
+                  const chunks: Product[][] = [];
+                  if (group.items.length > 0) {
+                    chunks.push(
+                      group.items.slice(0, Math.min(2, group.items.length)),
+                    );
+                  }
+                  for (let i = 2; i < group.items.length; i += 3) {
+                    chunks.push(group.items.slice(i, i + 3));
+                  }
+                  return chunks.map((chunk, chunkIdx) => {
+                    const pageNo = group.startPage + chunkIdx;
+                    return (
+                      <div
+                        key={`${group.id}-${chunkIdx}`}
+                        id={chunkIdx === 0 ? `cat-${group.id}` : undefined}
+                        className="catalog-page p-6 mb-8 flex flex-col justify-between"
+                        style={cs.page}
+                      >
+                        <div
+                          className="flex justify-between items-center border-b pb-3 mb-4"
+                          style={cs.line}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <div
+                              className="w-7 h-7 rounded-lg overflow-hidden"
+                              style={cs.logoTile}
+                            >
+                              <img
+                                src="images/logo.png"
+                                alt="لوگوی ariyatechno"
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <span
+                              className="font-extrabold text-base tracking-wider"
+                              style={cs.text}
+                            >
+                              ariyatechno
+                            </span>
+                            <span className="text-xs mr-2" style={cs.faint}>
+                              | {group.name}
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono" style={cs.muted}>
+                            صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
+                            {totalPages.toLocaleString("fa-IR")}
+                          </span>
+                        </div>
+
+                        {chunkIdx === 0 && (
+                          <div className="mb-4 -mt-1">
+                            <h2
+                              className="text-lg font-black flex items-center gap-2"
+                              style={cs.accent}
+                            >
+                              <group.icon className="w-5 h-5" />
+                              {group.name}
+                            </h2>
+                            <p className="text-[11px] mt-0.5" style={cs.faint}>
+                              {group.items.length.toLocaleString("fa-IR")} محصول
+                              در این دسته‌بندی
+                            </p>
+                          </div>
+                        )}
+
+                        <div className="space-y-3 flex-1">
+                          {chunk.map((item) => (
+                            <div
+                              key={item.id}
+                              className="print-card border rounded-2xl p-3 flex flex-row items-center gap-3"
+                              style={cs.card}
+                            >
+                              <div
+                                className="w-72 aspect-square rounded-xl flex items-center justify-center p-3 shrink-0 border"
+                                style={cs.imageBox}
+                              >
+                                <img
+                                  src={item.image}
+                                  alt={item.title}
+                                  className="max-h-full max-w-full object-contain filter drop-shadow-xl"
+                                />
+                              </div>
+
+                              <div className="flex-1 w-full">
+                                <div className="mb-2">
+                                  <h3
+                                    className="text-sm font-extrabold leading-snug line-clamp-2"
+                                    style={cs.text}
+                                  >
+                                    {item.title}
+                                  </h3>
+                                  {(item.brand || item.badge) && (
+                                    <div className="flex items-center flex-wrap gap-2 mt-1.5">
+                                      {item.brand && (
+                                        <span
+                                          className="text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-md border"
+                                          style={cs.brandChip}
+                                        >
+                                          {item.brand}
+                                        </span>
+                                      )}
+                                      {item.badge && (
+                                        <span
+                                          className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
+                                          style={cs.badgeChip}
+                                        >
+                                          {item.badge}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
+
+                                <div
+                                  className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs mb-3"
+                                  style={cs.muted}
+                                >
+                                  {item.specs &&
+                                    item.specs.slice(0, 6).map((sp, sIdx) => (
+                                      <div
+                                        key={sIdx}
+                                        className="flex items-start gap-1.5 py-0.5"
+                                      >
+                                        <span
+                                          className="font-bold"
+                                          style={cs.bullet}
+                                        >
+                                          •
+                                        </span>
+                                        <span className="leading-snug line-clamp-2">
+                                          {sp}
+                                        </span>
+                                      </div>
+                                    ))}
+                                </div>
+
+                                {showPricesInPrint && (
+                                  <div
+                                    className="w-full border-2 rounded-xl px-4 py-2.5 flex items-center justify-between"
+                                    style={cs.priceBox}
+                                  >
+                                    <span
+                                      className="text-xs font-semibold"
+                                      style={cs.priceLabel}
+                                    >
+                                      قیمت عمده
+                                    </span>
+                                    <span
+                                      className="text-xl font-black"
+                                      style={cs.priceValue}
+                                    >
+                                      {formatToman(item.price)}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div
+                          className="pt-4 mt-5 border-t flex justify-between items-center text-xs"
+                          style={cs.rule}
+                        >
+                          <span
+                            className="font-semibold tracking-wide"
+                            style={cs.footerBrand}
+                          >
+                            ariyatechno ACCESSORIES
+                          </span>
+                          <span className="font-mono">
+                            صفحه {pageNo.toLocaleString("fa-IR")} از{" "}
+                            {totalPages.toLocaleString("fa-IR")}
+                          </span>
+                          <span className="italic">
+                            Saving on quality is meaningless.
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  });
+                })}
+
+                {/* پشت‌جلد */}
+                <div
+                  className="catalog-page p-8 mb-8 flex flex-col items-center justify-center text-center"
+                  style={cs.cover}
+                >
+                  <div
+                    className="w-16 h-16 rounded-2xl overflow-hidden"
+                    style={cs.logoTile}
+                  >
+                    <img
+                      src="images/logo.png"
+                      alt="لوگوی ariyatechno"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="mt-5 text-3xl font-black tracking-wider">
+                    ariyatechno.
+                  </div>
+                  <div
+                    className="mt-2 text-sm font-semibold"
+                    style={cs.accentSoft}
+                  >
+                    کاتالوگ لوازم جانبی و کالاهای دیجیتال
+                  </div>
+                  <div className="mt-8 text-xs leading-7" style={cs.muted}>
+                    صرفه‌جویی در کیفیت بی‌معناست • تضمین اصالت کالا
+                  </div>
+                  <div
+                    className="mt-auto pt-8 text-[10px] font-mono"
+                    style={cs.faint}
+                  >
+                    {totalPages.toLocaleString("fa-IR")} • پایان کاتالوگ
+                  </div>
+                </div>
               </div>
             </div>
           </div>
