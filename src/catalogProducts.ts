@@ -364,11 +364,74 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-6419",
+    "category": "glass",
+    "title": "گلس سوپر ايكس او جي  SUPER X GLASS (OG)",
+    "brand": "",
+    "price": 89000,
+    "image": "images/wp/6571.png",
+    "specs": []
+  },
+  {
+    "id": "wp-6423",
+    "category": "cable-and-charger",
+    "title": "كابل تايپ سي برزنتي كپسولي",
+    "brand": "",
+    "price": 165000,
+    "image": "images/wp/6427.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6428",
+    "category": "gadget",
+    "title": "محافظ لنز دوربين  آيفوني",
+    "brand": "",
+    "price": 85000,
+    "image": "images/wp/6431.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6429",
+    "category": "gadget",
+    "title": "تبديل سه به دو برنجي ارت دار 16 آمپر MERKAN",
+    "brand": "",
+    "price": 49000,
+    "image": "images/wp/6433.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6434",
+    "category": "frame",
+    "title": "قاب سيليكوني مگ سيف دار(MAG SAFE) آيفوني",
+    "brand": "",
+    "price": 690000,
+    "image": "images/wp/6438.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6436",
+    "category": "gadget",
+    "title": "جك اصلي تايپ سي سامسونگ (SAMSUNG)",
+    "brand": "",
+    "price": 132000,
+    "image": "images/wp/6442.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6445",
+    "category": "gadget",
+    "title": "فندك الكترونيكي تايپ سي BLOWING مدل LHJ32",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/6452.webp",
+    "specs": []
+  },
+  {
     "id": "wp-6446",
     "category": "cable-and-charger",
     "title": "كابل كپي آيفون",
     "brand": "",
-    "price": 0,
+    "price": 175000,
     "image": "images/wp/6458.webp",
     "specs": []
   },
@@ -377,8 +440,17 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "frame",
     "title": "قاب سيليكوني سامسونگ CASE SAMSUNG CILICON",
     "brand": "",
-    "price": 0,
+    "price": 310000,
     "image": "images/wp/6455.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-6471",
+    "category": "gadget",
+    "title": "كابل آيفون سر فلزي كپسولي",
+    "brand": "",
+    "price": 168000,
+    "image": "images/wp/6586.png",
     "specs": []
   },
   {
@@ -400,15 +472,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-6483",
-    "category": "battery",
-    "title": "باطري قلمي شيرينگ 4 تايي تراست (TRUST) بسته 15 تايي",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6491.webp",
-    "specs": []
-  },
-  {
     "id": "wp-6486",
     "category": "cable-and-charger",
     "title": "کابل تایپ سی به تایپ سی C.C سامسونگ S22 کپی",
@@ -422,17 +485,8 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "battery",
     "title": "باطري سمعكي DP POWER مدل 10 (بسته هاي 10 ورقه )",
     "brand": "",
-    "price": 0,
+    "price": 51000,
     "image": "images/wp/6496.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-6501",
-    "category": "battery",
-    "title": "باطري نيم قلمي شيرينگ 4 تايي تراست (TRUST) بسته 15 تايي",
-    "brand": "",
-    "price": 0,
-    "image": "images/wp/6491.webp",
     "specs": []
   },
   {
@@ -440,7 +494,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "frame",
     "title": "قاب سيليكوني شيائومي CASE XIAOMI CILICON",
     "brand": "",
-    "price": 0,
+    "price": 295000,
     "image": "images/wp/6507.webp",
     "specs": []
   },
@@ -449,7 +503,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "converter",
     "title": "مبدل OTG فلزي تايپ سي مك دودو MC DODO",
     "brand": "",
-    "price": 0,
+    "price": 517000,
     "image": "images/wp/6536.webp",
     "specs": []
   },
@@ -458,7 +512,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "converter",
     "title": "جك تايپ سي سيم كنفي سر فلزي پكدار",
     "brand": "",
-    "price": 0,
+    "price": 195000,
     "image": "images/wp/6542.webp",
     "specs": []
   },
@@ -467,17 +521,17 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "محافظ شارژر سيليكوني 25 وات سامسونگ",
     "brand": "",
-    "price": 0,
+    "price": 235000,
     "image": "images/wp/6550.webp",
     "specs": []
   },
   {
-    "id": "wp-6699",
+    "id": "wp-6629",
     "category": "cable-and-charger",
-    "title": "کابل وشارژر پکدار 67وات Mi",
+    "title": "کابل اندروید برزنتی کپسولی",
     "brand": "",
-    "price": 1340000,
-    "image": "images/wp/6695.webp",
+    "price": 146000,
+    "image": "images/wp/6632.png",
     "specs": []
   },
   {
@@ -548,7 +602,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل  دو سر تایپ سی سامسونگ NOTE20 3A C.C",
     "brand": "",
-    "price": 534000,
+    "price": 489000,
     "image": "images/wp/6862.webp",
     "specs": [
       "رنگ: سفید",
@@ -565,6 +619,18 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-6907",
+    "category": "cable-and-charger",
+    "title": "کابل تایپ سی سامسونگ مدل S10 (ارجینال چین)",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/6908.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: مشکی"
+    ]
+  },
+  {
     "id": "wp-6950",
     "category": "cable-and-charger",
     "title": "ایوایکس به تایپ سی GFUZ مدل AX45",
@@ -572,6 +638,19 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 256000,
     "image": "images/wp/6951.webp",
     "specs": []
+  },
+  {
+    "id": "wp-6954",
+    "category": "cable-and-charger",
+    "title": "کابل KLUMIN آیفون مدل DC02",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/6955.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: قرمز",
+      "رنگ: مشکی"
+    ]
   },
   {
     "id": "wp-6997",
@@ -729,7 +808,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری ارجینال پکدار MI مدل M8",
     "brand": "",
-    "price": 565000,
+    "price": 475000,
     "image": "images/wp/7200.webp",
     "specs": [
       "رنگ: سفید مشکی",
@@ -738,11 +817,23 @@ export const CATALOG_PRODUCTS: Product[] = [
     ]
   },
   {
+    "id": "wp-7210",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری ارجینال سلبریت مدل G27",
+    "brand": "",
+    "price": 355000,
+    "image": "images/wp/7211.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: مشکی"
+    ]
+  },
+  {
     "id": "wp-7216",
     "category": "headphones-and-hands-free",
     "title": "هندزفری سیمدار سوزنی SY-43",
     "brand": "",
-    "price": 235000,
+    "price": 215000,
     "image": "images/wp/7217.webp",
     "specs": [
       "رنگ: سفید",
@@ -868,6 +959,18 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 1480000,
     "image": "images/wp/7323.webp",
     "specs": []
+  },
+  {
+    "id": "wp-7333",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری بلوتوث سونی مدل XB80BS",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/7334.webp",
+    "specs": [
+      "رنگ: قرمز",
+      "رنگ: مشکی"
+    ]
   },
   {
     "id": "wp-7344",
@@ -1020,6 +1123,18 @@ export const CATALOG_PRODUCTS: Product[] = [
     "price": 265000,
     "image": "images/wp/7574.webp",
     "specs": []
+  },
+  {
+    "id": "wp-2321",
+    "category": "cable-and-charger",
+    "title": "جک اصلی تایپ سی سامسونگ (SAMSUNG)",
+    "brand": "",
+    "price": 132000,
+    "image": "images/wp/7480.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: مشکی"
+    ]
   },
   {
     "id": "wp-2324",
@@ -1182,15 +1297,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2401",
-    "category": "cable-and-charger",
-    "title": "کابل شارژر کنفی تایپ سی اولتراسور ULTRASUR مدل C15C",
-    "brand": "",
-    "price": 212000,
-    "image": "images/wp/3876.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2402",
     "category": "cable-and-charger",
     "title": "کابل پکدار ایفون x مدل 7ic",
@@ -1331,18 +1437,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2545",
-    "category": "cable-and-charger",
-    "title": "کابل و شارژر 15 وات پکدار تایپ سی سامسونگ(برد RFT)",
-    "brand": "",
-    "price": 428000,
-    "image": "images/wp/6764.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
-  },
-  {
     "id": "wp-2548",
     "category": "cable-and-charger",
     "title": "کابل کنفی سر فلزیFIRT YOU 6A مدل C035تایپ سی",
@@ -1383,7 +1477,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل شارژر سامسونگ S4",
     "brand": "",
-    "price": 54500,
+    "price": 74000,
     "image": "images/wp/7034.webp",
     "specs": [
       "رنگ: سفید",
@@ -1407,7 +1501,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل شارژر تایپ سی USAMS مدل U18",
     "brand": "",
-    "price": 243000,
+    "price": 195000,
     "image": "images/wp/6848.webp",
     "specs": [
       "رنگ: سفید",
@@ -1652,6 +1746,18 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-2671",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری بلوتوث ارجینال TRANYO مدل M24",
+    "brand": "",
+    "price": 798000,
+    "image": "images/wp/7597.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: مشکی"
+    ]
+  },
+  {
     "id": "wp-4307",
     "category": "cable-and-charger",
     "title": "شارژر وایرلس کنفلون مدل Q-05",
@@ -1816,7 +1922,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری XO مدلEP52",
     "brand": "",
-    "price": 350000,
+    "price": 274986,
     "image": "images/wp/7194.webp",
     "specs": [
       "رنگ: سفید",
@@ -1986,15 +2092,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 162486,
     "image": "images/wp/4574.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-4576",
-    "category": "cable-and-charger",
-    "title": "کابل 65Wدو سر تایپ سی LDNIO مدل LC 631",
-    "brand": "",
-    "price": 425000,
-    "image": "images/wp/7465.webp",
     "specs": []
   },
   {
@@ -2392,6 +2489,19 @@ export const CATALOG_PRODUCTS: Product[] = [
     "image": "images/wp/6962.webp",
     "specs": [
       "برند شارژر: ios"
+    ]
+  },
+  {
+    "id": "wp-6300",
+    "category": "headphones-and-hands-free",
+    "title": "هدست بلوتوث عروسک گربه ای مدل MLS-602",
+    "brand": "",
+    "price": 1950000,
+    "image": "images/wp/7313.webp",
+    "specs": [
+      "رنگ: آبی کم‌رنگ",
+      "رنگ: سبز روشن",
+      "رنگ: سفید"
     ]
   }
 ];

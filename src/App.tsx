@@ -204,8 +204,8 @@ const CATEGORIES = [
 // دانه کامل: محصولات استخراج‌شده از بک‌اپ وردپرس + کاتالوگ UltraSur
 const SEED_PRODUCTS: Product[] = CATALOG_PRODUCTS;
 
-// نسخه‌بندی دانه — نسخه ۱۰: حفظ تصاویر آپلودی کاربر هنگام جایگزینی — جایگزینی کامل
-const SEED_VERSION = 10;
+// نسخه‌بندی دانه — نسخه ۱۱: بروزرسانی قیمت و موجودی از خروجی Sepidar — جایگزینی کامل
+const SEED_VERSION = 11;
 const syncSeedVersion = (db: SqlJsDatabase): void => {
   const cur = db.exec("SELECT value FROM meta WHERE key = 'seed_version'");
   const version = cur.length > 0 ? Number(cur[0].values[0][0]) : 1;

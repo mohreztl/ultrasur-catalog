@@ -52,8 +52,10 @@ const IMAGES_DIR = argValue(
   "--images",
   path.join(repoRoot, "public", "images"),
 );
-// فقط با --with-pdf محصولات UltraSur.pdf به خروجی اضافه می‌شوند.
+// فقط با --with-pdf محصولات UltraSur.pdf به خروجی اضافه می‌شوند。
 const WITH_PDF = args.includes("--with-pdf");
+// خروجی انبارداری Sepidar (قیمت/موجودی مرجع) — در صورت وجود جایگزین داده‌ی وردپرس می‌شود
+const SEPIDAR = argValue("--sepidar", path.join(analysisDir, "wp-items3.json"));
 
 // ---------------------------------------------------------------------------
 // Minimal PNG encoder (8-bit RGB) for FlateDecode objects carved as raw pixels.
@@ -486,6 +488,33 @@ for (const item of wpItems) {
 }
 
 // ---------------------------------------------------------------------------
+// Sepidar inventory export (price + stock source of truth). Items carry data
+// in metas: Code (SKU), Name, Few (warehouse qty), RegularPrice/SalePrice (RIAL).
+// Matched against WP products by _sku ↔ Code, falling back to normalized Name.
+// ---------------------------------------------------------------------------
+const sepByCode = new Map();
+const sepByName = new Map();
+let sepidarCount = 0;
+try {
+  const sepItems = JSON.parse(await fs.readFile(SEPIDAR, "utf8"));
+  sepidarCount = sepItems.length;
+  for (const it of sepItems) {
+    const m = it.metas || {};
+    const rec = {
+      few: Number(String(m.Few ?? "").trim()),
+      regular: Number(String(m.RegularPrice ?? "").trim()) || 0,
+      sale: Number(String(m.SalePrice ?? "").trim()) || 0,
+    };
+    const code = String(m.Code ?? "").trim();
+    if (code) sepByCode.set(code, rec);
+    const nm = norm(String(m.Name ?? ""));
+    if (nm && !sepByName.has(nm)) sepByName.set(nm, rec);
+  }
+} catch {
+  // فایل Sepidar موجود نیست — ورودی وردپرس مانند قبل پردازش می‌شود
+}
+
+// ---------------------------------------------------------------------------
 // PDF codes are always collected: products that were in the initial UltraSur
 // catalog are removed from the output. The products themselves are only
 // included with --with-pdf.
@@ -526,6 +555,8 @@ let skippedCatalogProduct = 0;
 let skippedLowStock = 0;
 let skippedNoQuantity = 0;
 let noThumb = 0;
+let sepidarMatched = 0;
+let sepidarPriceUpdated = 0;
 
 for (const item of rawProducts) {
   if (item.status === "trash") {
@@ -533,8 +564,15 @@ for (const item of rawProducts) {
     continue;
   }
   const metas = item.metas || {};
-  // محصولات «ناموجود» فروشگاه در کاتالوگ نمی‌آیند
-  if (metas._stock_status === "outofstock") {
+  // تطبیق با Sepidar: مرجع قیمت و موجودی (در صورت تطابق)
+  const sep =
+    sepByCode.get(String(metas._sku ?? "").trim()) ||
+    sepByName.get(norm(item.title));
+  if (sep) {
+    sepidarMatched += 1;
+  }
+  // محصولات «ناموجود» فروشگاه در کاتالوگ نمی‌آیند (Sepidar وضعیت را لغو می‌کند)
+  if (!sep && metas._stock_status === "outofstock") {
     skippedOutOfStock += 1;
     continue;
   }
@@ -556,8 +594,12 @@ for (const item of rawProducts) {
 
   // «موجود» ولی بدون تعداد = در عمل ناموجود → حذف
   // محصولات با موجودی انبار کمتر از ۵ هم حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
+  // با تطبیق Sepidar، موجودی انبار (Few) مرجع است
   const stockText = String(metas._stock ?? "").trim();
-  const stockNum = stockText === "" ? NaN : Number(stockText);
+  let stockNum = stockText === "" ? NaN : Number(stockText);
+  if (sep) {
+    stockNum = Number.isFinite(sep.few) ? sep.few : stockNum;
+  }
   if (!Number.isFinite(stockNum) || stockNum <= 0) {
     skippedNoQuantity += 1;
     continue;
@@ -567,7 +609,14 @@ for (const item of rawProducts) {
     continue;
   }
 
-  const price = Math.floor(Number(metas._price) || 0);
+  // قیمت: با تطبیق Sepidar از قیمت مؤثر (ریال ÷ ۱۰ = تومان) استفاده می‌شود
+  let price = Math.floor(Number(metas._price) || 0);
+  if (sep) {
+    const eff = sep.sale > 0 && sep.sale < sep.regular ? sep.sale : sep.regular;
+    const sepPrice = Math.floor(eff / 10);
+    if (sepPrice !== price) sepidarPriceUpdated += 1;
+    price = sepPrice;
+  }
 
   const specs = [];
   for (const term of attrTerms) {
@@ -830,6 +879,9 @@ const report = {
   skippedLowStock,
   skippedNoQuantity,
   wpWithoutImage: noThumb,
+  sepidarItems: sepidarCount,
+  sepidarMatched,
+  sepidarPriceUpdated,
   imageOverrides: overriddenImages,
   categoryCounts: counts,
   images: {
