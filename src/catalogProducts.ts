@@ -4,8 +4,422 @@ import type { Product } from "./App";
 
 export const CATALOG_PRODUCTS: Product[] = [
   {
-    "id": "wp-2382",
+    "id": "wp-7612",
+    "category": "beauty",
+    "title": "برس  حرارتی هیسکا مدل H5105 برند HISKA",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7613",
+    "category": "cable-and-charger",
+    "title": "شارژر سر جعبه سامسونگ سه پین پکدار تایپ سی  45 وات (برد SOLUM BLUE 4511) SAMSUNG دارای NFC فعال",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7614",
+    "category": "cable-and-charger",
+    "title": "شارژر سر جعبه سامسونگ سه پین پکدار تایپ سی  25 وات (برد 2510 SOLUM GREEN) SAMSUNGدارای NFC فعال",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/wp-7614.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7615",
+    "category": "lighter-and-charger",
+    "title": "فندکی شارژر آلیسون 38وات دو خروجی (USB+PD)مدل ALS-A712 برند ALLISON",
+    "brand": "",
+    "price": 785000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7616",
+    "category": "cable-and-charger",
+    "title": "کلگی شارژر 33وات تک پورت پکدار MI",
+    "brand": "",
+    "price": 1080000,
+    "image": "images/wp/wp-7616.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7617",
+    "category": "cable-and-charger",
+    "title": "کلگی شارژر 67وات تک پورت پکدار MI",
+    "brand": "",
+    "price": 1130000,
+    "image": "images/wp/wp-7617.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7618",
+    "category": "cable-and-charger",
+    "title": "کلگی شارژر 120وات تک پورت پکدار MI",
+    "brand": "",
+    "price": 1290000,
+    "image": "images/wp/wp-7618.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7619",
+    "category": "cable-and-charger",
+    "title": "کابل شارژر (C.C) دو سر تایپ سی هیسکا مدل LX891 برند HISKA",
+    "brand": "",
+    "price": 638800,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7625",
+    "category": "cable-and-charger",
+    "title": "شارژر 67 وات EU مدل H 167 برند HISKA",
+    "brand": "",
+    "price": 2770000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7631",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری بلوتوث گردنی هیسکا مدل FX 603 برند HISKA",
+    "brand": "",
+    "price": 4440000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7633",
+    "category": "lighter-and-charger",
+    "title": "شارژر فندکی هیسکا مدل CC307Q برند HISKA",
+    "brand": "",
+    "price": 1182000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7634",
+    "category": "cable-and-charger",
+    "title": "شارژر 20وات سلبریت مدل CH4 برند CELEBRATE",
+    "brand": "",
+    "price": 1280000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7635",
+    "category": "converter",
+    "title": "تبدیل سه به دو چراغدار آریاتکنور (ARYA TECHNO)",
+    "brand": "",
+    "price": 165000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7636",
+    "category": "cable-and-charger",
+    "title": "کابل (AUX IN TYPE C) آیوایکس به تایپ سی مدل LhTLZY",
+    "brand": "",
+    "price": 295000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7637",
+    "category": "beauty",
+    "title": "برس 'گرد حرارتی هیسکا مدل H5109 برند HISKA",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7638",
+    "category": "beauty",
+    "title": "سشوار مسافرتی هیسکا H5265 برند HISKA",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7639",
+    "category": "beauty",
+    "title": "فرکن سه قلو مدل H5410S برند HISKA",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7640",
+    "category": "headphones-and-hands-free",
+    "title": "هدست سلبریت ارجینال CELEBRATE مدل A24",
+    "brand": "",
+    "price": 3750000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7642",
+    "category": "cable-and-charger",
+    "title": "کابل شارژ آیفون (USB+I)سلبریت مدل I CB32 برند CELEBRATE",
+    "brand": "",
+    "price": 376000,
+    "image": "images/wp/wp-7642.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7643",
+    "category": "cable-and-charger",
+    "title": "شارژر 18وات سلبریت مدل CN4 برند CELEBRATE",
+    "brand": "",
+    "price": 595000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7644",
+    "category": "converter",
+    "title": "مبدل OTG پکدار فلزی تایپ سی USB3",
+    "brand": "",
+    "price": 239000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7645",
+    "category": "speaker",
+    "title": "اسپیکر بلوتوثی وستر مدل WS580 طرح تسلا سایبر تراک  ۱۵ وات WSTER",
+    "brand": "",
+    "price": 4980000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7646",
+    "category": "cable-and-charger",
+    "title": "شارژر دیواری 30 وات آمایا با بیمه 18 ماهه پارسیان AMAYA مدل ACW-E46DC با دو خروجی (USB+PD)",
+    "brand": "",
+    "price": 1230000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7647",
+    "category": "cable-and-charger",
+    "title": "شارژر دیواری 45 وات آمایا با بیمه 18 ماهه پارسیان AMAYA مدل ACW-E45DC با دو خروجی (USB+PD)",
+    "brand": "",
+    "price": 1690000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7648",
+    "category": "cable-and-charger",
+    "title": "شارژر دیواری صفحه دیجیتال 36 وات پارسیان مدل PH-2024 با دو خروجی (USB+PD)",
+    "brand": "",
+    "price": 1140000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7649",
+    "category": "smart-watch",
+    "title": "ساعت هوشمند AKO SW-CREST",
+    "brand": "",
+    "price": 5890000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7650",
+    "category": "smart-watch",
+    "title": "ساعت هوشمند AKO ULTRA",
+    "brand": "",
+    "price": 6090000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7651",
+    "category": "gadget",
+    "title": "مونوپاد 1288",
+    "brand": "",
+    "price": 790000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7652",
+    "category": "converter",
+    "title": "OTG پلاستیکی تایپ سی سامسونگ S10",
+    "brand": "",
+    "price": 85000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7653",
+    "category": "converter",
+    "title": "تبدیل سه به دو معمولی ویرا (VIRA)",
+    "brand": "",
+    "price": 94000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7654",
+    "category": "gadget",
+    "title": "لامپ شارژی سه حالته 40 وات KUCLASSIC",
+    "brand": "",
+    "price": 890000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7655",
+    "category": "gadget",
+    "title": "لامپ شارژی سه حالته 60 وات KUCLASSIC",
+    "brand": "",
+    "price": 1090000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7656",
+    "category": "battery",
+    "title": "باطری قلمی کارتی تراست (TRUST) چهار عددی بسته 10تایی",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/wp-7656.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7657",
+    "category": "battery",
+    "title": "باطری نیم قلمی کارتی تراست (TRUST) چهار عددی بسته 10تایی",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7658",
+    "category": "converter",
+    "title": "تبدیل سه به دو چراغ دار ویرا (VIRA)",
+    "brand": "",
+    "price": 139000,
+    "image": "images/wp/wp-7658.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7659",
+    "category": "speaker",
+    "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2816",
+    "brand": "",
+    "price": 18980000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7660",
+    "category": "speaker",
+    "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2820",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7661",
+    "category": "speaker",
+    "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2018",
+    "brand": "",
+    "price": 26900000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7663",
+    "category": "frame",
+    "title": "قاب سامسونگ برلیا کریستال مگنتی الکترو (BERLIA MAGNETIC)",
+    "brand": "",
+    "price": 355000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7664",
+    "category": "frame",
+    "title": "قاب آیفونی چرمی بند دار دی دی اچ(DDH)",
+    "brand": "",
+    "price": 440000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7665",
+    "category": "frame",
+    "title": "قاب سامسونگ چرمی بند دار دی دی اچ(DDH)",
+    "brand": "",
+    "price": 440000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7666",
+    "category": "frame",
+    "title": "قاب آیفونی مگ سیف دار پی ام (PM)",
+    "brand": "",
+    "price": 545000,
+    "image": "images/wp/wp-7666.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7667",
     "category": "holder",
+    "title": "محافظ لنز دوربین  آیفونی",
+    "brand": "",
+    "price": 85000,
+    "image": "images/wp/wp-7667.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7668",
+    "category": "glass",
+    "title": "گلس سوپر ایکس او جی  SUPER X GLASS (OG)",
+    "brand": "",
+    "price": 89000,
+    "image": "images/wp/wp-7668.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-7669",
+    "category": "frame",
+    "title": "قاب برلیا شفاف کریستالی آرمور مگنت دار آیفون CASE IPHONE BERLIA ARMOR MAGNETIC",
+    "brand": "",
+    "price": 640000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-7670",
+    "category": "frame",
+    "title": "قاب برلیا شفاف کریستالی آرمور مگنت دار سامسونگ CASE SAMSUNG BERLIA MAGNETIC",
+    "brand": "",
+    "price": 690000,
+    "image": "images/placeholder.svg",
+    "specs": []
+  },
+  {
+    "id": "wp-2382",
+    "category": "cable-and-charger",
     "title": "کابل آیفون سر فلزی کپسولی",
     "brand": "",
     "price": 168000,
@@ -14,7 +428,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2393",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری کارتی معمولی قلمی  پاور شیبا (power shiba)(بسته 12 عددی)",
     "brand": "",
     "price": 69360,
@@ -23,7 +437,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2394",
-    "category": "holder",
+    "category": "converter",
     "title": "جک تایپ سی سیم کنفی سر فلزی پکدار",
     "brand": "",
     "price": 195000,
@@ -32,7 +446,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2399",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری 2025 سکه ای MAXELL  قرمز",
     "brand": "",
     "price": 78000,
@@ -41,7 +455,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2400",
-    "category": "holder",
+    "category": "cable-and-charger",
     "title": "کابل اندروید برزنتی کپسولی",
     "brand": "",
     "price": 146000,
@@ -50,7 +464,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2403",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری کارتی معمولی قلمی MOTOMA(بسته 20 عددی)",
     "brand": "",
     "price": 69360,
@@ -59,7 +473,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2406",
-    "category": "holder",
+    "category": "cable-and-charger",
     "title": "محافظ شارژر سیلیکونی 25 وات سامسونگ",
     "brand": "",
     "price": 235000,
@@ -68,7 +482,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4078",
-    "category": "holder",
+    "category": "converter",
     "title": "تبدیل دو کاره آیفون مدل SX11",
     "brand": "",
     "price": 225001,
@@ -77,7 +491,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4081",
-    "category": "holder",
+    "category": "converter",
     "title": "تبدیل سه به دو چراغ دار هادرون مدل A10 -1",
     "brand": "",
     "price": 389000,
@@ -86,7 +500,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4840",
-    "category": "holder",
+    "category": "smart-watch",
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 38/40/41MM",
     "brand": "",
     "price": 125000,
@@ -95,7 +509,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4842",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب سیلیکونی شیائومی CASE XIAOMI CILICON",
     "brand": "",
     "price": 295000,
@@ -104,16 +518,16 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4843",
-    "category": "holder",
+    "category": "gadget",
     "title": "بند آویز موبایل کوچک",
     "brand": "",
     "price": 85000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4843.webp",
     "specs": []
   },
   {
     "id": "wp-4844",
-    "category": "holder",
+    "category": "smart-watch",
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 42/44/45/46/49MM",
     "brand": "",
     "price": 125000,
@@ -122,7 +536,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4845",
-    "category": "holder",
+    "category": "gadget",
     "title": "آویز موبایل مخملی عروسکی",
     "brand": "",
     "price": 98000,
@@ -131,7 +545,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4846",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب طرح دار شیائومی یانگ کیت (YOUNG KIT)",
     "brand": "",
     "price": 265000,
@@ -140,7 +554,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4848",
-    "category": "holder",
+    "category": "smart-watch",
     "title": "بند ساعت برزنتی XO 05A سری 38/40/41MM",
     "brand": "",
     "price": 398000,
@@ -149,7 +563,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4849",
-    "category": "holder",
+    "category": "converter",
     "title": "مبدل آیفون به میکرو فلزی ریمکس OTG IPHONE TO MICRO REMAX (پک 10 عددی)",
     "brand": "",
     "price": 68000,
@@ -158,7 +572,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4851",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S23 FE MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
@@ -167,7 +581,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4852",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S23 ULTRA MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
@@ -176,7 +590,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4853",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S24 ULTRA MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
@@ -185,25 +599,25 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4854",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 13 MAGSAFE   (CASE IPHONE)",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4854.webp",
     "specs": []
   },
   {
     "id": "wp-4856",
-    "category": "holder",
+    "category": "frame",
     "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 14 PRO MAX MAGSAFE   (CASE IPHONE)",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4856.webp",
     "specs": []
   },
   {
     "id": "wp-4858",
-    "category": "holder",
+    "category": "smart-watch",
     "title": "بند فلزی ساعت هوشمند WATCH سری 42/44/45/49MM",
     "brand": "",
     "price": 345000,
@@ -212,7 +626,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4859",
-    "category": "holder",
+    "category": "smart-watch",
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 42/44/45/49MM",
     "brand": "",
     "price": 143000,
@@ -221,7 +635,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4861",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری کارتی آلکالاین کتابی تک عددی وریتی (verity) (جعبه 12عددی)",
     "brand": "",
     "price": 165000,
@@ -230,7 +644,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4862",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری سمعکی DP POWER مدل 10 (بسته های 10 ورقه )",
     "brand": "",
     "price": 51000,
@@ -239,7 +653,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4863",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری سمعکی DP POWER مدل 13 (بسته های 10 ورقه )",
     "brand": "",
     "price": 56100,
@@ -248,7 +662,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4864",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری شارژی تلفنی پاناسونیک (Panasonic) مدل 105",
     "brand": "",
     "price": 365000,
@@ -257,7 +671,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4865",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری 2016 سکه ای MAXELL سرمه ای",
     "brand": "",
     "price": 78000,
@@ -266,7 +680,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4866",
-    "category": "holder",
+    "category": "battery",
     "title": "باطری قلمی معمولی کارتی 2 تایی POWER FLASH",
     "brand": "",
     "price": 69360,
@@ -275,7 +689,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4867",
-    "category": "holder",
+    "category": "converter",
     "title": "تبدیل OTG یو اس بی به تایپ سی USB به TYPE C الدینیو LDNIO مدل LC140",
     "brand": "",
     "price": 235000,
@@ -284,7 +698,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4868",
-    "category": "holder",
+    "category": "converter",
     "title": "مبدل OTG فلزی آیفون ULTRA SUR",
     "brand": "",
     "price": 415000,
@@ -293,7 +707,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4869",
-    "category": "holder",
+    "category": "converter",
     "title": "مبدل OTG HISKA  لایتنینگ به USB مدل H10",
     "brand": "",
     "price": 597000,
@@ -302,7 +716,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4870",
-    "category": "holder",
+    "category": "speaker",
     "title": "ماشین اسپیکر پنل خورشیدی 12 وات مدل P339",
     "brand": "",
     "price": 3380000,
@@ -311,16 +725,16 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4872",
-    "category": "holder",
+    "category": "cable-and-charger",
     "title": "کابل آیفون کپسولی",
     "brand": "",
     "price": 196860,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4872.png",
     "specs": []
   },
   {
     "id": "wp-4873",
-    "category": "holder",
+    "category": "cable-and-charger",
     "title": "شارژر کپسولی",
     "brand": "",
     "price": 211140,
@@ -329,16 +743,16 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4874",
-    "category": "holder",
+    "category": "cable-and-charger",
     "title": "کابل اندروید کپسولی",
     "brand": "",
     "price": 125000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4874.png",
     "specs": []
   },
   {
     "id": "wp-4877",
-    "category": "holder",
+    "category": "converter",
     "title": "مبدل OTG فلزی تایپ سی مک دودو MC DODO",
     "brand": "",
     "price": 517000,
@@ -347,7 +761,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4878",
-    "category": "holder",
+    "category": "dongle",
     "title": "دانگل بلوتوث USB فلزی",
     "brand": "",
     "price": 245000,
@@ -623,7 +1037,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل تایپ سی سامسونگ مدل S10 (ارجینال چین)",
     "brand": "",
-    "price": 0,
+    "price": 186000,
     "image": "images/wp/6908.webp",
     "specs": [
       "رنگ: سفید",
@@ -644,7 +1058,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل KLUMIN آیفون مدل DC02",
     "brand": "",
-    "price": 0,
+    "price": 235000,
     "image": "images/wp/6955.webp",
     "specs": [
       "رنگ: سفید",
@@ -657,7 +1071,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل آیفون پک کشویی ارجینال IC8 (مسی)",
     "brand": "",
-    "price": 0,
+    "price": 346000,
     "image": "images/wp/6998.webp",
     "specs": []
   },
@@ -675,7 +1089,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "شارژر پک کشویی ارجینال آیفون برد A21",
     "brand": "",
-    "price": 0,
+    "price": 435000,
     "image": "images/wp/7058.webp",
     "specs": []
   },
@@ -911,7 +1325,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری ارجینال MI",
     "brand": "",
-    "price": 0,
+    "price": 328000,
     "image": "images/wp/7281.webp",
     "specs": []
   },
@@ -920,7 +1334,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث گردنی ارجینال YISON مدل A22",
     "brand": "",
-    "price": 1750000,
+    "price": 2980000,
     "image": "images/wp/7284.webp",
     "specs": []
   },
@@ -929,7 +1343,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث گردنی ارجینال CELEBRATE مدل A29",
     "brand": "",
-    "price": 1336000,
+    "price": 1693000,
     "image": "images/wp/7299.webp",
     "specs": []
   },
@@ -938,7 +1352,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث گردنی ارجینال CELEBRAT  مدل SE8",
     "brand": "",
-    "price": 1670000,
+    "price": 2340000,
     "image": "images/wp/7302.webp",
     "specs": []
   },
@@ -947,7 +1361,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث گردنی ارجینال YISON مدل E18",
     "brand": "",
-    "price": 2385000,
+    "price": 3790000,
     "image": "images/wp/7307.webp",
     "specs": []
   },
@@ -977,11 +1391,20 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری پرووان PHB3306-PROONE",
     "brand": "",
-    "price": 0,
+    "price": 1540000,
     "image": "images/wp/7345.webp",
     "specs": [
       "رنگ: آبی"
     ]
+  },
+  {
+    "id": "wp-2301",
+    "category": "battery",
+    "title": "باطری شیرینگ قلمی 4 عددی پاناتک (panatech) (جعبه 10عددی)",
+    "brand": "",
+    "price": 77000,
+    "image": "images/wp/2305.webp",
+    "specs": []
   },
   {
     "id": "wp-7355",
@@ -997,7 +1420,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "holder",
     "title": "هولدر دریچه کولری PROONEمدل PHL1120",
     "brand": "",
-    "price": 0,
+    "price": 425000,
     "image": "images/wp/7389.webp",
     "specs": []
   },
@@ -1077,15 +1500,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-2301",
-    "category": "computer-products",
-    "title": "باطری شیرینگ قلمی 4 عددی پاناتک (panatech) (جعبه 10عددی)",
-    "brand": "",
-    "price": 77000,
-    "image": "images/wp/2305.webp",
-    "specs": []
-  },
-  {
     "id": "wp-2306",
     "category": "cable-and-charger",
     "title": "شارژر فست پکدار10 وات سامسونگ (سریAAA)",
@@ -1117,7 +1531,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2317",
-    "category": "lighter-and-charger",
+    "category": "gadget",
     "title": "فندک الکترونیکی تایپ سی BLOWING مدل LHJ32",
     "brand": "",
     "price": 265000,
@@ -1126,7 +1540,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2321",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "جک اصلی تایپ سی سامسونگ (SAMSUNG)",
     "brand": "",
     "price": 132000,
@@ -1307,7 +1721,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-2404",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "تبدیل سه به دو چراغدار SMART (جعبه 12 عددی)",
     "brand": "",
     "price": 187000,
@@ -1396,7 +1810,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "holder",
     "title": "هولدر  دریچه کولری 2110 HISKA",
     "brand": "",
-    "price": 630000,
+    "price": 775000,
     "image": "images/wp/7399.webp",
     "specs": []
   },
@@ -1425,15 +1839,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 2580000,
     "image": "images/wp/2489.webp",
-    "specs": []
-  },
-  {
-    "id": "wp-2532",
-    "category": "speaker",
-    "title": "ساعت هوشمند ULTRA SUR  مدل W3",
-    "brand": "",
-    "price": 2890000,
-    "image": "images/wp/2543.webp",
     "specs": []
   },
   {
@@ -1549,7 +1954,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4035",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "مبدل آیفون به میکرو مدل  OTG IPHONE TO MICRO EARLDOM OT08",
     "brand": "",
     "price": 125000,
@@ -1558,7 +1963,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4036",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "مبدل OTG میکرو سامسونگ OTG MCRO SAMSUNG",
     "brand": "",
     "price": 59000,
@@ -1567,7 +1972,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4056",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "مبدل OTG پکدارSAMSUNG  تایپ سی  USB 3 ساسمونگ S10",
     "brand": "",
     "price": 125000,
@@ -1576,7 +1981,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4059",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "جک پکدار آیفون",
     "brand": "",
     "price": 395000,
@@ -1585,7 +1990,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4060",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "جک بلوتوثی ایفون 7 مدل JH002",
     "brand": "",
     "price": 256000,
@@ -1594,7 +1999,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4071",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "OTG آیفون مدل REXER",
     "brand": "",
     "price": 345000,
@@ -1603,7 +2008,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4072",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "OTG پلاستیکی اندروید سامسونگ",
     "brand": "",
     "price": 75000,
@@ -1612,7 +2017,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4073",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "OTG فلزی آیفون (پک آبی و سفید)",
     "brand": "",
     "price": 228000,
@@ -1621,7 +2026,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4074",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "تبدبل دوبه دو هادرون مدل A08",
     "brand": "",
     "price": 305000,
@@ -1630,7 +2035,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4075",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "تبدیل اندروید به آیفون EARDOMمدل OT08",
     "brand": "",
     "price": 154000,
@@ -1639,7 +2044,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4079",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "تبدیل سه به دو تایمر دار  ULTRA SUR",
     "brand": "",
     "price": 1068000,
@@ -1669,7 +2074,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل ایوایکس آیفون ریموت دار GFUZ مدل AD03",
     "brand": "",
-    "price": 211231,
+    "price": 297000,
     "image": "images/wp/4162.webp",
     "specs": []
   },
@@ -1698,6 +2103,15 @@ export const CATALOG_PRODUCTS: Product[] = [
     "brand": "",
     "price": 845000,
     "image": "images/wp/4315.webp",
+    "specs": []
+  },
+  {
+    "id": "wp-4307",
+    "category": "cable-and-charger",
+    "title": "شارژر وایرلس کنفلون مدل Q-05",
+    "brand": "",
+    "price": 491726,
+    "image": "images/wp/7069.webp",
     "specs": []
   },
   {
@@ -1756,15 +2170,6 @@ export const CATALOG_PRODUCTS: Product[] = [
       "رنگ: سفید",
       "رنگ: مشکی"
     ]
-  },
-  {
-    "id": "wp-4307",
-    "category": "cable-and-charger",
-    "title": "شارژر وایرلس کنفلون مدل Q-05",
-    "brand": "",
-    "price": 491726,
-    "image": "images/wp/7069.webp",
-    "specs": []
   },
   {
     "id": "wp-4308",
@@ -1922,7 +2327,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری XO مدلEP52",
     "brand": "",
-    "price": 274986,
+    "price": 568000,
     "image": "images/wp/7194.webp",
     "specs": [
       "رنگ: سفید",
@@ -1943,7 +2348,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث دورگردنی XOمدل BS30",
     "brand": "",
-    "price": 1264800,
+    "price": 2340000,
     "image": "images/wp/7331.webp",
     "specs": []
   },
@@ -2042,7 +2447,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری اصلی TRANICO مدل R11",
     "brand": "",
-    "price": 234000,
+    "price": 318000,
     "image": "images/wp/7253.webp",
     "specs": []
   },
@@ -2129,7 +2534,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "holder",
     "title": "هولدر پایه داشبوردی Earldom مدل EH260",
     "brand": "",
-    "price": 698000,
+    "price": 796000,
     "image": "images/wp/7386.webp",
     "specs": []
   },
@@ -2174,7 +2579,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "dongle",
     "title": "دانگل بلوتوث Earldom مدل BR22",
     "brand": "",
-    "price": 589000,
+    "price": 697000,
     "image": "images/wp/4646.webp",
     "specs": []
   },
@@ -2332,6 +2737,18 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
+    "id": "wp-4229",
+    "category": "cable-and-charger",
+    "title": "کابل کنفی دو سر تایپ سی 60 وات TOOCKI",
+    "brand": "",
+    "price": 473550,
+    "image": "images/wp/6792.webp",
+    "specs": [
+      "رنگ: سفید",
+      "رنگ: مشکی"
+    ]
+  },
+  {
     "id": "wp-4881",
     "category": "gadget",
     "title": "جا کارتی آیفونی دارای آرم اپل مگنت دار WALLET",
@@ -2394,18 +2811,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     "specs": []
   },
   {
-    "id": "wp-4229",
-    "category": "cable-and-charger",
-    "title": "کابل کنفی دو سر تایپ سی 60 وات TOOCKI",
-    "brand": "",
-    "price": 473550,
-    "image": "images/wp/6792.webp",
-    "specs": [
-      "رنگ: سفید",
-      "رنگ: مشکی"
-    ]
-  },
-  {
     "id": "wp-4768",
     "category": "cable-and-charger",
     "title": "کابل شارژر اپل استوری C.C (دوسر تایپ سی) 60 وات",
@@ -2442,7 +2847,7 @@ export const CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": "wp-4847",
-    "category": "cable-and-charger",
+    "category": "converter",
     "title": "کابل تبدیل Type-C به AUX الدینیو LDNIO مدل LS-Y80C طول ۱۳ سانتی متر",
     "brand": "",
     "price": 375000,
@@ -2502,6 +2907,1854 @@ export const CATALOG_PRODUCTS: Product[] = [
       "رنگ: آبی کم‌رنگ",
       "رنگ: سبز روشن",
       "رنگ: سفید"
+    ]
+  },
+  {
+    "id": "sep-19100002",
+    "category": "lighter-and-charger",
+    "title": "فندکی pvc شفاف 2 پورت 55 وات با خروجی (pd+usb) مدل W107",
+    "brand": "",
+    "price": 498000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 19100002"
+    ]
+  },
+  {
+    "id": "sep-22100002",
+    "category": "converter",
+    "title": "مبدل OTG فلزی آیفون مک دودو MC DODO",
+    "brand": "MC DODO",
+    "price": 535000,
+    "image": "images/wp/sep-22100002.webp",
+    "specs": [
+      "کد کالا: 22100002"
+    ]
+  },
+  {
+    "id": "sep-20130003",
+    "category": "cable-and-charger",
+    "title": "کابل اندروید BIVA مدل 026L",
+    "brand": "BIVA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20130003"
+    ]
+  },
+  {
+    "id": "sep-20130021",
+    "category": "cable-and-charger",
+    "title": "کابل شارژر میکرو USAMS مدل U35",
+    "brand": "USAMS",
+    "price": 227205,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20130021"
+    ]
+  },
+  {
+    "id": "sep-20130023",
+    "category": "cable-and-charger",
+    "title": "کابل شارژر سوپر فست میکرو",
+    "brand": "",
+    "price": 145000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20130023"
+    ]
+  },
+  {
+    "id": "sep-20120011",
+    "category": "cable-and-charger",
+    "title": "کابل Kluminکیف دار مدل DC17",
+    "brand": "KLUMIN",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20120011"
+    ]
+  },
+  {
+    "id": "sep-20120016",
+    "category": "cable-and-charger",
+    "title": "کابل تایپ سی سیلیکونی GK-31 GRAND",
+    "brand": "GRAND",
+    "price": 173502,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20120016"
+    ]
+  },
+  {
+    "id": "sep-20120037",
+    "category": "cable-and-charger",
+    "title": "کابل هیسکا  LX841  HISKA تایپ سی",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20120037"
+    ]
+  },
+  {
+    "id": "sep-20140018",
+    "category": "cable-and-charger",
+    "title": "کابل آیفون  LDNIO مدل LS 641",
+    "brand": "LDNIO",
+    "price": 225000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20140018"
+    ]
+  },
+  {
+    "id": "sep-20140020",
+    "category": "cable-and-charger",
+    "title": "کابل آیفون GRAND مدل GK18",
+    "brand": "GRAND",
+    "price": 254745,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20140020"
+    ]
+  },
+  {
+    "id": "sep-20140024",
+    "category": "cable-and-charger",
+    "title": "کابل برزنتی  سر فلزیFIRT YOU 6A مدل F002 آیفون",
+    "brand": "FIRT YOU",
+    "price": 186583,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20140024"
+    ]
+  },
+  {
+    "id": "sep-20140027",
+    "category": "cable-and-charger",
+    "title": "کابل شارژ ایفون LDNIO مدل LS841",
+    "brand": "LDNIO",
+    "price": 109058,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20140027"
+    ]
+  },
+  {
+    "id": "sep-20140039",
+    "category": "cable-and-charger",
+    "title": "کابل شارژر تایپ سی پکدار آیفون 11 IC8 (مسی)",
+    "brand": "",
+    "price": 0,
+    "image": "images/wp/sep-20140039.webp",
+    "specs": [
+      "کد کالا: 20140039"
+    ]
+  },
+  {
+    "id": "sep-20150002",
+    "category": "cable-and-charger",
+    "title": "کابل  تایپ سی لایتینیگ HISKA LX801",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20150002"
+    ]
+  },
+  {
+    "id": "sep-20150007",
+    "category": "cable-and-charger",
+    "title": "کابل LC641 C-I سی به لایتینگ LDNIO",
+    "brand": "LDNIO",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20150007"
+    ]
+  },
+  {
+    "id": "sep-20150019",
+    "category": "cable-and-charger",
+    "title": "کابل اپل استوری 60W دو کاره C.C & C.IOS",
+    "brand": "",
+    "price": 843000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20150019"
+    ]
+  },
+  {
+    "id": "sep-20160012",
+    "category": "cable-and-charger",
+    "title": "کابل برزنتی دو سر تایپ سی سر فلزی FIRT YOU 60W  مدل C044",
+    "brand": "FIRT YOU",
+    "price": 209992,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20160012"
+    ]
+  },
+  {
+    "id": "sep-20160013",
+    "category": "cable-and-charger",
+    "title": "کابل پکدار AAA   S22  C.C",
+    "brand": "",
+    "price": 412000,
+    "image": "images/wp/sep-20160013.webp",
+    "specs": [
+      "کد کالا: 20160013"
+    ]
+  },
+  {
+    "id": "sep-20160016",
+    "category": "cable-and-charger",
+    "title": "کابل (C.C)دو سر تایپ سی Lx801برندHISKA",
+    "brand": "HISKA",
+    "price": 518600,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20160016"
+    ]
+  },
+  {
+    "id": "sep-20160024",
+    "category": "cable-and-charger",
+    "title": "کابل شارژر C.C LDNIO مدل LC441",
+    "brand": "LDNIO",
+    "price": 405000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20160024"
+    ]
+  },
+  {
+    "id": "sep-20160026",
+    "category": "cable-and-charger",
+    "title": "کابل کنفی  دو سر تایپ سی 100 وات TOOCKI",
+    "brand": "TOOCKI",
+    "price": 455511,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20160026"
+    ]
+  },
+  {
+    "id": "sep-20160027",
+    "category": "cable-and-charger",
+    "title": "کابل کنفی  فست شارژ دو سر تایپ سی 60 وات TOOCKI",
+    "brand": "TOOCKI",
+    "price": 419158,
+    "image": "images/wp/sep-20160027.webp",
+    "specs": [
+      "کد کالا: 20160027"
+    ]
+  },
+  {
+    "id": "sep-20160035",
+    "category": "cable-and-charger",
+    "title": "کابل پکدار اصلی سامسونگ سری S22",
+    "brand": "",
+    "price": 589000,
+    "image": "images/wp/sep-20160035.webp",
+    "specs": [
+      "کد کالا: 20160035"
+    ]
+  },
+  {
+    "id": "sep-20180010",
+    "category": "cable-and-charger",
+    "title": "کابل HDMI همه کاره PROONE مدل PCH71",
+    "brand": "PROONE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20180010"
+    ]
+  },
+  {
+    "id": "sep-20180012",
+    "category": "cable-and-charger",
+    "title": "کابل HDMI هیسکا مدل HD-033M برند HISKA",
+    "brand": "HISKA",
+    "price": 1461000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20180012"
+    ]
+  },
+  {
+    "id": "sep-20190008",
+    "category": "cable-and-charger",
+    "title": "کابل انتقال صدا PROONE  مدل PCA41",
+    "brand": "PROONE",
+    "price": 145000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20190008"
+    ]
+  },
+  {
+    "id": "sep-20220001",
+    "category": "cable-and-charger",
+    "title": "شارژ 25 وات H127EU HSKA",
+    "brand": "",
+    "price": 1390000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20220001"
+    ]
+  },
+  {
+    "id": "sep-20200006",
+    "category": "cable-and-charger",
+    "title": "شارژر 2 LDNIO پورت با 1 پورتPD 20W Q229",
+    "brand": "LDNIO",
+    "price": 980000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20200006"
+    ]
+  },
+  {
+    "id": "sep-20220004",
+    "category": "cable-and-charger",
+    "title": "شارژر 45 وات 3 پین سامسونگ",
+    "brand": "",
+    "price": 1139595,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20220004"
+    ]
+  },
+  {
+    "id": "sep-20200011",
+    "category": "cable-and-charger",
+    "title": "شارژر HISKA H114 PD",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20200011"
+    ]
+  },
+  {
+    "id": "sep-20220005",
+    "category": "cable-and-charger",
+    "title": "شارژر اصلی 45 وات سامسونگ",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20220005"
+    ]
+  },
+  {
+    "id": "sep-20200018",
+    "category": "cable-and-charger",
+    "title": "شارژر آیفون 2.1آمپر TRANICO",
+    "brand": "TRANICO",
+    "price": 351900,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20200018"
+    ]
+  },
+  {
+    "id": "sep-20210003",
+    "category": "cable-and-charger",
+    "title": "محافظ شارژر سیلیکونی 20 وات آیفون",
+    "brand": "",
+    "price": 235000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20210003"
+    ]
+  },
+  {
+    "id": "sep-20200043",
+    "category": "cable-and-charger",
+    "title": "شارژ هوآوی HUAWEI",
+    "brand": "HUAWEI",
+    "price": 198000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20200043"
+    ]
+  },
+  {
+    "id": "sep-20220013",
+    "category": "cable-and-charger",
+    "title": "شارژ 45 وات H145EU HSKA",
+    "brand": "",
+    "price": 2631000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20220013"
+    ]
+  },
+  {
+    "id": "sep-20240006",
+    "category": "electrical-multi-way",
+    "title": "چند راهی LDNIO مدل SC16",
+    "brand": "LDNIO",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20240006"
+    ]
+  },
+  {
+    "id": "sep-20250002",
+    "category": "cable-and-charger",
+    "title": "هندزفری کپسولی",
+    "brand": "",
+    "price": 235000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20250002"
+    ]
+  },
+  {
+    "id": "sep-20250009",
+    "category": "cable-and-charger",
+    "title": "کابل C.C کپسولی",
+    "brand": "",
+    "price": 234600,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20250009"
+    ]
+  },
+  {
+    "id": "sep-20260004",
+    "category": "cable-and-charger",
+    "title": "شارژر ارجینال چین  3 پین 45 وات سامسونگ (گیرین پک)",
+    "brand": "",
+    "price": 985000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20260004"
+    ]
+  },
+  {
+    "id": "sep-18140002",
+    "category": "flash",
+    "title": "فلش 128GB فلزی سامسونگ BAR  USB 3.1",
+    "brand": "",
+    "price": 2840000,
+    "image": "images/wp/sep-18140002.webp",
+    "specs": [
+      "کد کالا: 18140002"
+    ]
+  },
+  {
+    "id": "sep-24100029",
+    "category": "headphones-and-hands-free",
+    "title": "ایرپاد ارجینال  REMAX  مدل TWS-41",
+    "brand": "REMAX",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24100029"
+    ]
+  },
+  {
+    "id": "sep-24100049",
+    "category": "headphones-and-hands-free",
+    "title": "کیس ایرپاد proone case 3",
+    "brand": "PROONE",
+    "price": 365000,
+    "image": "images/wp/sep-24100049.webp",
+    "specs": [
+      "کد کالا: 24100049"
+    ]
+  },
+  {
+    "id": "sep-24110006",
+    "category": "headphones-and-hands-free",
+    "title": "هدست بلوتوث دور گردنی K19",
+    "brand": "",
+    "price": 1152090,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24110006"
+    ]
+  },
+  {
+    "id": "sep-24110018",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری بلوتوث XO مدل BE8",
+    "brand": "XO",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24110018"
+    ]
+  },
+  {
+    "id": "sep-24110040",
+    "category": "headphones-and-hands-free",
+    "title": "ایرپاد بلوتوث ارجینال TRANYO مدل M22",
+    "brand": "TRANYO",
+    "price": 1545000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24110040"
+    ]
+  },
+  {
+    "id": "sep-24110047",
+    "category": "headphones-and-hands-free",
+    "title": "هدست عروسکی AH806",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24110047"
+    ]
+  },
+  {
+    "id": "sep-24120031",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری پکدار اصلی تایپ سی سامسونگ NOTE 10",
+    "brand": "",
+    "price": 274573,
+    "image": "images/wp/sep-24120031.webp",
+    "specs": [
+      "کد کالا: 24120031"
+    ]
+  },
+  {
+    "id": "sep-24120034",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری تایپ سی سامسونگ ارجینال AKG مدل S10",
+    "brand": "",
+    "price": 468000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120034"
+    ]
+  },
+  {
+    "id": "sep-24120035",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری سامسونگ پکدارمدل 10",
+    "brand": "",
+    "price": 154000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120035"
+    ]
+  },
+  {
+    "id": "sep-24120059",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری ارجینال LENOVO مدل QF310",
+    "brand": "LENOVO",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120059"
+    ]
+  },
+  {
+    "id": "sep-19100038",
+    "category": "lighter-and-charger",
+    "title": "فندکی دو پورت 55 وات با خروجی تایپ سی",
+    "brand": "",
+    "price": 485000,
+    "image": "images/wp/sep-19100038.webp",
+    "specs": [
+      "کد کالا: 19100038"
+    ]
+  },
+  {
+    "id": "sep-25110004",
+    "category": "holder",
+    "title": "هولدر دریچه کولری HISKA 2109",
+    "brand": "HISKA",
+    "price": 468180,
+    "image": "images/wp/sep-25110004.webp",
+    "specs": [
+      "کد کالا: 25110004"
+    ]
+  },
+  {
+    "id": "sep-25130010",
+    "category": "holder",
+    "title": "هولدر رومیزی PROONEمدل PHL1186",
+    "brand": "PROONE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 25130010"
+    ]
+  },
+  {
+    "id": "sep-25130011",
+    "category": "holder",
+    "title": "هولدر موبایل PROONEمدل PHL1175",
+    "brand": "PROONE",
+    "price": 0,
+    "image": "images/wp/sep-25130011.webp",
+    "specs": [
+      "کد کالا: 25130011"
+    ]
+  },
+  {
+    "id": "sep-10100005",
+    "category": "speaker",
+    "title": "اسپیکر پرتابل  HISKA مدل B60",
+    "brand": "HISKA",
+    "price": 6110000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10100005"
+    ]
+  },
+  {
+    "id": "sep-10100021",
+    "category": "speaker",
+    "title": "اسپیکر HARMAN",
+    "brand": "HARMAN",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10100021"
+    ]
+  },
+  {
+    "id": "sep-10110002",
+    "category": "speaker",
+    "title": "اسپیکر خانگی HISKA مدل 1020",
+    "brand": "HISKA",
+    "price": 33270000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10110002"
+    ]
+  },
+  {
+    "id": "sep-10110003",
+    "category": "speaker",
+    "title": "اسپیکر پارتی هیسکا HISKA BOX 1009",
+    "brand": "HISKA",
+    "price": 40220000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10110003"
+    ]
+  },
+  {
+    "id": "sep-10110006",
+    "category": "speaker",
+    "title": "اسپیکر V.SMART مدل V.S81",
+    "brand": "V.SMART",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10110006"
+    ]
+  },
+  {
+    "id": "sep-14110001",
+    "category": "power-bank",
+    "title": "پاور بانک 20.000 میلی آمپر MI  (پک قرمز)",
+    "brand": "MI",
+    "price": 2450000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 14110001"
+    ]
+  },
+  {
+    "id": "sep-14120004",
+    "category": "power-bank",
+    "title": "پاور بانک 30.000 میلی آمپرMI",
+    "brand": "MI",
+    "price": 5430000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 14120004"
+    ]
+  },
+  {
+    "id": "sep-15100002",
+    "category": "dongle",
+    "title": "دانگل بلوتوث SAIYA M22",
+    "brand": "SAIYA",
+    "price": 293714,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 15100002"
+    ]
+  },
+  {
+    "id": "sep-15100003",
+    "category": "dongle",
+    "title": "دانگل بلوتوث SAIYA M23",
+    "brand": "SAIYA",
+    "price": 324000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 15100003"
+    ]
+  },
+  {
+    "id": "sep-15110001",
+    "category": "dongle",
+    "title": "دانگل HDMI برند HISKA مدل HR30",
+    "brand": "HISKA",
+    "price": 3885000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 15110001"
+    ]
+  },
+  {
+    "id": "sep-22100008",
+    "category": "converter",
+    "title": "مبدل  HISKA  لایتنینگ به تایپ سی مدل H8",
+    "brand": "HISKA",
+    "price": 468000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 22100008"
+    ]
+  },
+  {
+    "id": "sep-22100011",
+    "category": "converter",
+    "title": "تبدیل دو کاره آیفون مدل SX04",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 22100011"
+    ]
+  },
+  {
+    "id": "sep-22110006",
+    "category": "converter",
+    "title": "جک آیفون W48مدل HISKA",
+    "brand": "HISKA",
+    "price": 474000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 22110006"
+    ]
+  },
+  {
+    "id": "sep-22120002",
+    "category": "converter",
+    "title": "مبدل چند کاره برق LDNIO مدل Z3",
+    "brand": "LDNIO",
+    "price": 66371,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 22120002"
+    ]
+  },
+  {
+    "id": "sep-12110005",
+    "category": "battery",
+    "title": "باطری شیرینگ نیم  قلمی 4 عددی پاناتک (panatech) (جعبه 10عددی)",
+    "brand": "PANATECH",
+    "price": 69360,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 12110005"
+    ]
+  },
+  {
+    "id": "sep-12190001",
+    "category": "battery",
+    "title": "باطری سکه ای تک برگMAXFORT سایز 2016",
+    "brand": "MAXFORT",
+    "price": 78000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 12190001"
+    ]
+  },
+  {
+    "id": "sep-12190012",
+    "category": "battery",
+    "title": "باطری اصلی سکه ای لیتیومی Maxell مدل 2016 (پک بنفش)",
+    "brand": "MAXELL",
+    "price": 78000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 12190012"
+    ]
+  },
+  {
+    "id": "sep-12200003",
+    "category": "battery",
+    "title": "باطری شارژی تلفنی پاناسونیک (Panasonic) مدل 107",
+    "brand": "PANASONIC",
+    "price": 365000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 12200003"
+    ]
+  },
+  {
+    "id": "sep-21100004",
+    "category": "gadget",
+    "title": "گیمبال و پایه نگهدارنده لرزشگیر مدل  3AXIS - S5",
+    "brand": "",
+    "price": 10760000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21100004"
+    ]
+  },
+  {
+    "id": "sep-21120001",
+    "category": "gadget",
+    "title": "بطری سیلیکونی تاشو PROONE مدل PFB0012",
+    "brand": "PROONE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21120001"
+    ]
+  },
+  {
+    "id": "sep-21210002",
+    "category": "gadget",
+    "title": "دوربین ثبت وقایع خودرو HISKA مدل HR94",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21210002"
+    ]
+  },
+  {
+    "id": "sep-21180002",
+    "category": "gadget",
+    "title": "دسته بازی HISKA مدل HR 70",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21180002"
+    ]
+  },
+  {
+    "id": "sep-21190003",
+    "category": "gadget",
+    "title": "کیف اکسسوری HISKA مدل H25",
+    "brand": "HISKA",
+    "price": 1340000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21190003"
+    ]
+  },
+  {
+    "id": "sep-21190006",
+    "category": "gadget",
+    "title": "سایر کالا",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21190006"
+    ]
+  },
+  {
+    "id": "sep-21190013",
+    "category": "gadget",
+    "title": "تبلت گرافیکی",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21190013"
+    ]
+  },
+  {
+    "id": "sep-21190017",
+    "category": "gadget",
+    "title": "مانیتور اندروید ماشین",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21190017"
+    ]
+  },
+  {
+    "id": "sep-13120005",
+    "category": "beauty",
+    "title": "برس حرارتی HISKA مدل H5107",
+    "brand": "HISKA",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 13120005"
+    ]
+  },
+  {
+    "id": "sep-23130001",
+    "category": "computer-products",
+    "title": "کیبورد سیمی HISKA مدل HXKE200",
+    "brand": "HISKA",
+    "price": 905250,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 23130001"
+    ]
+  },
+  {
+    "id": "sep-26100001",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A10",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100001"
+    ]
+  },
+  {
+    "id": "sep-26100005",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A11/MI 11 LITE",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100005"
+    ]
+  },
+  {
+    "id": "sep-26100006",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A21S/X3 GT",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100006"
+    ]
+  },
+  {
+    "id": "sep-26100007",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A31/A22 4G/A32 4G/A33",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100007"
+    ]
+  },
+  {
+    "id": "sep-26100008",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A02S/A03/A12/A13",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100008"
+    ]
+  },
+  {
+    "id": "sep-26100009",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A51/A52/A53/S20FE",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100009"
+    ]
+  },
+  {
+    "id": "sep-26100013",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A14",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100013"
+    ]
+  },
+  {
+    "id": "sep-26100015",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A34",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100015"
+    ]
+  },
+  {
+    "id": "sep-26100016",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A54",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100016"
+    ]
+  },
+  {
+    "id": "sep-26100017",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S21 FE",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100017"
+    ]
+  },
+  {
+    "id": "sep-26100019",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S25 FE",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100019"
+    ]
+  },
+  {
+    "id": "sep-26100020",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A15/A25",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100020"
+    ]
+  },
+  {
+    "id": "sep-26110002",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 8",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110002"
+    ]
+  },
+  {
+    "id": "sep-26110003",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 8 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110003"
+    ]
+  },
+  {
+    "id": "sep-26110004",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA X3/MI 10T/X4/X4 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110004"
+    ]
+  },
+  {
+    "id": "sep-26110005",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA F3/NOTE 10 PRO/NOTE 11 PRO/NOTE 14",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110005"
+    ]
+  },
+  {
+    "id": "sep-26110006",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 10/NOTE 11/NOTE 11S/NOTE 12S",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110006"
+    ]
+  },
+  {
+    "id": "sep-26110007",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 10C/12C/A3",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110007"
+    ]
+  },
+  {
+    "id": "sep-26110008",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 12/ REDMI 13",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110008"
+    ]
+  },
+  {
+    "id": "sep-26110009",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 13/F5/M6 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110009"
+    ]
+  },
+  {
+    "id": "sep-26110010",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 13PRO/X6/14T",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110010"
+    ]
+  },
+  {
+    "id": "sep-26110011",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 13C/C65/ SAM A05/SAM A07",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110011"
+    ]
+  },
+  {
+    "id": "sep-26110012",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 14C/C75",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110012"
+    ]
+  },
+  {
+    "id": "sep-26110013",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 12 4G/X5",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110013"
+    ]
+  },
+  {
+    "id": "sep-26110015",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 15C",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110015"
+    ]
+  },
+  {
+    "id": "sep-26110016",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 15",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26110016"
+    ]
+  },
+  {
+    "id": "sep-26120001",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 6/7/8 BLACK",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120001"
+    ]
+  },
+  {
+    "id": "sep-26120005",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XS/11 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120005"
+    ]
+  },
+  {
+    "id": "sep-26120006",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XR/11",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120006"
+    ]
+  },
+  {
+    "id": "sep-26120007",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XS MAX/11 PRO MAX",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120007"
+    ]
+  },
+  {
+    "id": "sep-26120009",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 12 /12 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120009"
+    ]
+  },
+  {
+    "id": "sep-26120010",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 12 PRO MAX",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120010"
+    ]
+  },
+  {
+    "id": "sep-26120012",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 13/ 13 PRO/14",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120012"
+    ]
+  },
+  {
+    "id": "sep-26120013",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 13 PRO MAX/14 PLUS",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120013"
+    ]
+  },
+  {
+    "id": "sep-26120014",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 14 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120014"
+    ]
+  },
+  {
+    "id": "sep-26120015",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 14 PRO MAX",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120015"
+    ]
+  },
+  {
+    "id": "sep-26120016",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 15 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120016"
+    ]
+  },
+  {
+    "id": "sep-26120018",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 15/16",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120018"
+    ]
+  },
+  {
+    "id": "sep-26120019",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 16 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120019"
+    ]
+  },
+  {
+    "id": "sep-26120020",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 16 PRO MAX",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120020"
+    ]
+  },
+  {
+    "id": "sep-26120022",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 17 PRO",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26120022"
+    ]
+  },
+  {
+    "id": "sep-26100024",
+    "category": "glass",
+    "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S22",
+    "brand": "MIETUBLE",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 26100024"
+    ]
+  },
+  {
+    "id": "sep-24120070",
+    "category": "headphones-and-hands-free",
+    "title": "هندزفری سلبریت ارجینال CELEBRATE مدل G38 تایپ سی",
+    "brand": "CELEBRATE",
+    "price": 468000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120070"
+    ]
+  },
+  {
+    "id": "sep-20160041",
+    "category": "cable-and-charger",
+    "title": "کابل  دوسر تایپ سی S23 سامسونگ 1.8M",
+    "brand": "",
+    "price": 345000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20160041"
+    ]
+  },
+  {
+    "id": "sep-20140051",
+    "category": "cable-and-charger",
+    "title": "کابل ارجینال LDNIO مدل LS632 آیفون",
+    "brand": "LDNIO",
+    "price": 368000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20140051"
+    ]
+  },
+  {
+    "id": "sep-21220001",
+    "category": "gadget",
+    "title": "مونوپاد Y17",
+    "brand": "",
+    "price": 1490000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21220001"
+    ]
+  },
+  {
+    "id": "sep-21220002",
+    "category": "gadget",
+    "title": "مونوپاد X17",
+    "brand": "",
+    "price": 1290000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21220002"
+    ]
+  },
+  {
+    "id": "sep-21220003",
+    "category": "gadget",
+    "title": "مونوپاد Z6",
+    "brand": "",
+    "price": 1270000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21220003"
+    ]
+  },
+  {
+    "id": "sep-21220004",
+    "category": "gadget",
+    "title": "مونوپاد UK",
+    "brand": "",
+    "price": 1125000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21220004"
+    ]
+  },
+  {
+    "id": "sep-21220005",
+    "category": "gadget",
+    "title": "مونوپاد U6",
+    "brand": "",
+    "price": 1348000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21220005"
+    ]
+  },
+  {
+    "id": "sep-17100012",
+    "category": "smart-watch",
+    "title": "ساعت هوشمند APPLE WATCH مدل SERIES 11",
+    "brand": "APPLE",
+    "price": 5830000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17100012"
+    ]
+  },
+  {
+    "id": "sep-20190035",
+    "category": "cable-and-charger",
+    "title": "کابل AUX IOS  ایوایکس آیفونی طرح مک دودو MCDODO",
+    "brand": "MCDODO",
+    "price": 265000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 20190035"
+    ]
+  },
+  {
+    "id": "sep-17100013",
+    "category": "smart-watch",
+    "title": "ساعت هوشمند ULTRA3",
+    "brand": "",
+    "price": 4970000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17100013"
+    ]
+  },
+  {
+    "id": "sep-28110002",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف سامسونگ شفاف SAM S23 FE MAGSAFE (CASE SAMSUNG)",
+    "brand": "SAMSUNG",
+    "price": 265000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 28110002"
+    ]
+  },
+  {
+    "id": "sep-28110006",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف سامسونگ شفاف SAM S24 ULTRA MAGSAFE (CASE SAMSUNG)",
+    "brand": "SAMSUNG",
+    "price": 265000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 28110006"
+    ]
+  },
+  {
+    "id": "sep-28100001",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 11 MAGSAFE   (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100001.webp",
+    "specs": [
+      "کد کالا: 28100001"
+    ]
+  },
+  {
+    "id": "sep-28100002",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 11 PRO MAGSAFE   (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100002.webp",
+    "specs": [
+      "کد کالا: 28100002"
+    ]
+  },
+  {
+    "id": "sep-28100003",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 11 PRO MAX MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100003.webp",
+    "specs": [
+      "کد کالا: 28100003"
+    ]
+  },
+  {
+    "id": "sep-28100004",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 12 MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100004.webp",
+    "specs": [
+      "کد کالا: 28100004"
+    ]
+  },
+  {
+    "id": "sep-28100005",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 12 PRO MAGSAFE   (CASE IPHONE)",
+    "brand": "",
+    "price": 340000,
+    "image": "images/wp/sep-28100005.webp",
+    "specs": [
+      "کد کالا: 28100005"
+    ]
+  },
+  {
+    "id": "sep-28100006",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 12 PRO MAX MAGSAFE   (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100006.webp",
+    "specs": [
+      "کد کالا: 28100006"
+    ]
+  },
+  {
+    "id": "sep-28100008",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون محافظ دار دوربین IPHONE 13 PRO MAGSAFE  (CASE IPHONE)",
+    "brand": "",
+    "price": 295000,
+    "image": "images/wp/sep-28100008.webp",
+    "specs": [
+      "کد کالا: 28100008"
+    ]
+  },
+  {
+    "id": "sep-28100012",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون شفاف IPHONE 13 MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/sep-28100012.webp",
+    "specs": [
+      "کد کالا: 28100012"
+    ]
+  },
+  {
+    "id": "sep-28100013",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون شفاف IPHONE 13 PRO MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/sep-28100013.webp",
+    "specs": [
+      "کد کالا: 28100013"
+    ]
+  },
+  {
+    "id": "sep-28100014",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون شفاف IPHONE 13 PRO MAX MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/sep-28100014.webp",
+    "specs": [
+      "کد کالا: 28100014"
+    ]
+  },
+  {
+    "id": "sep-28100015",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون شفاف IPHONE 14 PRO MAX MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/sep-28100015.webp",
+    "specs": [
+      "کد کالا: 28100015"
+    ]
+  },
+  {
+    "id": "sep-28100016",
+    "category": "frame",
+    "title": "قاب موبایل مگ سیف آیفون شفاف IPHONE 15 PRO MAX MAGSAFE (CASE IPHONE)",
+    "brand": "",
+    "price": 265000,
+    "image": "images/wp/sep-28100016.webp",
+    "specs": [
+      "کد کالا: 28100016"
+    ]
+  },
+  {
+    "id": "sep-17110001",
+    "category": "smart-watch",
+    "title": "بند ساعت مگنتی XO 01A سری 38/40/41MM",
+    "brand": "XO",
+    "price": 485000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17110001"
+    ]
+  },
+  {
+    "id": "sep-17110002",
+    "category": "smart-watch",
+    "title": "بند ساعت مگنتی XO 01B سری 42/44/45/49MM",
+    "brand": "XO",
+    "price": 485000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17110002"
+    ]
+  },
+  {
+    "id": "sep-17110005",
+    "category": "smart-watch",
+    "title": "بند ساعت برزنتی XO 03A سری 38/40/41MM",
+    "brand": "XO",
+    "price": 398000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17110005"
+    ]
+  },
+  {
+    "id": "sep-17110006",
+    "category": "smart-watch",
+    "title": "بند ساعت برزنتی XO 03B سری 42/44/45/49MM",
+    "brand": "XO",
+    "price": 398000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17110006"
+    ]
+  },
+  {
+    "id": "sep-17110008",
+    "category": "smart-watch",
+    "title": "بند ساعت برزنتی XO 05B سری 42/44/45/49MM",
+    "brand": "XO",
+    "price": 398000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 17110008"
+    ]
+  },
+  {
+    "id": "sep-15130001",
+    "category": "dongle",
+    "title": "دانگل وایرلس تسکو WIRELESS DONGLE TSKO",
+    "brand": "TSKO",
+    "price": 475000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 15130001"
+    ]
+  },
+  {
+    "id": "sep-24120073",
+    "category": "headphones-and-hands-free",
+    "title": "کیس ایرپاد FOR-HP:3300",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120073"
+    ]
+  },
+  {
+    "id": "sep-24100060",
+    "category": "headphones-and-hands-free",
+    "title": "ایرپاد ارجینال CELEBRATE مدل T500",
+    "brand": "CELEBRATE",
+    "price": 2726000,
+    "image": "images/wp/sep-24100060.webp",
+    "specs": [
+      "کد کالا: 24100060"
+    ]
+  },
+  {
+    "id": "sep-24120076",
+    "category": "headphones-and-hands-free",
+    "title": "هدست سلبریت ارجینال CELEBRATE مدل A23",
+    "brand": "CELEBRATE",
+    "price": 3850000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120076"
+    ]
+  },
+  {
+    "id": "sep-24120078",
+    "category": "headphones-and-hands-free",
+    "title": "هدست سلبریت ارجینال CELEBRATE مدل A32",
+    "brand": "CELEBRATE",
+    "price": 4780000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 24120078"
+    ]
+  },
+  {
+    "id": "sep-23160003",
+    "category": "computer-products",
+    "title": "هاب 4 پورت CELEBRATE مدل CA05",
+    "brand": "CELEBRATE",
+    "price": 1340000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 23160003"
+    ]
+  },
+  {
+    "id": "sep-23160004",
+    "category": "computer-products",
+    "title": "هاب CELEBRATE مدل CA06",
+    "brand": "CELEBRATE",
+    "price": 1130000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 23160004"
+    ]
+  },
+  {
+    "id": "sep-23160005",
+    "category": "computer-products",
+    "title": "هاب 6 پورت تایپ سی (USB C) الدینیو LDNIO مدل DS16U",
+    "brand": "LDNIO",
+    "price": 2560000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 23160005"
+    ]
+  },
+  {
+    "id": "sep-18110005",
+    "category": "flash",
+    "title": "فلش 16G سامسونگ SAMSUNG مدل FIT سرعت USB 2",
+    "brand": "SAMSUNG",
+    "price": 616000,
+    "image": "images/wp/sep-18110005.webp",
+    "specs": [
+      "کد کالا: 18110005"
+    ]
+  },
+  {
+    "id": "sep-21160004",
+    "category": "gadget",
+    "title": "چراغ قوه پلیسی و فاموسی A76",
+    "brand": "",
+    "price": 986000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 21160004"
+    ]
+  },
+  {
+    "id": "sep-28100018",
+    "category": "frame",
+    "title": "قاب آیفونی وا وی شفاف دارای (لنز محافظ و پد الکلی)(VAWI)",
+    "brand": "VAWI",
+    "price": 565000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 28100018"
+    ]
+  },
+  {
+    "id": "sep-28110008",
+    "category": "frame",
+    "title": "قاب طرح دار سامسونگ یانگ کیت (YOUNG KIT)",
+    "brand": "YOUNG KIT",
+    "price": 295000,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 28110008"
+    ]
+  },
+  {
+    "id": "sep-10100047",
+    "category": "speaker",
+    "title": "اسپیکر پرتابل استورم اس SPEAKER SRORM S مدل NOW:GO",
+    "brand": "",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10100047"
+    ]
+  },
+  {
+    "id": "sep-10100048",
+    "category": "speaker",
+    "title": "اسپیکر پرتابل استورم لایت SPEAKER STORM LITE مدل NOW:GO",
+    "brand": "STORM",
+    "price": 0,
+    "image": "images/placeholder.svg",
+    "specs": [
+      "کد کالا: 10100048"
     ]
   }
 ];

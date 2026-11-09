@@ -359,6 +359,20 @@ const TITLE_RULES = [
   ["smart-watch", (t) => t.includes("ساعت")],
   ["glass", (t) => t.includes("گلس")],
   ["frame", (t) => t.includes("قاب")],
+  [
+    "beauty",
+    (t) =>
+      [
+        "برس",
+        "سشوار",
+        "اصلاح",
+        "ریش",
+        "اتو مو",
+        "فر کننده",
+        "فرکن",
+        "شیکلم",
+      ].some((k) => t.includes(k)),
+  ],
   ["holder", (t) => t.includes("هولدر")],
   ["power-bank", (t) => t.includes("پاور")],
   ["speaker", (t) => t.includes("اسپیکر")],
@@ -449,6 +463,26 @@ const modelCode = (title) => {
   return m ? m[0].toUpperCase() : "";
 };
 
+// دپارتمن فروشگاه سپیدار = دسته‌های سایت (کد 8 رقمی دو رقم اول)
+const SEP_CATEGORY_BY_PREFIX = {
+  10: "speaker",
+  12: "battery",
+  13: "beauty",
+  14: "power-bank",
+  15: "dongle",
+  17: "smart-watch",
+  18: "flash",
+  19: "lighter-and-charger",
+  20: "cable-and-charger",
+  21: "gadget",
+  22: "converter",
+  23: "computer-products",
+  24: "headphones-and-hands-free",
+  25: "holder",
+  26: "glass",
+  28: "frame",
+};
+
 // ---------------------------------------------------------------------------
 // Load sources
 // ---------------------------------------------------------------------------
@@ -494,18 +528,22 @@ for (const item of wpItems) {
 // ---------------------------------------------------------------------------
 const sepByCode = new Map();
 const sepByName = new Map();
+const sepAll = [];
 let sepidarCount = 0;
 try {
   const sepItems = JSON.parse(await fs.readFile(SEPIDAR, "utf8"));
   sepidarCount = sepItems.length;
   for (const it of sepItems) {
     const m = it.metas || {};
+    const code = String(m.Code ?? "").trim();
     const rec = {
       few: Number(String(m.Few ?? "").trim()),
       regular: Number(String(m.RegularPrice ?? "").trim()) || 0,
       sale: Number(String(m.SalePrice ?? "").trim()) || 0,
+      code,
+      name: String(m.Name ?? "").trim(),
     };
-    const code = String(m.Code ?? "").trim();
+    sepAll.push(rec);
     if (code) sepByCode.set(code, rec);
     const nm = norm(String(m.Name ?? ""));
     if (nm && !sepByName.has(nm)) sepByName.set(nm, rec);
@@ -590,10 +628,19 @@ for (const item of rawProducts) {
     (c.domain || "").startsWith("pa_"),
   );
 
-  const category = classifyWp(catEntries, item.title);
+  // دسته‌بندی نادرست سایت با پیشوند کد سپیدار (دپارتمان فروشگاه) اصلاح می‌شود
+  let category = classifyWp(catEntries, item.title);
+  const skuTrim = String(metas._sku ?? "").trim();
+  const titleN = norm(item.title);
+  if (titleN.includes("چند راهی") || titleN.includes("چندراهی")) {
+    category = "electrical-multi-way";
+  } else if (/^\d{8}$/.test(skuTrim)) {
+    const prefixCat = SEP_CATEGORY_BY_PREFIX[skuTrim.slice(0, 2)];
+    if (prefixCat) category = prefixCat;
+  }
 
   // «موجود» ولی بدون تعداد = در عمل ناموجود → حذف
-  // محصولات با موجودی انبار کمتر از ۵ هم حذف می‌شوند (به‌جز دسته‌ی اسپیکر)
+  // محصولات با موجودی انبار کمتر از ۵ هم حذف می‌شوند (به‌جز دسته‌های اسپیکر و بیوتی)
   // با تطبیق Sepidar، موجودی انبار (Few) مرجع است
   const stockText = String(metas._stock ?? "").trim();
   let stockNum = stockText === "" ? NaN : Number(stockText);
@@ -604,7 +651,7 @@ for (const item of rawProducts) {
     skippedNoQuantity += 1;
     continue;
   }
-  if (category !== "speaker" && stockNum < 5) {
+  if (category !== "speaker" && category !== "beauty" && stockNum < 5) {
     skippedLowStock += 1;
     continue;
   }
@@ -669,7 +716,131 @@ for (const item of rawProducts) {
   });
 }
 
-let products = [...wpOut, ...pdfOut];
+// ---------------------------------------------------------------------------
+// Sepidar-only products: موجود در انبار سپیدار اما خارج از ووکامرس.
+// دسته‌بندی بر اساس پیشوند کد کالا (دپارتمان فروشگاه = دسته‌های سایت).
+// ---------------------------------------------------------------------------
+const BRAND_TOKENS = [
+  "MC DODO",
+  "MCDODO",
+  "HISKA",
+  "LDNIO",
+  "USAMS",
+  "GRAND",
+  "TOOCKI",
+  "PROONE",
+  "CELEBRATE",
+  "REMAX",
+  "SAIYA",
+  "MAXFORT",
+  "MAXELL",
+  "PANASONIC",
+  "PANATECH",
+  "HUAWEI",
+  "SAMSUNG",
+  "APPLE",
+  "LENOVO",
+  "TRANYO",
+  "V.SMART",
+  "BIVA",
+  "KLUMIN",
+  "FIRT YOU",
+  "YOUNG KIT",
+  "VAWI",
+  "MIETUBLE",
+  "TRANICO",
+  "TSKO",
+  "HARMAN",
+  "STORM",
+  "SHEGLAM",
+  "YESIDO",
+  "AKO",
+  "ULTRA SUR",
+  "ULTRASUR",
+  "XO",
+  "MI",
+];
+const ULTRA_BRAND_RE = /(ultra[\s_-]*sur|اولترا ?سور|اولتراسور)/i;
+const sepBrandOf = (rawName) => {
+  const up = rawName.toUpperCase();
+  for (const b of BRAND_TOKENS) {
+    const re = new RegExp(
+      "\\b" + b.replace(/[.*+?^\x24{}()|[\]\\]/g, "\\$&") + "\\b",
+    );
+    if (re.test(up)) {
+      return b === "ULTRA SUR" || b === "ULTRASUR" ? "UltraSur" : b;
+    }
+  }
+  return "";
+};
+const sepIsCatalogLine = (rawName) => {
+  const n = norm(rawName).replace(/_/g, "-");
+  for (const d of n.match(/u-[a-z0-9+]+|hs\d+/g) || []) {
+    if (pdfCodeKeys.has(d.toUpperCase())) return true;
+  }
+  if (!ULTRA_BRAND_RE.test(rawName)) return false;
+  const m = n.match(/\u0645\u062f\u0644\s+([a-z0-9+.-]+)/);
+  const tok = m ? m[1].trim() : "";
+  if (!tok) return false;
+  return (
+    pdfCodeKeys.has(tok.toUpperCase()) ||
+    pdfCodeKeys.has(("u-" + tok).toUpperCase()) ||
+    pdfCodeKeys.has(tok.replace(/^u-/, "").toUpperCase())
+  );
+};
+const classifySep = (code, rawName) => {
+  const title = norm(rawName);
+  if (
+    title.includes("\u0686\u0646\u062f \u0631\u0627\u0647\u06cc") ||
+    title.includes("\u0686\u0646\u062f\u0631\u0627\u0647\u06cc")
+  )
+    return "electrical-multi-way";
+  return SEP_CATEGORY_BY_PREFIX[code.slice(0, 2)] || "gadget";
+};
+
+const wooSkus = new Set();
+const wooTitles = new Set();
+for (const item of rawProducts) {
+  const m = item.metas || {};
+  const sku = String(m._sku ?? "").trim();
+  if (sku) wooSkus.add(sku);
+  const nm = norm(item.title);
+  if (nm) wooTitles.add(nm);
+}
+
+let sepOnlyAdded = 0;
+let sepOnlySkippedCatalog = 0;
+let sepOnlyNoCode = 0;
+const sepOnlyOut = [];
+const sepUsedIds = new Set();
+for (const rec of sepAll) {
+  if (!(rec.few > 0)) continue;
+  if (!rec.code) {
+    sepOnlyNoCode += 1;
+    continue;
+  }
+  if (wooSkus.has(rec.code) || wooTitles.has(norm(rec.name))) continue;
+  if (sepIsCatalogLine(rec.name)) {
+    sepOnlySkippedCatalog += 1;
+    continue;
+  }
+  let id = `sep-${rec.code}`;
+  while (sepUsedIds.has(id)) id += "-2";
+  sepUsedIds.add(id);
+  const eff = rec.sale > 0 && rec.sale < rec.regular ? rec.sale : rec.regular;
+  sepOnlyOut.push({
+    id,
+    category: classifySep(rec.code, rec.name),
+    title: rec.name,
+    brand: sepBrandOf(rec.name),
+    price: Math.floor(eff / 10),
+    image: "images/placeholder.svg",
+    specs: [`\u06a9\u062f \u06a9\u0627\u0644\u0627: ${rec.code}`],
+  });
+  sepOnlyAdded += 1;
+}
+
+let products = [...wpOut, ...sepOnlyOut, ...pdfOut];
 
 // ---------------------------------------------------------------------------
 // Image overrides: fixed image URLs for products whose backup lacks thumbnails
@@ -882,6 +1053,9 @@ const report = {
   sepidarItems: sepidarCount,
   sepidarMatched,
   sepidarPriceUpdated,
+  sepOnlyAdded,
+  sepOnlySkippedCatalog,
+  sepOnlyNoCode,
   imageOverrides: overriddenImages,
   categoryCounts: counts,
   images: {
