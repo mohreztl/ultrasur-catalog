@@ -9,7 +9,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "برس  حرارتی هیسکا مدل H5105 برند HISKA",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7612.jpg",
     "specs": []
   },
   {
@@ -18,7 +18,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر سر جعبه سامسونگ سه پین پکدار تایپ سی  45 وات (برد SOLUM BLUE 4511) SAMSUNG دارای NFC فعال",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7613.jpg",
     "specs": []
   },
   {
@@ -36,7 +36,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "فندکی شارژر آلیسون 38وات دو خروجی (USB+PD)مدل ALS-A712 برند ALLISON",
     "brand": "",
     "price": 785000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7615.jpg",
     "specs": []
   },
   {
@@ -72,7 +72,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل شارژر (C.C) دو سر تایپ سی هیسکا مدل LX891 برند HISKA",
     "brand": "",
     "price": 638800,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7619.webp",
     "specs": []
   },
   {
@@ -81,7 +81,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر 67 وات EU مدل H 167 برند HISKA",
     "brand": "",
     "price": 2770000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7625.jpg",
     "specs": []
   },
   {
@@ -90,7 +90,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری بلوتوث گردنی هیسکا مدل FX 603 برند HISKA",
     "brand": "",
     "price": 4440000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7631.jpg",
     "specs": []
   },
   {
@@ -99,7 +99,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر فندکی هیسکا مدل CC307Q برند HISKA",
     "brand": "",
     "price": 1182000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7633.jpg",
     "specs": []
   },
   {
@@ -108,7 +108,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر 20وات سلبریت مدل CH4 برند CELEBRATE",
     "brand": "",
     "price": 1280000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7634.jpg",
     "specs": []
   },
   {
@@ -117,7 +117,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل سه به دو چراغدار آریاتکنور (ARYA TECHNO)",
     "brand": "",
     "price": 165000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7635.webp",
     "specs": []
   },
   {
@@ -126,7 +126,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل (AUX IN TYPE C) آیوایکس به تایپ سی مدل LhTLZY",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7636.webp",
     "specs": []
   },
   {
@@ -135,7 +135,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "برس 'گرد حرارتی هیسکا مدل H5109 برند HISKA",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7637.webp",
     "specs": []
   },
   {
@@ -144,7 +144,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "سشوار مسافرتی هیسکا H5265 برند HISKA",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7638.jpg",
     "specs": []
   },
   {
@@ -153,7 +153,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "فرکن سه قلو مدل H5410S برند HISKA",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7639.jpg",
     "specs": []
   },
   {
@@ -162,7 +162,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هدست سلبریت ارجینال CELEBRATE مدل A24",
     "brand": "",
     "price": 3750000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7640.jpg",
     "specs": []
   },
   {
@@ -180,7 +180,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر 18وات سلبریت مدل CN4 برند CELEBRATE",
     "brand": "",
     "price": 595000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7643.jpg",
     "specs": []
   },
   {
@@ -189,7 +189,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل OTG پکدار فلزی تایپ سی USB3",
     "brand": "",
     "price": 239000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7644.webp",
     "specs": []
   },
   {
@@ -198,7 +198,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر بلوتوثی وستر مدل WS580 طرح تسلا سایبر تراک  ۱۵ وات WSTER",
     "brand": "",
     "price": 4980000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7645.jpg",
     "specs": []
   },
   {
@@ -207,7 +207,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر دیواری 30 وات آمایا با بیمه 18 ماهه پارسیان AMAYA مدل ACW-E46DC با دو خروجی (USB+PD)",
     "brand": "",
     "price": 1230000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7646.jpg",
     "specs": []
   },
   {
@@ -216,7 +216,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر دیواری 45 وات آمایا با بیمه 18 ماهه پارسیان AMAYA مدل ACW-E45DC با دو خروجی (USB+PD)",
     "brand": "",
     "price": 1690000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7647.webp",
     "specs": []
   },
   {
@@ -225,7 +225,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر دیواری صفحه دیجیتال 36 وات پارسیان مدل PH-2024 با دو خروجی (USB+PD)",
     "brand": "",
     "price": 1140000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7648.webp",
     "specs": []
   },
   {
@@ -234,7 +234,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ساعت هوشمند AKO SW-CREST",
     "brand": "",
     "price": 5890000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7649.webp",
     "specs": []
   },
   {
@@ -243,7 +243,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ساعت هوشمند AKO ULTRA",
     "brand": "",
     "price": 6090000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7650.jpg",
     "specs": []
   },
   {
@@ -252,7 +252,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد 1288",
     "brand": "",
     "price": 790000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7651.jpg",
     "specs": []
   },
   {
@@ -261,7 +261,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "OTG پلاستیکی تایپ سی سامسونگ S10",
     "brand": "",
     "price": 85000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7652.jpg",
     "specs": []
   },
   {
@@ -270,7 +270,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل سه به دو معمولی ویرا (VIRA)",
     "brand": "",
     "price": 94000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7653.webp",
     "specs": []
   },
   {
@@ -279,7 +279,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "لامپ شارژی سه حالته 40 وات KUCLASSIC",
     "brand": "",
     "price": 890000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7654.jpg",
     "specs": []
   },
   {
@@ -288,7 +288,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "لامپ شارژی سه حالته 60 وات KUCLASSIC",
     "brand": "",
     "price": 1090000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7655.jpg",
     "specs": []
   },
   {
@@ -306,7 +306,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری نیم قلمی کارتی تراست (TRUST) چهار عددی بسته 10تایی",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7657.jpg",
     "specs": []
   },
   {
@@ -324,7 +324,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2816",
     "brand": "",
     "price": 18980000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7659.jpg",
     "specs": []
   },
   {
@@ -333,7 +333,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2820",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7660.jpg",
     "specs": []
   },
   {
@@ -342,7 +342,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پارتی باکس تراست SPEAKER TRUST TPS-2018",
     "brand": "",
     "price": 26900000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7661.jpg",
     "specs": []
   },
   {
@@ -351,7 +351,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب سامسونگ برلیا کریستال مگنتی الکترو (BERLIA MAGNETIC)",
     "brand": "",
     "price": 355000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7663.webp",
     "specs": []
   },
   {
@@ -360,7 +360,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب آیفونی چرمی بند دار دی دی اچ(DDH)",
     "brand": "",
     "price": 440000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7664.jpg",
     "specs": []
   },
   {
@@ -369,7 +369,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب سامسونگ چرمی بند دار دی دی اچ(DDH)",
     "brand": "",
     "price": 440000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7665.jpg",
     "specs": []
   },
   {
@@ -405,7 +405,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب برلیا شفاف کریستالی آرمور مگنت دار آیفون CASE IPHONE BERLIA ARMOR MAGNETIC",
     "brand": "",
     "price": 640000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7669.jpg",
     "specs": []
   },
   {
@@ -414,7 +414,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب برلیا شفاف کریستالی آرمور مگنت دار سامسونگ CASE SAMSUNG BERLIA MAGNETIC",
     "brand": "",
     "price": 690000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-7670.webp",
     "specs": []
   },
   {
@@ -432,7 +432,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری کارتی معمولی قلمی  پاور شیبا (power shiba)(بسته 12 عددی)",
     "brand": "",
     "price": 69360,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-2393.jpg",
     "specs": []
   },
   {
@@ -450,7 +450,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری 2025 سکه ای MAXELL  قرمز",
     "brand": "",
     "price": 78000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-2399.jpg",
     "specs": []
   },
   {
@@ -468,7 +468,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری کارتی معمولی قلمی MOTOMA(بسته 20 عددی)",
     "brand": "",
     "price": 69360,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-2403.webp",
     "specs": []
   },
   {
@@ -486,7 +486,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل دو کاره آیفون مدل SX11",
     "brand": "",
     "price": 225001,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4078.jpg",
     "specs": []
   },
   {
@@ -495,7 +495,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل سه به دو چراغ دار هادرون مدل A10 -1",
     "brand": "",
     "price": 389000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4081.webp",
     "specs": []
   },
   {
@@ -504,7 +504,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 38/40/41MM",
     "brand": "",
     "price": 125000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4840.jpg",
     "specs": []
   },
   {
@@ -531,7 +531,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 42/44/45/46/49MM",
     "brand": "",
     "price": 125000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4844.jpg",
     "specs": []
   },
   {
@@ -540,7 +540,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "آویز موبایل مخملی عروسکی",
     "brand": "",
     "price": 98000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4845.jpg",
     "specs": []
   },
   {
@@ -549,7 +549,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب طرح دار شیائومی یانگ کیت (YOUNG KIT)",
     "brand": "",
     "price": 265000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4846.jpg",
     "specs": []
   },
   {
@@ -558,7 +558,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت برزنتی XO 05A سری 38/40/41MM",
     "brand": "",
     "price": 398000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4848.jpg",
     "specs": []
   },
   {
@@ -567,7 +567,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل آیفون به میکرو فلزی ریمکس OTG IPHONE TO MICRO REMAX (پک 10 عددی)",
     "brand": "",
     "price": 68000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4849.jpg",
     "specs": []
   },
   {
@@ -576,7 +576,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S23 FE MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4851.jpg",
     "specs": []
   },
   {
@@ -585,7 +585,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S23 ULTRA MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4852.jpg",
     "specs": []
   },
   {
@@ -594,7 +594,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب موبایل مگ سیف سامسونگ محافظ دار دوربین SAM S24 ULTRA MAGSAFE (CASE SAMSUNG)",
     "brand": "",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4853.jpg",
     "specs": []
   },
   {
@@ -621,7 +621,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند فلزی ساعت هوشمند WATCH سری 42/44/45/49MM",
     "brand": "",
     "price": 345000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4858.jpg",
     "specs": []
   },
   {
@@ -630,7 +630,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند سیلیکونی ساعت هوشمند WATCH سری 42/44/45/49MM",
     "brand": "",
     "price": 143000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4859.webp",
     "specs": []
   },
   {
@@ -639,7 +639,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری کارتی آلکالاین کتابی تک عددی وریتی (verity) (جعبه 12عددی)",
     "brand": "",
     "price": 165000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4861.jpg",
     "specs": []
   },
   {
@@ -657,7 +657,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری سمعکی DP POWER مدل 13 (بسته های 10 ورقه )",
     "brand": "",
     "price": 56100,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4863.jpg",
     "specs": []
   },
   {
@@ -666,7 +666,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری شارژی تلفنی پاناسونیک (Panasonic) مدل 105",
     "brand": "",
     "price": 365000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4864.jpg",
     "specs": []
   },
   {
@@ -675,7 +675,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری 2016 سکه ای MAXELL سرمه ای",
     "brand": "",
     "price": 78000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4865.webp",
     "specs": []
   },
   {
@@ -684,7 +684,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری قلمی معمولی کارتی 2 تایی POWER FLASH",
     "brand": "",
     "price": 69360,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4866.jpg",
     "specs": []
   },
   {
@@ -702,7 +702,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل OTG فلزی آیفون ULTRA SUR",
     "brand": "",
     "price": 415000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4868.jpg",
     "specs": []
   },
   {
@@ -711,7 +711,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل OTG HISKA  لایتنینگ به USB مدل H10",
     "brand": "",
     "price": 597000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4869.webp",
     "specs": []
   },
   {
@@ -720,7 +720,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ماشین اسپیکر پنل خورشیدی 12 وات مدل P339",
     "brand": "",
     "price": 3380000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4870.jpg",
     "specs": []
   },
   {
@@ -738,7 +738,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر کپسولی",
     "brand": "",
     "price": 211140,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4873.webp",
     "specs": []
   },
   {
@@ -765,7 +765,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دانگل بلوتوث USB فلزی",
     "brand": "",
     "price": 245000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/wp-4878.jpg",
     "specs": []
   },
   {
@@ -2915,7 +2915,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "فندکی pvc شفاف 2 پورت 55 وات با خروجی (pd+usb) مدل W107",
     "brand": "",
     "price": 498000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-19100002.jpg",
     "specs": [
       "کد کالا: 19100002"
     ]
@@ -2937,7 +2937,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل اندروید BIVA مدل 026L",
     "brand": "BIVA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20130003.webp",
     "specs": [
       "کد کالا: 20130003"
     ]
@@ -2948,7 +2948,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل شارژر میکرو USAMS مدل U35",
     "brand": "USAMS",
     "price": 227205,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20130021.jpg",
     "specs": [
       "کد کالا: 20130021"
     ]
@@ -2959,7 +2959,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل شارژر سوپر فست میکرو",
     "brand": "",
     "price": 145000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20130023.jpg",
     "specs": [
       "کد کالا: 20130023"
     ]
@@ -2970,7 +2970,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل Kluminکیف دار مدل DC17",
     "brand": "KLUMIN",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20120011.jpg",
     "specs": [
       "کد کالا: 20120011"
     ]
@@ -2981,7 +2981,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل تایپ سی سیلیکونی GK-31 GRAND",
     "brand": "GRAND",
     "price": 173502,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20120016.jpg",
     "specs": [
       "کد کالا: 20120016"
     ]
@@ -2992,7 +2992,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل هیسکا  LX841  HISKA تایپ سی",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20120037.webp",
     "specs": [
       "کد کالا: 20120037"
     ]
@@ -3003,7 +3003,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل آیفون  LDNIO مدل LS 641",
     "brand": "LDNIO",
     "price": 225000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20140018.jpg",
     "specs": [
       "کد کالا: 20140018"
     ]
@@ -3014,7 +3014,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل آیفون GRAND مدل GK18",
     "brand": "GRAND",
     "price": 254745,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20140020.jpg",
     "specs": [
       "کد کالا: 20140020"
     ]
@@ -3025,7 +3025,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل برزنتی  سر فلزیFIRT YOU 6A مدل F002 آیفون",
     "brand": "FIRT YOU",
     "price": 186583,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20140024.webp",
     "specs": [
       "کد کالا: 20140024"
     ]
@@ -3036,7 +3036,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل شارژ ایفون LDNIO مدل LS841",
     "brand": "LDNIO",
     "price": 109058,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20140027.png",
     "specs": [
       "کد کالا: 20140027"
     ]
@@ -3058,7 +3058,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل  تایپ سی لایتینیگ HISKA LX801",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20150002.jpg",
     "specs": [
       "کد کالا: 20150002"
     ]
@@ -3069,7 +3069,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل LC641 C-I سی به لایتینگ LDNIO",
     "brand": "LDNIO",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20150007.png",
     "specs": [
       "کد کالا: 20150007"
     ]
@@ -3080,7 +3080,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل اپل استوری 60W دو کاره C.C & C.IOS",
     "brand": "",
     "price": 843000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20150019.jpg",
     "specs": [
       "کد کالا: 20150019"
     ]
@@ -3091,7 +3091,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل برزنتی دو سر تایپ سی سر فلزی FIRT YOU 60W  مدل C044",
     "brand": "FIRT YOU",
     "price": 209992,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20160012.jpg",
     "specs": [
       "کد کالا: 20160012"
     ]
@@ -3113,7 +3113,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل (C.C)دو سر تایپ سی Lx801برندHISKA",
     "brand": "HISKA",
     "price": 518600,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20160016.webp",
     "specs": [
       "کد کالا: 20160016"
     ]
@@ -3124,7 +3124,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل شارژر C.C LDNIO مدل LC441",
     "brand": "LDNIO",
     "price": 405000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20160024.jpg",
     "specs": [
       "کد کالا: 20160024"
     ]
@@ -3135,7 +3135,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل کنفی  دو سر تایپ سی 100 وات TOOCKI",
     "brand": "TOOCKI",
     "price": 455511,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20160026.webp",
     "specs": [
       "کد کالا: 20160026"
     ]
@@ -3168,7 +3168,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل HDMI همه کاره PROONE مدل PCH71",
     "brand": "PROONE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20180010.jpg",
     "specs": [
       "کد کالا: 20180010"
     ]
@@ -3179,7 +3179,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل HDMI هیسکا مدل HD-033M برند HISKA",
     "brand": "HISKA",
     "price": 1461000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20180012.png",
     "specs": [
       "کد کالا: 20180012"
     ]
@@ -3190,7 +3190,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل انتقال صدا PROONE  مدل PCA41",
     "brand": "PROONE",
     "price": 145000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20190008.jpg",
     "specs": [
       "کد کالا: 20190008"
     ]
@@ -3201,7 +3201,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژ 25 وات H127EU HSKA",
     "brand": "",
     "price": 1390000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20220001.jpg",
     "specs": [
       "کد کالا: 20220001"
     ]
@@ -3212,7 +3212,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر 2 LDNIO پورت با 1 پورتPD 20W Q229",
     "brand": "LDNIO",
     "price": 980000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20200006.jpg",
     "specs": [
       "کد کالا: 20200006"
     ]
@@ -3223,7 +3223,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر 45 وات 3 پین سامسونگ",
     "brand": "",
     "price": 1139595,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20220004.jpg",
     "specs": [
       "کد کالا: 20220004"
     ]
@@ -3234,7 +3234,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر HISKA H114 PD",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20200011.webp",
     "specs": [
       "کد کالا: 20200011"
     ]
@@ -3245,7 +3245,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر اصلی 45 وات سامسونگ",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20220005.jpg",
     "specs": [
       "کد کالا: 20220005"
     ]
@@ -3256,7 +3256,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر آیفون 2.1آمپر TRANICO",
     "brand": "TRANICO",
     "price": 351900,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20200018.jpg",
     "specs": [
       "کد کالا: 20200018"
     ]
@@ -3267,7 +3267,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "محافظ شارژر سیلیکونی 20 وات آیفون",
     "brand": "",
     "price": 235000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20210003.jpg",
     "specs": [
       "کد کالا: 20210003"
     ]
@@ -3278,7 +3278,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژ هوآوی HUAWEI",
     "brand": "HUAWEI",
     "price": 198000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20200043.jpg",
     "specs": [
       "کد کالا: 20200043"
     ]
@@ -3289,7 +3289,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژ 45 وات H145EU HSKA",
     "brand": "",
     "price": 2631000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20220013.webp",
     "specs": [
       "کد کالا: 20220013"
     ]
@@ -3300,7 +3300,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "چند راهی LDNIO مدل SC16",
     "brand": "LDNIO",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20240006.webp",
     "specs": [
       "کد کالا: 20240006"
     ]
@@ -3311,7 +3311,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری کپسولی",
     "brand": "",
     "price": 235000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20250002.webp",
     "specs": [
       "کد کالا: 20250002"
     ]
@@ -3322,7 +3322,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل C.C کپسولی",
     "brand": "",
     "price": 234600,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20250009.jpg",
     "specs": [
       "کد کالا: 20250009"
     ]
@@ -3333,7 +3333,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "شارژر ارجینال چین  3 پین 45 وات سامسونگ (گیرین پک)",
     "brand": "",
     "price": 985000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20260004.jpg",
     "specs": [
       "کد کالا: 20260004"
     ]
@@ -3355,7 +3355,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ایرپاد ارجینال  REMAX  مدل TWS-41",
     "brand": "REMAX",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24100029.jpg",
     "specs": [
       "کد کالا: 24100029"
     ]
@@ -3377,7 +3377,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هدست بلوتوث دور گردنی K19",
     "brand": "",
     "price": 1152090,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24110006.jpg",
     "specs": [
       "کد کالا: 24110006"
     ]
@@ -3388,7 +3388,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری بلوتوث XO مدل BE8",
     "brand": "XO",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24110018.jpg",
     "specs": [
       "کد کالا: 24110018"
     ]
@@ -3399,7 +3399,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ایرپاد بلوتوث ارجینال TRANYO مدل M22",
     "brand": "TRANYO",
     "price": 1545000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24110040.webp",
     "specs": [
       "کد کالا: 24110040"
     ]
@@ -3410,7 +3410,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هدست عروسکی AH806",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24110047.jpg",
     "specs": [
       "کد کالا: 24110047"
     ]
@@ -3432,7 +3432,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری تایپ سی سامسونگ ارجینال AKG مدل S10",
     "brand": "",
     "price": 468000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120034.jpg",
     "specs": [
       "کد کالا: 24120034"
     ]
@@ -3443,7 +3443,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری سامسونگ پکدارمدل 10",
     "brand": "",
     "price": 154000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120035.webp",
     "specs": [
       "کد کالا: 24120035"
     ]
@@ -3454,7 +3454,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری ارجینال LENOVO مدل QF310",
     "brand": "LENOVO",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120059.jpg",
     "specs": [
       "کد کالا: 24120059"
     ]
@@ -3487,7 +3487,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هولدر رومیزی PROONEمدل PHL1186",
     "brand": "PROONE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-25130010.webp",
     "specs": [
       "کد کالا: 25130010"
     ]
@@ -3509,7 +3509,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پرتابل  HISKA مدل B60",
     "brand": "HISKA",
     "price": 6110000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10100005.webp",
     "specs": [
       "کد کالا: 10100005"
     ]
@@ -3520,7 +3520,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر HARMAN",
     "brand": "HARMAN",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10100021.jpg",
     "specs": [
       "کد کالا: 10100021"
     ]
@@ -3531,7 +3531,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر خانگی HISKA مدل 1020",
     "brand": "HISKA",
     "price": 33270000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10110002.webp",
     "specs": [
       "کد کالا: 10110002"
     ]
@@ -3542,7 +3542,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پارتی هیسکا HISKA BOX 1009",
     "brand": "HISKA",
     "price": 40220000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10110003.webp",
     "specs": [
       "کد کالا: 10110003"
     ]
@@ -3553,7 +3553,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر V.SMART مدل V.S81",
     "brand": "V.SMART",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10110006.webp",
     "specs": [
       "کد کالا: 10110006"
     ]
@@ -3564,7 +3564,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "پاور بانک 20.000 میلی آمپر MI  (پک قرمز)",
     "brand": "MI",
     "price": 2450000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-14110001.jpg",
     "specs": [
       "کد کالا: 14110001"
     ]
@@ -3575,7 +3575,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "پاور بانک 30.000 میلی آمپرMI",
     "brand": "MI",
     "price": 5430000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-14120004.webp",
     "specs": [
       "کد کالا: 14120004"
     ]
@@ -3586,7 +3586,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دانگل بلوتوث SAIYA M22",
     "brand": "SAIYA",
     "price": 293714,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-15100002.webp",
     "specs": [
       "کد کالا: 15100002"
     ]
@@ -3608,7 +3608,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دانگل HDMI برند HISKA مدل HR30",
     "brand": "HISKA",
     "price": 3885000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-15110001.jpg",
     "specs": [
       "کد کالا: 15110001"
     ]
@@ -3619,7 +3619,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل  HISKA  لایتنینگ به تایپ سی مدل H8",
     "brand": "HISKA",
     "price": 468000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-22100008.webp",
     "specs": [
       "کد کالا: 22100008"
     ]
@@ -3630,7 +3630,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبدیل دو کاره آیفون مدل SX04",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-22100011.webp",
     "specs": [
       "کد کالا: 22100011"
     ]
@@ -3641,7 +3641,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "جک آیفون W48مدل HISKA",
     "brand": "HISKA",
     "price": 474000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-22110006.jpg",
     "specs": [
       "کد کالا: 22110006"
     ]
@@ -3652,7 +3652,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مبدل چند کاره برق LDNIO مدل Z3",
     "brand": "LDNIO",
     "price": 66371,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-22120002.jpg",
     "specs": [
       "کد کالا: 22120002"
     ]
@@ -3663,7 +3663,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری شیرینگ نیم  قلمی 4 عددی پاناتک (panatech) (جعبه 10عددی)",
     "brand": "PANATECH",
     "price": 69360,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-12110005.webp",
     "specs": [
       "کد کالا: 12110005"
     ]
@@ -3674,7 +3674,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری سکه ای تک برگMAXFORT سایز 2016",
     "brand": "MAXFORT",
     "price": 78000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-12190001.jpg",
     "specs": [
       "کد کالا: 12190001"
     ]
@@ -3685,7 +3685,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری اصلی سکه ای لیتیومی Maxell مدل 2016 (پک بنفش)",
     "brand": "MAXELL",
     "price": 78000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-12190012.png",
     "specs": [
       "کد کالا: 12190012"
     ]
@@ -3696,7 +3696,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "باطری شارژی تلفنی پاناسونیک (Panasonic) مدل 107",
     "brand": "PANASONIC",
     "price": 365000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-12200003.webp",
     "specs": [
       "کد کالا: 12200003"
     ]
@@ -3707,7 +3707,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گیمبال و پایه نگهدارنده لرزشگیر مدل  3AXIS - S5",
     "brand": "",
     "price": 10760000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21100004.webp",
     "specs": [
       "کد کالا: 21100004"
     ]
@@ -3718,7 +3718,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بطری سیلیکونی تاشو PROONE مدل PFB0012",
     "brand": "PROONE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21120001.jpg",
     "specs": [
       "کد کالا: 21120001"
     ]
@@ -3729,7 +3729,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دوربین ثبت وقایع خودرو HISKA مدل HR94",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21210002.webp",
     "specs": [
       "کد کالا: 21210002"
     ]
@@ -3740,7 +3740,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دسته بازی HISKA مدل HR 70",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21180002.jpg",
     "specs": [
       "کد کالا: 21180002"
     ]
@@ -3751,7 +3751,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کیف اکسسوری HISKA مدل H25",
     "brand": "HISKA",
     "price": 1340000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21190003.jpg",
     "specs": [
       "کد کالا: 21190003"
     ]
@@ -3773,7 +3773,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "تبلت گرافیکی",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21190013.jpg",
     "specs": [
       "کد کالا: 21190013"
     ]
@@ -3784,7 +3784,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مانیتور اندروید ماشین",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21190017.jpg",
     "specs": [
       "کد کالا: 21190017"
     ]
@@ -3795,7 +3795,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "برس حرارتی HISKA مدل H5107",
     "brand": "HISKA",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-13120005.webp",
     "specs": [
       "کد کالا: 13120005"
     ]
@@ -3806,7 +3806,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کیبورد سیمی HISKA مدل HXKE200",
     "brand": "HISKA",
     "price": 905250,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-23130001.jpg",
     "specs": [
       "کد کالا: 23130001"
     ]
@@ -3817,7 +3817,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A10",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100001.jpg",
     "specs": [
       "کد کالا: 26100001"
     ]
@@ -3828,7 +3828,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A11/MI 11 LITE",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100005.webp",
     "specs": [
       "کد کالا: 26100005"
     ]
@@ -3839,7 +3839,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A21S/X3 GT",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100006.jpg",
     "specs": [
       "کد کالا: 26100006"
     ]
@@ -3850,7 +3850,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A31/A22 4G/A32 4G/A33",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100007.webp",
     "specs": [
       "کد کالا: 26100007"
     ]
@@ -3861,7 +3861,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A02S/A03/A12/A13",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100008.jpg",
     "specs": [
       "کد کالا: 26100008"
     ]
@@ -3872,7 +3872,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A51/A52/A53/S20FE",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100009.jpg",
     "specs": [
       "کد کالا: 26100009"
     ]
@@ -3883,7 +3883,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A14",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100013.jpg",
     "specs": [
       "کد کالا: 26100013"
     ]
@@ -3894,7 +3894,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A34",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100015.jpg",
     "specs": [
       "کد کالا: 26100015"
     ]
@@ -3905,7 +3905,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A54",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100016.jpg",
     "specs": [
       "کد کالا: 26100016"
     ]
@@ -3916,7 +3916,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S21 FE",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100017.jpg",
     "specs": [
       "کد کالا: 26100017"
     ]
@@ -3927,7 +3927,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S25 FE",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100019.webp",
     "specs": [
       "کد کالا: 26100019"
     ]
@@ -3938,7 +3938,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM A15/A25",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100020.webp",
     "specs": [
       "کد کالا: 26100020"
     ]
@@ -3949,7 +3949,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 8",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110002.jpg",
     "specs": [
       "کد کالا: 26110002"
     ]
@@ -3960,7 +3960,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 8 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110003.jpg",
     "specs": [
       "کد کالا: 26110003"
     ]
@@ -3971,7 +3971,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA X3/MI 10T/X4/X4 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110004.jpg",
     "specs": [
       "کد کالا: 26110004"
     ]
@@ -3982,7 +3982,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA F3/NOTE 10 PRO/NOTE 11 PRO/NOTE 14",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110005.webp",
     "specs": [
       "کد کالا: 26110005"
     ]
@@ -3993,7 +3993,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 10/NOTE 11/NOTE 11S/NOTE 12S",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110006.jpg",
     "specs": [
       "کد کالا: 26110006"
     ]
@@ -4004,7 +4004,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 10C/12C/A3",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110007.jpg",
     "specs": [
       "کد کالا: 26110007"
     ]
@@ -4015,7 +4015,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 12/ REDMI 13",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110008.jpg",
     "specs": [
       "کد کالا: 26110008"
     ]
@@ -4026,7 +4026,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 13/F5/M6 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110009.png",
     "specs": [
       "کد کالا: 26110009"
     ]
@@ -4037,7 +4037,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 13PRO/X6/14T",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110010.jpg",
     "specs": [
       "کد کالا: 26110010"
     ]
@@ -4048,7 +4048,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 13C/C65/ SAM A05/SAM A07",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110011.jpg",
     "specs": [
       "کد کالا: 26110011"
     ]
@@ -4059,7 +4059,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 14C/C75",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110012.jpg",
     "specs": [
       "کد کالا: 26110012"
     ]
@@ -4070,7 +4070,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI NOTE 12 4G/X5",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110013.jpg",
     "specs": [
       "کد کالا: 26110013"
     ]
@@ -4081,7 +4081,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 15C",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110015.webp",
     "specs": [
       "کد کالا: 26110015"
     ]
@@ -4092,7 +4092,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) XIA REDMI 15",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26110016.webp",
     "specs": [
       "کد کالا: 26110016"
     ]
@@ -4103,7 +4103,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 6/7/8 BLACK",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120001.webp",
     "specs": [
       "کد کالا: 26120001"
     ]
@@ -4114,7 +4114,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XS/11 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120005.webp",
     "specs": [
       "کد کالا: 26120005"
     ]
@@ -4125,7 +4125,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XR/11",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120006.webp",
     "specs": [
       "کد کالا: 26120006"
     ]
@@ -4136,7 +4136,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP XS MAX/11 PRO MAX",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120007.jpg",
     "specs": [
       "کد کالا: 26120007"
     ]
@@ -4147,7 +4147,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 12 /12 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120009.jpg",
     "specs": [
       "کد کالا: 26120009"
     ]
@@ -4158,7 +4158,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 12 PRO MAX",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120010.webp",
     "specs": [
       "کد کالا: 26120010"
     ]
@@ -4169,7 +4169,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 13/ 13 PRO/14",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120012.jpg",
     "specs": [
       "کد کالا: 26120012"
     ]
@@ -4180,7 +4180,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 13 PRO MAX/14 PLUS",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120013.jpg",
     "specs": [
       "کد کالا: 26120013"
     ]
@@ -4191,7 +4191,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 14 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120014.jpg",
     "specs": [
       "کد کالا: 26120014"
     ]
@@ -4202,7 +4202,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 14 PRO MAX",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120015.jpg",
     "specs": [
       "کد کالا: 26120015"
     ]
@@ -4213,7 +4213,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 15 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120016.jpg",
     "specs": [
       "کد کالا: 26120016"
     ]
@@ -4224,7 +4224,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 15/16",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120018.webp",
     "specs": [
       "کد کالا: 26120018"
     ]
@@ -4235,7 +4235,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 16 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120019.jpg",
     "specs": [
       "کد کالا: 26120019"
     ]
@@ -4246,7 +4246,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 16 PRO MAX",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120020.webp",
     "specs": [
       "کد کالا: 26120020"
     ]
@@ -4257,7 +4257,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) IP 17 PRO",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26120022.webp",
     "specs": [
       "کد کالا: 26120022"
     ]
@@ -4268,7 +4268,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "گلس آنتی استاتیک منتوبل (MIETUBLE) SAM S22",
     "brand": "MIETUBLE",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-26100024.webp",
     "specs": [
       "کد کالا: 26100024"
     ]
@@ -4279,7 +4279,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هندزفری سلبریت ارجینال CELEBRATE مدل G38 تایپ سی",
     "brand": "CELEBRATE",
     "price": 468000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120070.jpg",
     "specs": [
       "کد کالا: 24120070"
     ]
@@ -4290,7 +4290,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل  دوسر تایپ سی S23 سامسونگ 1.8M",
     "brand": "",
     "price": 345000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20160041.jpg",
     "specs": [
       "کد کالا: 20160041"
     ]
@@ -4301,7 +4301,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل ارجینال LDNIO مدل LS632 آیفون",
     "brand": "LDNIO",
     "price": 368000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20140051.jpg",
     "specs": [
       "کد کالا: 20140051"
     ]
@@ -4312,7 +4312,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد Y17",
     "brand": "",
     "price": 1490000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21220001.jpg",
     "specs": [
       "کد کالا: 21220001"
     ]
@@ -4323,7 +4323,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد X17",
     "brand": "",
     "price": 1290000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21220002.webp",
     "specs": [
       "کد کالا: 21220002"
     ]
@@ -4334,7 +4334,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد Z6",
     "brand": "",
     "price": 1270000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21220003.jpg",
     "specs": [
       "کد کالا: 21220003"
     ]
@@ -4345,7 +4345,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد UK",
     "brand": "",
     "price": 1125000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21220004.jpg",
     "specs": [
       "کد کالا: 21220004"
     ]
@@ -4356,7 +4356,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "مونوپاد U6",
     "brand": "",
     "price": 1348000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21220005.jpg",
     "specs": [
       "کد کالا: 21220005"
     ]
@@ -4367,7 +4367,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ساعت هوشمند APPLE WATCH مدل SERIES 11",
     "brand": "APPLE",
     "price": 5830000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17100012.jpg",
     "specs": [
       "کد کالا: 17100012"
     ]
@@ -4378,7 +4378,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کابل AUX IOS  ایوایکس آیفونی طرح مک دودو MCDODO",
     "brand": "MCDODO",
     "price": 265000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-20190035.jpg",
     "specs": [
       "کد کالا: 20190035"
     ]
@@ -4389,7 +4389,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "ساعت هوشمند ULTRA3",
     "brand": "",
     "price": 4970000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17100013.webp",
     "specs": [
       "کد کالا: 17100013"
     ]
@@ -4400,7 +4400,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب موبایل مگ سیف سامسونگ شفاف SAM S23 FE MAGSAFE (CASE SAMSUNG)",
     "brand": "SAMSUNG",
     "price": 265000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-28110002.jpg",
     "specs": [
       "کد کالا: 28110002"
     ]
@@ -4411,7 +4411,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب موبایل مگ سیف سامسونگ شفاف SAM S24 ULTRA MAGSAFE (CASE SAMSUNG)",
     "brand": "SAMSUNG",
     "price": 265000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-28110006.jpg",
     "specs": [
       "کد کالا: 28110006"
     ]
@@ -4554,7 +4554,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت مگنتی XO 01A سری 38/40/41MM",
     "brand": "XO",
     "price": 485000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17110001.jpg",
     "specs": [
       "کد کالا: 17110001"
     ]
@@ -4565,7 +4565,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت مگنتی XO 01B سری 42/44/45/49MM",
     "brand": "XO",
     "price": 485000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17110002.jpg",
     "specs": [
       "کد کالا: 17110002"
     ]
@@ -4576,7 +4576,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت برزنتی XO 03A سری 38/40/41MM",
     "brand": "XO",
     "price": 398000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17110005.jpg",
     "specs": [
       "کد کالا: 17110005"
     ]
@@ -4587,7 +4587,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت برزنتی XO 03B سری 42/44/45/49MM",
     "brand": "XO",
     "price": 398000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17110006.jpg",
     "specs": [
       "کد کالا: 17110006"
     ]
@@ -4598,7 +4598,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "بند ساعت برزنتی XO 05B سری 42/44/45/49MM",
     "brand": "XO",
     "price": 398000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-17110008.jpg",
     "specs": [
       "کد کالا: 17110008"
     ]
@@ -4609,7 +4609,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "دانگل وایرلس تسکو WIRELESS DONGLE TSKO",
     "brand": "TSKO",
     "price": 475000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-15130001.jpg",
     "specs": [
       "کد کالا: 15130001"
     ]
@@ -4620,7 +4620,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "کیس ایرپاد FOR-HP:3300",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120073.png",
     "specs": [
       "کد کالا: 24120073"
     ]
@@ -4642,7 +4642,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هدست سلبریت ارجینال CELEBRATE مدل A23",
     "brand": "CELEBRATE",
     "price": 3850000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120076.jpg",
     "specs": [
       "کد کالا: 24120076"
     ]
@@ -4653,7 +4653,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هدست سلبریت ارجینال CELEBRATE مدل A32",
     "brand": "CELEBRATE",
     "price": 4780000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-24120078.jpg",
     "specs": [
       "کد کالا: 24120078"
     ]
@@ -4664,7 +4664,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هاب 4 پورت CELEBRATE مدل CA05",
     "brand": "CELEBRATE",
     "price": 1340000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-23160003.jpg",
     "specs": [
       "کد کالا: 23160003"
     ]
@@ -4675,7 +4675,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هاب CELEBRATE مدل CA06",
     "brand": "CELEBRATE",
     "price": 1130000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-23160004.jpg",
     "specs": [
       "کد کالا: 23160004"
     ]
@@ -4686,7 +4686,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "هاب 6 پورت تایپ سی (USB C) الدینیو LDNIO مدل DS16U",
     "brand": "LDNIO",
     "price": 2560000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-23160005.jpg",
     "specs": [
       "کد کالا: 23160005"
     ]
@@ -4708,7 +4708,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "چراغ قوه پلیسی و فاموسی A76",
     "brand": "",
     "price": 986000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-21160004.webp",
     "specs": [
       "کد کالا: 21160004"
     ]
@@ -4719,7 +4719,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب آیفونی وا وی شفاف دارای (لنز محافظ و پد الکلی)(VAWI)",
     "brand": "VAWI",
     "price": 565000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-28100018.webp",
     "specs": [
       "کد کالا: 28100018"
     ]
@@ -4730,7 +4730,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "قاب طرح دار سامسونگ یانگ کیت (YOUNG KIT)",
     "brand": "YOUNG KIT",
     "price": 295000,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-28110008.jpg",
     "specs": [
       "کد کالا: 28110008"
     ]
@@ -4741,7 +4741,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پرتابل استورم اس SPEAKER SRORM S مدل NOW:GO",
     "brand": "",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10100047.jpg",
     "specs": [
       "کد کالا: 10100047"
     ]
@@ -4752,7 +4752,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "title": "اسپیکر پرتابل استورم لایت SPEAKER STORM LITE مدل NOW:GO",
     "brand": "STORM",
     "price": 0,
-    "image": "images/placeholder.svg",
+    "image": "images/wp/sep-10100048.jpg",
     "specs": [
       "کد کالا: 10100048"
     ]
