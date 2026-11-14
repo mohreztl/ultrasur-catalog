@@ -820,10 +820,14 @@ export default function UltraSurCatalogApp() {
       });
       try {
         stage = "بارگذاری ماژول PDF";
+        // اگر تب قدیمی بعد از انتشار نسخه جدید باز مانده باشد، نشانی چانک‌های هش‌دار
+        // دیگر روی سرور نیست و import شکست می‌خورد → پیام Refresh به‌جای خطای مبهم
         const [{ jsPDF }, { getFontEmbedCSS, toSvg }] = await Promise.all([
           import("jspdf"),
           import("html-to-image"),
-        ]);
+        ]).catch(() => {
+          throw new Error("MODULE_STALE");
+        });
         // تعبیه یک‌باره فونت‌ها (SVG خروجی فقط فونت‌های درون‌خط را می‌شناسد)
         const fullFontCSS = await getFontEmbedCSS(nodes[0]);
         // فقط فونت انتخاب‌شده را تعبیه کن؛ CSS کامل (~۱ مگابایت با ۲۲ فونت)
@@ -853,15 +857,18 @@ export default function UltraSurCatalogApp() {
         const isMobile =
           window.matchMedia("(pointer: coarse)").matches ||
           /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        // کیفیت تطبیقی: برای کاتالوگ‌های حجیم سبک‌تر
+        // کیفیت تطبیقی: برای کاتالوگ‌های حجیم سبک‌تر تا حافظه کافی بماند
+        const heavy = nodes.length > 150;
         const scale = isMobile
-          ? 1.5
-          : nodes.length > 150
-            ? 2
+          ? heavy
+            ? 1.2
+            : 1.5
+          : heavy
+            ? 1.85
             : nodes.length > 60
               ? 2.25
               : 2.5;
-        const quality = isMobile ? 0.78 : nodes.length > 150 ? 0.82 : 0.9;
+        const quality = isMobile ? (heavy ? 0.7 : 0.78) : heavy ? 0.8 : 0.9;
         // بارگذاری SVG در <img> با مهلت زمانی تا iOS در حالت معلق نماند
         const loadSvgImage = (url: string) =>
           new Promise<HTMLImageElement>((resolve, reject) => {
@@ -976,7 +983,18 @@ export default function UltraSurCatalogApp() {
       }
     } catch (err) {
       console.error("PDF export failed at stage:", stage, err);
-      showToast(`خطا در ساخت فایل PDF (مرحله: ${stage})`, "error");
+      if (err instanceof Error && err.message === "MODULE_STALE") {
+        showToast(
+          "نسخهٔ جدید برنامه منتشر شده؛ صفحه را تازه‌سازی (Refresh) کنید و دوباره تلاش کنید",
+          "error",
+        );
+      } else {
+        const detail = err instanceof Error ? err.message : String(err);
+        showToast(
+          `خطا در ساخت فایل PDF (مرحله: ${stage} — ${detail.slice(0, 60)})`,
+          "error",
+        );
+      }
     } finally {
       setIsExportingPdf(false);
       setExportProgress(null);
