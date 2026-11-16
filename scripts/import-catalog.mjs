@@ -657,8 +657,10 @@ for (const item of rawProducts) {
   }
 
   // قیمت: با تطبیق Sepidar از قیمت مؤثر (ریال ÷ ۱۰ = تومان) استفاده می‌شود
+  // محصولات سینک‌شده با سپیدار (wp_sepidar_products_update_key) قیمت خودِ فروشگاه = قیمت روز سپیدار را دارند
   let price = Math.floor(Number(metas._price) || 0);
-  if (sep) {
+  const syncedFromSepidar = Boolean(metas.wp_sepidar_products_update_key);
+  if (sep && !(syncedFromSepidar && price > 0)) {
     const eff = sep.sale > 0 && sep.sale < sep.regular ? sep.sale : sep.regular;
     const sepPrice = Math.floor(eff / 10);
     if (sepPrice !== price) sepidarPriceUpdated += 1;

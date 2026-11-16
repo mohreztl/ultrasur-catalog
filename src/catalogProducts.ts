@@ -17,7 +17,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "شارژر سر جعبه سامسونگ سه پین پکدار تایپ سی  45 وات (برد SOLUM BLUE 4511) SAMSUNG دارای NFC فعال",
     "brand": "",
-    "price": 0,
+    "price": 2890000,
     "image": "images/wp/wp-7613.jpg",
     "specs": []
   },
@@ -26,7 +26,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "شارژر سر جعبه سامسونگ سه پین پکدار تایپ سی  25 وات (برد 2510 SOLUM GREEN) SAMSUNGدارای NFC فعال",
     "brand": "",
-    "price": 0,
+    "price": 1590000,
     "image": "images/wp/wp-7614.webp",
     "specs": []
   },
@@ -1864,7 +1864,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل کنفی  تایپ سی LDINIO مدل LS631",
     "brand": "",
-    "price": 310000,
+    "price": 385000,
     "image": "images/wp/2563.webp",
     "specs": []
   },
@@ -2327,7 +2327,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری XO مدلEP52",
     "brand": "",
-    "price": 568000,
+    "price": 350000,
     "image": "images/wp/7194.webp",
     "specs": [
       "رنگ: سفید",
@@ -2339,7 +2339,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "headphones-and-hands-free",
     "title": "هندزفری بلوتوث دورگردنی LDNIO مدل N02",
     "brand": "",
-    "price": 2080000,
+    "price": 2580000,
     "image": "images/wp/7310.webp",
     "specs": []
   },
@@ -2525,7 +2525,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     "category": "cable-and-charger",
     "title": "کابل آیفون LDINIO مدل LS631",
     "brand": "",
-    "price": 310000,
+    "price": 385000,
     "image": "images/wp/4613.webp",
     "specs": []
   },
